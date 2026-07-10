@@ -1,0 +1,338 @@
+[
+  {
+    "id": 60, "name": "Clay", "category": "Data / SEO / Scraping",
+    "description": "GTM data-enrichment platform that orchestrates 100+ data providers inside spreadsheet-like tables.",
+    "auth_methods": ["None"],
+    "self_serve": "gated",
+    "access_note": "The app is self-serve, but there is no public inbound developer API — Clay's 'HTTP API' column calls OUT to other services, and data gets in via per-table webhooks.",
+    "api_surface": "None",
+    "api_breadth": "outbound HTTP-API column + per-table inbound webhooks only",
+    "mcp": "none found", "mcp_note": "",
+    "buildable": "no",
+    "blocker": "no public inbound API to build against",
+    "evidence": {
+      "auth": "https://university.clay.com/docs/http-api-integration-overview",
+      "access": "https://university.clay.com/docs/http-api-integration-overview",
+      "api": "https://university.clay.com/docs/http-api-integration-overview",
+      "mcp": ""
+    },
+    "confidence": "medium",
+    "sources_fetched": ["https://university.clay.com/docs/http-api-integration-overview"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 62, "name": "Vercel", "category": "Dev / Infra / Data",
+    "description": "Frontend cloud platform for deploying and hosting web apps with serverless infrastructure.",
+    "auth_methods": ["Bearer Token"],
+    "self_serve": "self-serve",
+    "access_note": "Create an access token in dashboard Account Settings > Tokens on the free Hobby plan.",
+    "api_surface": "REST",
+    "api_breadth": "full platform control: deployments, projects, domains, DNS, env vars, teams",
+    "mcp": "official", "mcp_note": "Vercel MCP at mcp.vercel.com",
+    "buildable": "yes",
+    "blocker": "none",
+    "evidence": {
+      "auth": "https://vercel.com/docs/rest-api",
+      "access": "https://vercel.com/docs/rest-api",
+      "api": "https://vercel.com/docs/rest-api",
+      "mcp": "https://vercel.com/docs/mcp/vercel-mcp"
+    },
+    "confidence": "high",
+    "sources_fetched": ["https://vercel.com/docs/rest-api"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 63, "name": "Netlify", "category": "Dev / Infra / Data",
+    "description": "Web development platform for building, deploying and hosting sites with serverless functions.",
+    "auth_methods": ["Bearer Token", "OAuth2"],
+    "self_serve": "self-serve",
+    "access_note": "Personal access token from User Settings > Applications on the free tier; OAuth2 for public integrations.",
+    "api_surface": "REST",
+    "api_breadth": "sites, deploys, DNS, forms, functions, env vars",
+    "mcp": "official", "mcp_note": "Netlify MCP server (netlify/netlify-mcp)",
+    "buildable": "yes",
+    "blocker": "none",
+    "evidence": {
+      "auth": "https://docs.netlify.com/api/get-started/",
+      "access": "https://docs.netlify.com/api/get-started/",
+      "api": "https://docs.netlify.com/api/get-started/",
+      "mcp": "https://docs.netlify.com/build/build-with-ai/netlify-mcp-server/"
+    },
+    "confidence": "high",
+    "sources_fetched": ["https://docs.netlify.com/api/get-started/"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 64, "name": "Cloudflare", "category": "Dev / Infra / Data",
+    "description": "CDN, DNS, security and edge-compute platform fronting a large share of the web.",
+    "auth_methods": ["Bearer Token", "API Key"],
+    "self_serve": "self-serve",
+    "access_note": "Scoped API tokens created in the dashboard on the free plan (legacy global API key also exists).",
+    "api_surface": "REST",
+    "api_breadth": "very broad: zones, DNS, Workers, R2, KV, firewall, analytics",
+    "mcp": "official", "mcp_note": "cloudflare/mcp-server-cloudflare (multiple servers)",
+    "buildable": "yes",
+    "blocker": "none",
+    "evidence": {
+      "auth": "https://developers.cloudflare.com/fundamentals/api/get-started/create-token/",
+      "access": "https://developers.cloudflare.com/fundamentals/api/get-started/create-token/",
+      "api": "https://developers.cloudflare.com/api/",
+      "mcp": "https://github.com/cloudflare/mcp-server-cloudflare"
+    },
+    "confidence": "high",
+    "sources_fetched": ["https://developers.cloudflare.com/api/"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 67, "name": "Snowflake", "category": "Dev / Infra / Data",
+    "description": "Cloud data warehouse for analytics, data engineering and AI workloads.",
+    "auth_methods": ["OAuth2", "JWT", "Bearer Token"],
+    "self_serve": "self-serve",
+    "access_note": "30-day free trial account; SQL API authenticates with OAuth or key-pair JWT, programmatic access tokens also supported.",
+    "api_surface": "REST",
+    "api_breadth": "SQL API executes any SQL; separate REST APIs for management",
+    "mcp": "official", "mcp_note": "Snowflake-Labs/mcp + managed MCP server",
+    "buildable": "yes",
+    "blocker": "none (account + warehouse setup is the only friction)",
+    "evidence": {
+      "auth": "https://docs.snowflake.com/en/developer-guide/sql-api/authenticating",
+      "access": "https://signup.snowflake.com/",
+      "api": "https://docs.snowflake.com/en/developer-guide/sql-api/index",
+      "mcp": "https://github.com/Snowflake-Labs/mcp"
+    },
+    "confidence": "high",
+    "sources_fetched": ["https://docs.snowflake.com/en/developer-guide/sql-api/index"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 69, "name": "Datadog", "category": "Dev / Infra / Data",
+    "description": "Observability platform: infrastructure monitoring, APM, logs and security.",
+    "auth_methods": ["API Key"],
+    "self_serve": "self-serve",
+    "access_note": "API key + application key generated in Organization Settings on a free trial (free tier keeps limited features).",
+    "api_surface": "REST",
+    "api_breadth": "very broad: metrics, monitors, dashboards, logs, incidents, users",
+    "mcp": "official", "mcp_note": "Datadog MCP Server (docs.datadoghq.com/mcp_server)",
+    "buildable": "yes",
+    "blocker": "none",
+    "evidence": {
+      "auth": "https://docs.datadoghq.com/account_management/api-app-keys/",
+      "access": "https://docs.datadoghq.com/account_management/api-app-keys/",
+      "api": "https://docs.datadoghq.com/api/latest/",
+      "mcp": "https://docs.datadoghq.com/mcp_server/"
+    },
+    "confidence": "high",
+    "sources_fetched": ["https://docs.datadoghq.com/api/latest/"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 70, "name": "Sentry", "category": "Dev / Infra / Data",
+    "description": "Error tracking and application performance monitoring for developers.",
+    "auth_methods": ["Bearer Token", "OAuth2"],
+    "self_serve": "self-serve",
+    "access_note": "Organization or personal auth tokens created in settings on the free developer plan; OAuth for public integrations.",
+    "api_surface": "REST",
+    "api_breadth": "projects, issues, events, releases, alerts, teams",
+    "mcp": "official", "mcp_note": "Sentry MCP (mcp.sentry.dev)",
+    "buildable": "yes",
+    "blocker": "none",
+    "evidence": {
+      "auth": "https://docs.sentry.io/api/auth/",
+      "access": "https://docs.sentry.io/api/auth/",
+      "api": "https://docs.sentry.io/api/",
+      "mcp": "https://docs.sentry.io/product/sentry-mcp/"
+    },
+    "confidence": "high",
+    "sources_fetched": ["https://docs.sentry.io/api/"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 71, "name": "Notion", "category": "Productivity & PM",
+    "description": "All-in-one workspace for notes, docs, wikis and databases.",
+    "auth_methods": ["Bearer Token", "OAuth2"],
+    "self_serve": "self-serve",
+    "access_note": "Create an internal integration at notion.so/my-integrations on any plan (including free) for an instant token; OAuth2 for public integrations.",
+    "api_surface": "REST",
+    "api_breadth": "pages, databases, blocks, users, comments, search",
+    "mcp": "official", "mcp_note": "Notion MCP (mcp.notion.com, makenotion/notion-mcp-server)",
+    "buildable": "yes",
+    "blocker": "none",
+    "evidence": {
+      "auth": "https://developers.notion.com/docs/authorization",
+      "access": "https://developers.notion.com/docs/create-a-notion-integration",
+      "api": "https://developers.notion.com/reference/intro",
+      "mcp": "https://developers.notion.com/docs/mcp"
+    },
+    "confidence": "high",
+    "sources_fetched": ["https://developers.notion.com/reference/intro"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 80, "name": "Harvest", "category": "Productivity & PM",
+    "description": "Time tracking and invoicing for teams and freelancers.",
+    "auth_methods": ["Bearer Token", "OAuth2"],
+    "self_serve": "self-serve",
+    "access_note": "Personal access token from id.getharvest.com/developers on the free plan or 30-day trial; OAuth2 for multi-account apps.",
+    "api_surface": "REST",
+    "api_breadth": "time entries, projects, clients, invoices, estimates, reports",
+    "mcp": "community", "mcp_note": "community servers e.g. taiste/harvest-mcp-server",
+    "buildable": "yes",
+    "blocker": "none",
+    "evidence": {
+      "auth": "https://help.getharvest.com/api-v2/authentication-api/authentication/authentication/",
+      "access": "https://help.getharvest.com/api-v2/authentication-api/authentication/authentication/",
+      "api": "https://help.getharvest.com/api-v2/",
+      "mcp": "https://github.com/taiste/harvest-mcp-server"
+    },
+    "confidence": "high",
+    "sources_fetched": ["https://help.getharvest.com/api-v2/"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 81, "name": "Stripe", "category": "Finance & Fintech",
+    "description": "Payments infrastructure: accept, process and manage online payments.",
+    "auth_methods": ["API Key", "OAuth2"],
+    "self_serve": "self-serve",
+    "access_note": "Instant test-mode API keys on signup; live keys after activating the account. OAuth2 for Connect platforms.",
+    "api_surface": "REST",
+    "api_breadth": "very broad: payments, customers, subscriptions, invoices, payouts, issuing",
+    "mcp": "official", "mcp_note": "Stripe MCP (mcp.stripe.com / agent toolkit)",
+    "buildable": "yes",
+    "blocker": "none",
+    "evidence": {
+      "auth": "https://docs.stripe.com/keys",
+      "access": "https://docs.stripe.com/keys",
+      "api": "https://docs.stripe.com/api",
+      "mcp": "https://docs.stripe.com/mcp"
+    },
+    "confidence": "high",
+    "sources_fetched": ["https://docs.stripe.com/api"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 91, "name": "NotebookLM", "category": "AI / Research / Media",
+    "description": "Google's AI research notebook that grounds answers in user-uploaded sources.",
+    "auth_methods": ["OAuth2"],
+    "self_serve": "gated",
+    "access_note": "No API for the consumer product; the API exists only in NotebookLM Enterprise via Google Cloud (Gemini Enterprise/Agentspace licensing + IAM roles).",
+    "api_surface": "REST",
+    "api_breadth": "Enterprise-only: create/manage notebooks and sources via Discovery Engine API",
+    "mcp": "none found", "mcp_note": "",
+    "buildable": "no",
+    "blocker": "enterprise-only API behind Gemini Enterprise licensing",
+    "evidence": {
+      "auth": "https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/create-manage-notebooks-api",
+      "access": "https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/create-manage-notebooks-api",
+      "api": "https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/create-manage-notebooks-api",
+      "mcp": ""
+    },
+    "confidence": "medium",
+    "sources_fetched": [],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 92, "name": "Otter AI", "category": "AI / Research / Media",
+    "description": "AI meeting transcription and notetaking assistant.",
+    "auth_methods": ["API Key"],
+    "self_serve": "partial",
+    "access_note": "A public API key can be created under Integrations > Developer in account settings; the Otter MCP server is limited to Business/Enterprise plans.",
+    "api_surface": "REST",
+    "api_breadth": "speeches/transcripts export and search (narrow)",
+    "mcp": "official", "mcp_note": "Otter MCP Server (enterprise plans)",
+    "buildable": "partial",
+    "blocker": "API is new and narrow; MCP gated to Business/Enterprise",
+    "evidence": {
+      "auth": "https://help.otter.ai/hc/en-us/articles/36130822688279-Otter-ai-Public-API",
+      "access": "https://help.otter.ai/hc/en-us/articles/36130822688279-Otter-ai-Public-API",
+      "api": "https://help.otter.ai/hc/en-us/articles/36130822688279-Otter-ai-Public-API",
+      "mcp": "https://help.otter.ai/hc/en-us/articles/35287607569687-Otter-MCP-Server"
+    },
+    "confidence": "medium",
+    "sources_fetched": [],
+    "researched_by": "human (Claude fallback); help-center pages block bots (403), claims based on page snippets", "verified": false
+  },
+  {
+    "id": 95, "name": "Reducto", "category": "AI / Research / Media",
+    "description": "Document-parsing API platform that turns PDFs and scans into structured data for AI pipelines.",
+    "auth_methods": ["API Key"],
+    "self_serve": "self-serve",
+    "access_note": "Sign up to Reducto Studio and 'parse your first document in 5 minutes' via the API quickstart; enterprise tier adds dedicated support.",
+    "api_surface": "REST",
+    "api_breadth": "parse, extract, split, edit pipelines",
+    "mcp": "official", "mcp_note": "Reducto MCP tools for Claude Code/Cursor per docs",
+    "buildable": "yes",
+    "blocker": "none",
+    "evidence": {
+      "auth": "https://docs.reducto.ai/overview",
+      "access": "https://docs.reducto.ai/overview",
+      "api": "https://docs.reducto.ai/overview",
+      "mcp": "https://docs.reducto.ai/overview"
+    },
+    "confidence": "medium",
+    "sources_fetched": ["https://docs.reducto.ai/overview"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 96, "name": "Devin", "category": "AI / Research / Media",
+    "description": "Cognition's autonomous AI software engineer that plans and executes coding tasks.",
+    "auth_methods": ["Bearer Token"],
+    "self_serve": "partial",
+    "access_note": "API uses service-user credentials (cog_ prefix) as Bearer tokens; requires a paid Devin subscription to have an account at all.",
+    "api_surface": "REST",
+    "api_breadth": "sessions, playbooks, knowledge, schedules",
+    "mcp": "official", "mcp_note": "Devin MCP server at mcp.devin.ai",
+    "buildable": "partial",
+    "blocker": "paid Devin subscription required",
+    "evidence": {
+      "auth": "https://docs.devin.ai/api-reference/overview",
+      "access": "https://docs.devin.ai/api-reference/overview",
+      "api": "https://docs.devin.ai/api-reference/overview",
+      "mcp": "https://docs.devin.ai/work-with-devin/devin-mcp"
+    },
+    "confidence": "high",
+    "sources_fetched": ["https://docs.devin.ai/api-reference/overview", "https://docs.devin.ai/work-with-devin/devin-mcp"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 99, "name": "YouTube Transcript", "category": "AI / Research / Media",
+    "description": "Third-party REST API (transcriptapi.com) for fetching YouTube transcripts, video and channel data.",
+    "auth_methods": ["Bearer Token"],
+    "self_serve": "self-serve",
+    "access_note": "Sign up and get an API key immediately with 100 free credits, no card required; paid from ~$5/month.",
+    "api_surface": "REST",
+    "api_breadth": "transcripts, video search, channels, playlists",
+    "mcp": "none found", "mcp_note": "",
+    "buildable": "yes",
+    "blocker": "none (note: unofficial third-party YouTube service)",
+    "evidence": {
+      "auth": "https://www.transcriptapi.com/",
+      "access": "https://www.transcriptapi.com/",
+      "api": "https://www.transcriptapi.com/",
+      "mcp": ""
+    },
+    "confidence": "high",
+    "sources_fetched": ["https://www.transcriptapi.com/"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  },
+  {
+    "id": 100, "name": "Grain", "category": "AI / Research / Media",
+    "description": "AI meeting recorder that captures, transcribes and shares video call highlights.",
+    "auth_methods": ["Bearer Token", "OAuth2"],
+    "self_serve": "self-serve",
+    "access_note": "Personal access token generated in app settings (grain.com/app/settings/integrations); OAuth2 with PKCE for public apps; docs don't state plan gating.",
+    "api_surface": "REST",
+    "api_breadth": "recordings, transcripts, webhooks, users, teams",
+    "mcp": "official", "mcp_note": "official Grain MCP server (release note 2025-06-18)",
+    "buildable": "yes",
+    "blocker": "none documented; plan limits unclear",
+    "evidence": {
+      "auth": "https://developers.grain.com/",
+      "access": "https://developers.grain.com/",
+      "api": "https://developers.grain.com/",
+      "mcp": "https://grain.com/release-note/06-18-2025"
+    },
+    "confidence": "medium",
+    "sources_fetched": ["https://developers.grain.com/"],
+    "researched_by": "human (Claude fallback)", "verified": false
+  }
+]

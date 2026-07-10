@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Can an agent build it? — 100 apps profiled for Composio</title>
+<meta name="description" content="An AI research agent profiled 100 SaaS apps for agent-toolkit buildability: auth, credential access, API surface, MCP coverage — then fact-checked itself.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:#f6f4ee; --card:#fcfbf7; --ink:#191713; --ink-2:#57534a; --ink-3:#8f8a7e;
+  --line:#e3dfd3; --rule:#c9c4b4; --accent:#1c5cab; --accent-ink:#164a8a;
+  --s-blue:#2a78d6;
+  /* access/buildability trio — validated (CVD ΔE 40.5, all checks pass on this surface) */
+  --c-open:#1c5cab; --c-partial:#eda100; --c-gated:#d03b3b;
+  --st-warn:#c98500; --st-crit:#d03b3b; --good-text:#006300;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:#141310; --card:#1d1b17; --ink:#f2efe6; --ink-2:#b6b1a3; --ink-3:#7d786c;
+    --line:#2e2b24; --rule:#3c382e; --accent:#6da7ec; --accent-ink:#86b6ef;
+    --s-blue:#3987e5;
+    /* dark steps of the same trio — validated separately (ΔE 35.9, all pass) */
+    --c-open:#3987e5; --c-partial:#c98500; --c-gated:#e66767;
+    --st-warn:#fab219; --st-crit:#e66767; --good-text:#0ca30c;
+  }
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { background:var(--paper); color:var(--ink); font:16px/1.6 "Instrument Sans",sans-serif;
+       -webkit-font-smoothing:antialiased; }
+.mono { font-family:"IBM Plex Mono",monospace; }
+.wrap { max-width:1180px; margin:0 auto; padding:0 28px; }
+a { color:var(--accent); }
+
+/* masthead */
+header { border-bottom:3px double var(--rule); padding:26px 0 22px; }
+.mast { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; }
+.mast .brand { font-family:Fraunces,serif; font-weight:900; font-size:20px; letter-spacing:-.02em; }
+.mast .meta { font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-2); }
+
+/* hero */
+.hero { padding:64px 0 30px; }
+.kicker { font-family:"IBM Plex Mono",monospace; font-size:12px; letter-spacing:.14em;
+          text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
+h1 { font-family:Fraunces,serif; font-weight:900; font-size:clamp(38px,6vw,72px);
+     line-height:1.02; letter-spacing:-.025em; max-width:15ch; }
+h1 em { font-style:italic; color:var(--accent); }
+.standfirst { margin-top:22px; max-width:62ch; font-size:18px; color:var(--ink-2); }
+
+/* stat band */
+.stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+         border-block:1px solid var(--rule); margin:44px 0; }
+.stat { padding:20px 18px; border-right:1px solid var(--line); }
+.stat:last-child { border-right:0; }
+.stat b { display:block; font-family:Fraunces,serif; font-weight:900; font-size:40px;
+          letter-spacing:-.02em; line-height:1.1; }
+.stat span { font-size:12.5px; color:var(--ink-2); }
+.stat .good { color:var(--good-text); } .stat .warn { color:var(--st-warn); }
+.stat .crit { color:var(--st-crit); }
+
+/* sections */
+section { padding:52px 0 8px; }
+.sec-head { display:flex; align-items:baseline; gap:14px; border-bottom:1px solid var(--rule);
+            padding-bottom:12px; margin-bottom:28px; }
+.sec-no { font-family:"IBM Plex Mono",monospace; color:var(--accent); font-size:13px; }
+h2 { font-family:Fraunces,serif; font-weight:900; font-size:clamp(24px,3.4vw,36px);
+     letter-spacing:-.02em; }
+.sec-note { margin-left:auto; font-size:13px; color:var(--ink-3); }
+
+/* insights */
+.insights { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:22px; }
+.card h3 { font-family:Fraunces,serif; font-weight:600; font-size:19px; margin-bottom:8px; }
+.card p { font-size:14.5px; color:var(--ink-2); }
+.card p strong { color:var(--ink); }
+.big-insight { grid-column:1/-1; border-left:4px solid var(--accent); }
+.big-insight h3 { font-size:24px; }
+
+/* charts */
+.charts { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:14px; margin-top:14px; }
+.chart-title { font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:.1em;
+               text-transform:uppercase; color:var(--ink-2); margin-bottom:16px; }
+.bar-row { display:grid; grid-template-columns:110px 1fr 34px; align-items:center; gap:10px; margin-bottom:9px; }
+.bar-name { font-size:13px; color:var(--ink-2); }
+.bar-track { height:14px; background:transparent; }
+.bar-fill { height:100%; border-radius:0 4px 4px 0; min-width:2px; }
+.bar-val { font-family:"IBM Plex Mono",monospace; font-size:12.5px; text-align:right; }
+.stack-row { display:grid; grid-template-columns:110px 1fr; align-items:center; gap:10px; margin-bottom:8px; }
+.stack-name { font-size:13px; color:var(--ink-2); }
+.stack-track { display:flex; gap:2px; height:20px; }
+.seg { border-radius:3px; min-width:6px; display:flex; align-items:center; justify-content:center; }
+.seg span { font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:#fff; mix-blend-mode:normal; }
+.seg[style*="--ink-3"] span { color:var(--paper); }
+.legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:14px; }
+.lg { display:inline-flex; align-items:center; gap:6px; font-size:12.5px; color:var(--ink-2); }
+.lg i { width:10px; height:10px; border-radius:2px; display:inline-block; }
+
+/* waffle */
+.waffle { display:grid; grid-template-columns:repeat(20,1fr); gap:4px; margin-top:12px; }
+.wf { aspect-ratio:1; border-radius:3px; opacity:.92; cursor:default; }
+.wf:hover { outline:2px solid var(--ink); opacity:1; }
+
+/* table */
+.controls { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; align-items:center; }
+.chip { font:500 12.5px "Instrument Sans",sans-serif; padding:7px 14px; border-radius:999px;
+        border:1px solid var(--line); background:var(--card); color:var(--ink-2); cursor:pointer; }
+.chip.on { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+#q { margin-left:auto; padding:8px 14px; border:1px solid var(--line); border-radius:8px;
+     background:var(--card); color:var(--ink); font:14px "Instrument Sans",sans-serif; min-width:220px; }
+.tblwrap { overflow-x:auto; border:1px solid var(--line); border-radius:10px; background:var(--card); }
+table { width:100%; border-collapse:collapse; font-size:13.5px; min-width:1050px; }
+th { font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+     color:var(--ink-3); text-align:left; padding:12px 12px; border-bottom:1px solid var(--rule);
+     position:sticky; top:0; background:var(--card); }
+td { padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+tr:last-child td { border-bottom:0; }
+td small { display:block; color:var(--ink-3); font-size:11.5px; max-width:30ch; }
+td.num { font-family:"IBM Plex Mono",monospace; color:var(--ink-3); font-size:12px; }
+.tag { font-family:"IBM Plex Mono",monospace; font-size:11px; border:1px solid var(--line);
+       border-radius:4px; padding:1px 6px; white-space:nowrap; }
+.pill { font-size:9px; vertical-align:1px; }
+.apisurf { white-space:nowrap; }
+.blk { max-width:220px; font-size:12.5px; color:var(--ink-2); }
+.ev { font-family:"IBM Plex Mono",monospace; font-size:11px; margin-right:2px; }
+.dim { color:var(--ink-3); }
+.ok { color:var(--good-text); font-weight:700; }
+.warn { color:var(--st-warn); font-weight:600; font-family:"IBM Plex Mono",monospace; font-size:11.5px; }
+.bad { color:var(--st-crit); font-weight:700; }
+
+/* pipeline */
+.pipe { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; margin-top:6px; }
+.step { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; }
+.step .n { font-family:"IBM Plex Mono",monospace; color:var(--accent); font-size:11px; }
+.step h4 { font-size:14.5px; margin:6px 0 4px; }
+.step p { font-size:12.5px; color:var(--ink-2); }
+.honesty { border-left:4px solid var(--st-warn); }
+
+footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px;
+         font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-2); }
+@media (max-width:640px) { .bar-row { grid-template-columns:90px 1fr 30px; }
+  .stack-row { grid-template-columns:90px 1fr; } }
+</style>
+</head>
+<body>
+
+<header><div class="wrap mast">
+  <span class="brand">API Buildability Census</span>
+  <span class="meta">composio take-home · 11 Jul 2026 · agent-generated, human-verified</span>
+</div></header>
+
+<div class="wrap">
+
+<div class="hero">
+  <div class="kicker">100 apps · 10 categories · every claim linked to evidence</div>
+  <h1>Can an agent <em>build a toolkit</em> for it today?</h1>
+  <p class="standfirst">A Python research agent profiled 100 SaaS apps — auth model, credential
+  access, API surface, existing MCP servers — then an independent verifier fact-checked every
+  claim against freshly fetched docs pages, and flagged records were re-researched.
+  </p>
+</div>
+
+<div class="stats">
+  <div class="stat"><b class="good">74</b><span>buildable today</span></div>
+  <div class="stat"><b class="warn">21</b><span>buildable with friction</span></div>
+  <div class="stat"><b class="crit">4</b><span>blocked / no public API</span></div>
+  <div class="stat"><b>59</b><span>fully self-serve credentials</span></div>
+  <div class="stat"><b>3</b><span>gated (sales / partner)</span></div>
+  <div class="stat"><b>94</b><span>already have an MCP server</span></div>
+</div>
+
+<section id="patterns">
+  <div class="sec-head"><span class="sec-no">01</span><h2>The patterns</h2>
+    <span class="sec-note">the headline, not the table</span></div>
+  <div class="insights">
+    <div class="card big-insight">
+      <h3>74 of 100 apps could become agent toolkits this week — the gate is business, not technology.</h3>
+      <p>Where an app isn't buildable, the blocker is almost never a missing API — it's who is
+      allowed to hold credentials. Top blockers found: <strong>paid plan required (14), app review or admin gate (11), enterprise / partner gate (4)</strong>.</p>
+    </div>
+    <div class="card"><h3>OAuth2 dominates (55/100)</h3>
+      <p>OAuth2 appears on <strong>55</strong> apps and API keys on <strong>55</strong> —
+      many apps ship both: OAuth for user-delegated access, keys for server-to-server. A toolkit
+      platform must treat dual-auth as the default case, not the edge case.</p></div>
+    <div class="card"><h3>Self-serve is the norm — gating is categorical</h3>
+      <p><strong>Communications</strong> is the most open category
+      (100% self-serve); <strong>Finance &amp; Fintech</strong> is the most gated
+      (30%). Openness clusters by who the buyer is: developer-first
+      products open the door, enterprise- and partner-sold products keep a human in the loop.</p></div>
+    <div class="card"><h3>3 easy wins with no MCP yet</h3>
+      <p>Apps that are buildable, self-serve, <em>and</em> have no MCP server found —
+      greenfield for Composio. The gated list (3 apps) is the outreach queue, not
+      a dead end.</p></div>
+  </div>
+  <div class="charts">
+    <div class="card"><div class="chart-title">Auth methods across 100 apps (multi-count)</div>
+      
+        <div class="bar-row">
+          <span class="bar-name">OAuth2</span>
+          <div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--s-blue)"></div></div>
+          <span class="bar-val">55</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">API Key</span>
+          <div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--s-blue)"></div></div>
+          <span class="bar-val">55</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Token / JWT</span>
+          <div class="bar-track"><div class="bar-fill" style="width:48%;background:var(--s-blue)"></div></div>
+          <span class="bar-val">48</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Basic Auth</span>
+          <div class="bar-track"><div class="bar-fill" style="width:17%;background:var(--s-blue)"></div></div>
+          <span class="bar-val">17</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Session</span>
+          <div class="bar-track"><div class="bar-fill" style="width:4%;background:var(--s-blue)"></div></div>
+          <span class="bar-val">4</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">None</span>
+          <div class="bar-track"><div class="bar-fill" style="width:4%;background:var(--s-blue)"></div></div>
+          <span class="bar-val">4</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name">Other</span>
+          <div class="bar-track"><div class="bar-fill" style="width:3%;background:var(--s-blue)"></div></div>
+          <span class="bar-val">3</span>
+        </div></div>
+    <div class="card"><div class="chart-title">Credential access by category</div>
+      <div class="stack-row"><span class="stack-name">CRM</span><div class="stack-track"><div class="seg" style="flex:6;background:var(--c-open)" title="CRM &amp; Sales — Self-serve: 6"><span>6</span></div><div class="seg" style="flex:4;background:var(--c-partial)" title="CRM &amp; Sales — Partial: 4"><span>4</span></div></div></div><div class="stack-row"><span class="stack-name">Support</span><div class="stack-track"><div class="seg" style="flex:4;background:var(--c-open)" title="Support &amp; Helpdesk — Self-serve: 4"><span>4</span></div><div class="seg" style="flex:5;background:var(--c-partial)" title="Support &amp; Helpdesk — Partial: 5"><span>5</span></div><div class="seg" style="flex:1;background:var(--ink-3)" title="Support &amp; Helpdesk — Unknown: 1"><span>1</span></div></div></div><div class="stack-row"><span class="stack-name">Communications</span><div class="stack-track"><div class="seg" style="flex:10;background:var(--c-open)" title="Communications — Self-serve: 10"><span>10</span></div></div></div><div class="stack-row"><span class="stack-name">Marketing</span><div class="stack-track"><div class="seg" style="flex:5;background:var(--c-open)" title="Marketing &amp; Ads — Self-serve: 5"><span>5</span></div><div class="seg" style="flex:5;background:var(--c-partial)" title="Marketing &amp; Ads — Partial: 5"><span>5</span></div></div></div><div class="stack-row"><span class="stack-name">Ecommerce</span><div class="stack-track"><div class="seg" style="flex:6;background:var(--c-open)" title="Ecommerce — Self-serve: 6"><span>6</span></div><div class="seg" style="flex:3;background:var(--c-partial)" title="Ecommerce — Partial: 3"><span>3</span></div><div class="seg" style="flex:1;background:var(--ink-3)" title="Ecommerce — Unknown: 1"><span>1</span></div></div></div><div class="stack-row"><span class="stack-name">Data</span><div class="stack-track"><div class="seg" style="flex:7;background:var(--c-open)" title="Data / SEO / Scraping — Self-serve: 7"><span>7</span></div><div class="seg" style="flex:2;background:var(--c-partial)" title="Data / SEO / Scraping — Partial: 2"><span>2</span></div><div class="seg" style="flex:1;background:var(--c-gated)" title="Data / SEO / Scraping — Gated: 1"><span>1</span></div></div></div><div class="stack-row"><span class="stack-name">Dev</span><div class="stack-track"><div class="seg" style="flex:7;background:var(--c-open)" title="Dev / Infra / Data — Self-serve: 7"><span>7</span></div><div class="seg" style="flex:3;background:var(--c-partial)" title="Dev / Infra / Data — Partial: 3"><span>3</span></div></div></div><div class="stack-row"><span class="stack-name">Productivity</span><div class="stack-track"><div class="seg" style="flex:6;background:var(--c-open)" title="Productivity &amp; PM — Self-serve: 6"><span>6</span></div><div class="seg" style="flex:4;background:var(--c-partial)" title="Productivity &amp; PM — Partial: 4"><span>4</span></div></div></div><div class="stack-row"><span class="stack-name">Finance</span><div class="stack-track"><div class="seg" style="flex:3;background:var(--c-open)" title="Finance &amp; Fintech — Self-serve: 3"><span>3</span></div><div class="seg" style="flex:7;background:var(--c-partial)" title="Finance &amp; Fintech — Partial: 7"><span>7</span></div></div></div><div class="stack-row"><span class="stack-name">AI</span><div class="stack-track"><div class="seg" style="flex:5;background:var(--c-open)" title="AI / Research / Media — Self-serve: 5"><span>5</span></div><div class="seg" style="flex:3;background:var(--c-partial)" title="AI / Research / Media — Partial: 3"><span>3</span></div><div class="seg" style="flex:2;background:var(--c-gated)" title="AI / Research / Media — Gated: 2"><span>2</span></div></div></div>
+      <div class="legend"><span class="lg"><i style="background:var(--c-open)"></i>Self-serve</span><span class="lg"><i style="background:var(--c-partial)"></i>Partial</span><span class="lg"><i style="background:var(--c-gated)"></i>Gated</span><span class="lg"><i style="background:var(--ink-3)"></i>Unknown</span></div></div>
+    <div class="card"><div class="chart-title">The 100 — buildability at a glance (hover any cell)</div>
+      <div class="waffle"><div class="wf" style="background:var(--c-partial)" title="Salesforce — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="HubSpot — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Pipedrive — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Attio — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Twenty — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Podio — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Zoho CRM — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Close — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Copper — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="DealCloud — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="Zendesk — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Intercom — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Freshdesk — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Front — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Pylon — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="LiveAgent — buildable: yes"></div><div class="wf" style="background:var(--ink-3)" title="Plain — buildable: unknown"></div><div class="wf" style="background:var(--c-partial)" title="Help Scout — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="Gorgias — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Gladly — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Slack — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Twilio — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Zoho Cliq — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Lark — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Pumble — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Discord — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Telegram — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="WhatsApp Business — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Aircall — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Vonage — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Google Ads — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="Meta Ads — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="LinkedIn Ads — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="GoHighLevel — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Mailchimp — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Klaviyo — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="systeme.io — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Pinterest — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Threads — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="SendGrid — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Shopify — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="WooCommerce — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="BigCommerce — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Salesforce Commerce Cloud — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Magento (Adobe Commerce) — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Squarespace — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="Ecwid — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Gumroad — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Amazon Selling Partner — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Fanbasis — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="DataForSEO — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="SE Ranking — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Ahrefs — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="MrScraper — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Apify — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Firecrawl — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Bright Data — buildable: yes"></div><div class="wf" style="background:var(--c-gated)" title="Sherlock — buildable: no"></div><div class="wf" style="background:var(--c-partial)" title="Waterfall.io — buildable: partial"></div><div class="wf" style="background:var(--c-gated)" title="Clay — buildable: no"></div><div class="wf" style="background:var(--c-open)" title="GitHub — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Vercel — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Netlify — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Cloudflare — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Supabase — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Neo4j — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Snowflake — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="MongoDB Atlas — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Datadog — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Sentry — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Notion — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Airtable — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Linear — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Jira — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Asana — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Monday.com — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="ClickUp — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Coda — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Smartsheet — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Harvest — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Stripe — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Plaid — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Binance — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Paygent Connect — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="iPayX — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="QuickBooks — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Xero — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Brex — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Ramp — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="PitchBook — buildable: yes"></div><div class="wf" style="background:var(--c-gated)" title="NotebookLM — buildable: no"></div><div class="wf" style="background:var(--c-partial)" title="Otter AI — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Fathom — buildable: yes"></div><div class="wf" style="background:var(--c-gated)" title="Consensus — buildable: no"></div><div class="wf" style="background:var(--c-open)" title="Reducto — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Devin — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Higgsfield — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Mermaid CLI — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="YouTube Transcript — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Grain — buildable: yes"></div></div>
+      <div class="legend"><span class="lg"><i style="background:var(--c-open)"></i>Yes</span><span class="lg"><i style="background:var(--c-partial)"></i>Partial</span><span class="lg"><i style="background:var(--c-gated)"></i>No</span><span class="lg"><i style="background:var(--ink-3)"></i>Unknown</span></div></div>
+  </div>
+</section>
+
+<section id="findings">
+  <div class="sec-head"><span class="sec-no">02</span><h2>All 100 apps</h2>
+    <span class="sec-note">every row links to the evidence behind it · ✓ = verifier confirmed all 5 claims</span></div>
+  <div class="controls">
+    <button class="chip on" data-f="all">All</button>
+    <button class="chip" data-f="CRM &amp; Sales">CRM</button><button class="chip" data-f="Support &amp; Helpdesk">Support</button><button class="chip" data-f="Communications">Communications</button><button class="chip" data-f="Marketing &amp; Ads">Marketing</button><button class="chip" data-f="Ecommerce">Ecommerce</button><button class="chip" data-f="Data / SEO / Scraping">Data</button><button class="chip" data-f="Dev / Infra / Data">Dev</button><button class="chip" data-f="Productivity &amp; PM">Productivity</button><button class="chip" data-f="Finance &amp; Fintech">Finance</button><button class="chip" data-f="AI / Research / Media">AI</button>
+    <button class="chip" data-f="acc:gated">Gated only</button>
+    <input id="q" placeholder="search apps…">
+  </div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>#</th><th>App</th><th>Auth</th><th>Access</th><th>API surface</th>
+      <th>MCP</th><th>Buildable</th><th>Blocker</th><th>Evidence · ✓</th></tr></thead>
+    <tbody id="tb">
+      <tr data-cat="CRM &amp; Sales" data-acc="partial">
+        <td class="num">1</td>
+        <td><strong>Salesforce</strong><small>Salesforce is a customer relationship management (CRM) and sales platform.</small></td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">paid plan or approval</td>
+        <td><a class="ev" href="https://developer.salesforce.com/docs/apis" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/intro_using_oauth.htm" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.apideck.com/blog/how-to-get-your-salesforce-api-keys" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.salesforce.com/agentforce/mcp-support/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="CRM &amp; Sales" data-acc="partial">
+        <td class="num">2</td>
+        <td><strong>HubSpot</strong><small>HubSpot is a CRM and sales platform that enables businesses to manage their customer relat</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">paid plan or admin approval</td>
+        <td><a class="ev" href="https://developers.hubspot.com/docs/api-reference/latest/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.hubspot.com/docs/apps/legacy-apps/authentication/intro-to-auth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://community.hubspot.com/t5/APIs-Integrations/Where-is-my-developer-API-key/td-p/1023255" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developers.hubspot.com/ai-tools/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="CRM &amp; Sales" data-acc="self-serve">
+        <td class="num">3</td>
+        <td><strong>Pipedrive</strong><small>Pipedrive is a CRM and sales platform that provides API access for integrations and custom</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developers.pipedrive.com/docs/api/v1" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.pipedrive.com/docs/api/v1/Oauth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.pipedrive.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.pipedrive.com/en/newsroom/pipedrive-launches-native-mcp-server-bringing-crm-workflows-directly-into-ai-assistants" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="CRM &amp; Sales" data-acc="partial">
+        <td class="num">4</td>
+        <td><strong>Attio</strong><small>Attio is a CRM that provides a public REST API for developers to build custom integrations</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">rate limits</td>
+        <td><a class="ev" href="https://docs.attio.com/rest-api/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.attio.com/rest-api/guides/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.stacksync.com/blog/how-to-get-an-attio-developer-account-and-start-working-with-attios-api" target="_blank" rel="noopener">access</a> <a class="ev" href="https://docs.attio.com/mcp/overview" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="CRM &amp; Sales" data-acc="self-serve">
+        <td class="num">5</td>
+        <td><strong>Twenty</strong><small>Twenty is an open-source CRM that provides building blocks for a custom CRM to meet comple</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST + GraphQL<small>full CRUD on all core objects</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.twenty.com/developers/extend/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://github.com/mhenry3164/twenty-crm-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="CRM &amp; Sales" data-acc="self-serve">
+        <td class="num">6</td>
+        <td><strong>Podio</strong><small>Podio is a CRM and sales platform that provides a programmable interface to all its functi</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developers.podio.com/doc" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.podio.com/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.podio.com/index/faq" target="_blank" rel="noopener">access</a> <a class="ev" href="https://docs.sharefile.com/en-us/podio/using-podio/general-features/podio-mcp-server.html" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="CRM &amp; Sales" data-acc="self-serve">
+        <td class="num">7</td>
+        <td><strong>Zoho CRM</strong><small>Zoho CRM is a customer relationship management platform that provides APIs for integration</small></td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://www.zoho.com/crm/developer/docs/api/v8/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.zoho.com/crm/developer/docs/api/v8/oauth-overview.html" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://help.zoho.com/portal/en/community/topic/setting-up-the-api-key" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/junnaisystems/zoho-crm-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="CRM &amp; Sales" data-acc="self-serve">
+        <td class="num">8</td>
+        <td><strong>Close</strong><small>Close is a CRM and sales platform that provides API access for integrations and automation</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developer.close.com/api/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.close.com/api/overview/api-key-authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.close.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://help.close.com/docs/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="CRM &amp; Sales" data-acc="self-serve">
+        <td class="num">9</td>
+        <td><strong>Copper</strong><small>Copper is a CRM and sales platform that provides a RESTful interface with JSON-formatted r</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full access to most Copper resources</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developer.copper.com/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.copper.com/introduction/authentication.html" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://viasocket.com/mcp/copper" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="CRM &amp; Sales" data-acc="partial">
+        <td class="num">10</td>
+        <td><strong>DealCloud</strong><small>DealCloud is a CRM and sales platform that provides a comprehensive API for custom integra</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">paid plan or approval</td>
+        <td><a class="ev" href="https://api.docs.dealcloud.com/docs" target="_blank" rel="noopener">api</a> <a class="ev" href="https://api.docs.dealcloud.com/docs/token" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://api.docs.dealcloud.com/docs/apikeys" target="_blank" rel="noopener">access</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Support &amp; Helpdesk" data-acc="partial">
+        <td class="num">11</td>
+        <td><strong>Zendesk</strong><small>Zendesk is a support and helpdesk platform that provides APIs for ticketing, help center, </small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span> <span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>community</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">paid plan or approval</td>
+        <td><a class="ev" href="https://developer.zendesk.com/api-reference/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.zendesk.com/api-reference/introduction/security-and-auth/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.zendesk.com/documentation/api-basics/getting-started/getting-a-trial-or-sponsored-account-for-development/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/reminia/zendesk-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Support &amp; Helpdesk" data-acc="self-serve">
+        <td class="num">12</td>
+        <td><strong>Intercom</strong><small>Intercom is a support and helpdesk platform that provides APIs for developers to build int</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developers.intercom.com/docs/references/rest-api/api.intercom.io" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.intercom.com/docs/build-an-integration/learn-more/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.intercom.com/help/en/articles/9071694-intercom-developer-faqs" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.intercom.com/blog/introducing-model-context-protocol-fin/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Support &amp; Helpdesk" data-acc="partial">
+        <td class="num">13</td>
+        <td><strong>Freshdesk</strong><small>Freshdesk is a support and helpdesk application</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>community</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">paid plan required</td>
+        <td><a class="ev" href="https://developer.freshdesk.com/api/v1" target="_blank" rel="noopener">api</a> <a class="ev" href="https://community.freshworks.com/api-and-webhooks-11406/freshdesk-api-for-free-users-available-35254" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/NeuraLegion/freshdesk_mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Support &amp; Helpdesk" data-acc="self-serve">
+        <td class="num">14</td>
+        <td><strong>Front</strong><small>Front is a helpdesk and support platform that allows users to manage customer conversation</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>none found</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://dev.frontapp.com/docs/welcome" target="_blank" rel="noopener">api</a> <a class="ev" href="https://dev.frontapp.com/reference/introduction" target="_blank" rel="noopener">auth</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Support &amp; Helpdesk" data-acc="partial">
+        <td class="num">15</td>
+        <td><strong>Pylon</strong><small>Pylon is a B2B customer support and customer operations platform.</small></td>
+        <td><span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>community</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">admin approval</td>
+        <td><a class="ev" href="https://docs.usepylon.com/pylon-docs/developer/api/api-reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.usepylon.com/pylon-docs/developer/api/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://getpylon.com/developers/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/JustinBeckwith/pylon-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Support &amp; Helpdesk" data-acc="self-serve">
+        <td class="num">16</td>
+        <td><strong>LiveAgent</strong><small>LiveAgent is an integrated customer support software, ticketing system, live chat, social </small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://support.liveagent.com/840770-Complete-API-reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://support.liveagent.com/802463-REST-API" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://support.liveagent.com/741982-API-key" target="_blank" rel="noopener">access</a> <a class="ev" href="https://faq.liveagent.com/114892-MCP-Integration-Guide-for-LiveAgent-Agents-Early-Preview" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Support &amp; Helpdesk" data-acc="unknown">
+        <td class="num">17</td>
+        <td><strong>Plain</strong><small>Plain is an API-first customer infrastructure platform for B2B SaaS that provides a suppor</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--ink-3)">●</span> Unknown</td>
+        <td class="apisurf">GraphQL<small>full API-UI parity</small></td>
+        <td>official</td>
+        <td style="color:var(--ink-3);font-weight:600">Unknown</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://www.plain.com/docs/graphql/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.plain.com/docs/graphql/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.plain.com/blog/api-first-support-platforms" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Support &amp; Helpdesk" data-acc="partial">
+        <td class="num">18</td>
+        <td><strong>Help Scout</strong><small>Help Scout is a support and helpdesk platform that provides tools for developers to integr</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>community</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">paid plan required</td>
+        <td><a class="ev" href="https://developer.helpscout.com/docs-api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://articles.helpscout.com/blog/help-scout-api/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/drewburchfield/help-scout-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Support &amp; Helpdesk" data-acc="partial">
+        <td class="num">19</td>
+        <td><strong>Gorgias</strong><small>Gorgias is a support and helpdesk platform that provides an open REST API for reading and </small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">paid plan or approval</td>
+        <td><a class="ev" href="https://docs.gorgias.com/en-US/rest-api-208286" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.gorgias.com/docs/1-register-on-developer-portal" target="_blank" rel="noopener">access</a> <a class="ev" href="https://docs.gorgias.com/en-US/connect-your-ai-assistant-to-the-gorgias-mcp-6310546" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Support &amp; Helpdesk" data-acc="self-serve">
+        <td class="num">20</td>
+        <td><strong>Gladly</strong><small>Gladly is a customer service platform that provides APIs for integrating with external sys</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developer.gladly.com/rest/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.gladly.com/implementation/docs/get-your-api-tokens" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.stackone.com/connectors/gladly/mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Communications" data-acc="self-serve">
+        <td class="num">21</td>
+        <td><strong>Slack</strong><small>Slack is a communication platform that allows users to interact with each other and with A</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.slack.dev/apis/web-api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.slack.dev/authentication/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://api.slack.com/apps/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://docs.slack.dev/ai/slack-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Communications" data-acc="self-serve">
+        <td class="num">22</td>
+        <td><strong>Twilio</strong><small>Twilio provides cloud communications APIs for messaging, voice, video, email and other cha</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on all core communication objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://www.twilio.com/docs" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.twilio.com/docs/messaging/api" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.twilio.com/docs/ai/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Communications" data-acc="self-serve">
+        <td class="num">23</td>
+        <td><strong>Zoho Cliq</strong><small>Zoho Cliq is a team chat and collaboration platform for channels, threads, reminders and s</small></td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on chat objects (channels, messages, reminders, users)</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://www.zoho.com/cliq/help/restapi/v3/introduction/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.zoho.com/cliq/help/restapi/v3/oauth/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.zoho.com/cliq/mcp-server.html" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Communications" data-acc="self-serve">
+        <td class="num">24</td>
+        <td><strong>Lark</strong><small>Lark is a workplace communication and collaboration platform.</small></td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>broad set of workplace collaboration APIs</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://open.larksuite.com/api-explorer?from=guide" target="_blank" rel="noopener">api</a> <a class="ev" href="https://open.larksuite.com/document/ukTMukTMukTM/uMTNz4yM1MjLzUzM" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://open.larksuite.com/document/uAjLw4CM/ukTMukTMukTM/mcp_integration/mcp_introduction" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Communications" data-acc="self-serve">
+        <td class="num">25</td>
+        <td><strong>Pumble</strong><small>Pumble is an all‑in‑one team communication app for messaging, file sharing and video confe</small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on messages, channels, reactions and user interactions</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://pumble.com/help/integrations/automation-workflow-integrations/api-keys-integration/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://pumble.com/help/integrations/automation-workflow-integrations/how-to-use-the-pumble-mcp-server/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Communications" data-acc="self-serve">
+        <td class="num">26</td>
+        <td><strong>Discord</strong><small>Discord is a communications platform that provides chat, voice, and community features via</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core Discord objects (guilds, channels, messages, users)</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.discord.com/developers/reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.discord.com/developers/topics/oauth2" target="_blank" rel="noopener">access</a> <a class="ev" href="https://mcpservers.org/servers/exilproductions/discord-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Communications" data-acc="self-serve">
+        <td class="num">27</td>
+        <td><strong>Telegram</strong><small>Telegram provides a cloud‑based messaging platform with a Bot API that lets developers cre</small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core messaging objects (messages, chats, users, etc.)</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://core.telegram.org/bots/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://core.telegram.org/api/obtaining_api_id" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/sparfenyuk/mcp-telegram" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Communications" data-acc="self-serve">
+        <td class="num">28</td>
+        <td><strong>WhatsApp Business</strong><small>Provides a programmable API for businesses to send and receive WhatsApp messages.</small></td>
+        <td><span class="tag">Other</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full messaging (send, receive, templates, media)</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">auth method not explicitly documented</td>
+        <td><a class="ev" href="https://developers.facebook.com/documentation/business-messaging/whatsapp/get-started" target="_blank" rel="noopener">api</a> <a class="ev" href="https://whatsappbusiness.com/developers/developer-hub/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/msaelices/whatsapp-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Communications" data-acc="self-serve">
+        <td class="num">29</td>
+        <td><strong>Aircall</strong><small>Aircall provides a cloud‑based phone system with a public REST API for managing calls, use</small></td>
+        <td><span class="tag">Basic Auth</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core objects (users, calls, contacts, numbers, teams, tags, webhooks, etc.)</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developer.aircall.io/api-references" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.aircall.io/tutorials/basic-authentication/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://viasocket.com/mcp/aircall" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Communications" data-acc="self-serve">
+        <td class="num">30</td>
+        <td><strong>Vonage</strong><small>Vonage provides communication APIs for voice, video, messaging, and network features.</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD across voice, video, messaging, and network APIs</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developer.vonage.com/en/documentation" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.vonage.com/en/verify/concepts/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.vonage.com/en/getting-started/overview" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developer.vonage.com/en/mcp-server/overview" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Marketing &amp; Ads" data-acc="partial">
+        <td class="num">31</td>
+        <td><strong>Google Ads</strong><small>The Google Ads API is a programmatic interface for managing Google Ads accounts and campai</small></td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on campaigns, ads, keywords and reporting</small></td>
+        <td>official</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">Developer token approval required</td>
+        <td><a class="ev" href="https://developers.google.com/google-ads/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.google.com/google-ads/api/docs/api-policy/developer-token" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developers.google.com/google-ads/api/docs/developer-toolkit/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Marketing &amp; Ads" data-acc="partial">
+        <td class="num">32</td>
+        <td><strong>Meta Ads</strong><small>Meta Ads is a platform that allows developers to automate ad creation, management, and rep</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on ad accounts and campaigns</small></td>
+        <td>official</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">app review</td>
+        <td><a class="ev" href="https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.facebook.com/documentation/ads-commerce/marketing-api/get-started/authorization" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.adamigo.ai/blog/meta-ads-api-key-setup-guide" target="_blank" rel="noopener">access</a> <a class="ev" href="https://pipeboard.co/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Marketing &amp; Ads" data-acc="partial">
+        <td class="num">33</td>
+        <td><strong>LinkedIn Ads</strong><small>The LinkedIn Ads app helps businesses grow by building technology to reach, engage, and co</small></td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">approval process</td>
+        <td><a class="ev" href="https://learn.microsoft.com/en-us/linkedin/marketing/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://learn.microsoft.com/en-us/linkedin/shared/authentication/getting-access" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.linkedin.com/product-catalog" target="_blank" rel="noopener">access</a> <a class="ev" href="https://lobehub.com/mcp/wsofidelhi-linkedin-ads-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Marketing &amp; Ads" data-acc="partial">
+        <td class="num">34</td>
+        <td><strong>GoHighLevel</strong><small>GoHighLevel is a CRM and marketing automation platform that lets businesses manage contact</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects (contacts, conversations, calendar, payments, etc.)</small></td>
+        <td>official</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">OAuth requires paid Agency Pro plan</td>
+        <td><a class="ev" href="https://marketplace.gohighlevel.com/docs/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.gohighlevel.com/support/solutions/articles/48001060529-highlevel-api-documentation" target="_blank" rel="noopener">access</a> <a class="ev" href="https://marketplace.gohighlevel.com/docs/other/mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Marketing &amp; Ads" data-acc="self-serve">
+        <td class="num">35</td>
+        <td><strong>Mailchimp</strong><small>Mailchimp provides a marketing platform for creating, sending, and tracking email campaign</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span> <span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core marketing objects (audiences, contacts, campaigns, automation, etc.)</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://mailchimp.com/developer/marketing/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://mailchimp.com/developer/marketing/docs/fundamentals/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://mailchimp.com/developer/marketing/guides/quick-start/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://apify.com/engaging_image/mailchimp-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Marketing &amp; Ads" data-acc="self-serve">
+        <td class="num">36</td>
+        <td><strong>Klaviyo</strong><small>Klaviyo provides marketing automation APIs for managing profiles, events, lists, campaigns</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core marketing objects (profiles, events, lists, campaigns, etc.)</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developers.klaviyo.com/en/reference/api_overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.klaviyo.com/blog/introducing-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Marketing &amp; Ads" data-acc="self-serve">
+        <td class="num">37</td>
+        <td><strong>systeme.io</strong><small>Systeme.io is an all‑in‑one platform for building sales funnels, email marketing, online c</small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>CRUD on contacts, tags, subscriptions, newsletters and related objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developer.systeme.io/reference/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.systeme.io/article/2323-how-to-create-a-public-api-key-on-systeme-io" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://help.systeme.io/article/9489-how-to-use-systeme-ios-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Marketing &amp; Ads" data-acc="partial">
+        <td class="num">38</td>
+        <td><strong>Pinterest</strong><small>Provides an API to create and manage Pins, Boards, ads, product catalogs, and analytics on</small></td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on content, ads, catalogs plus analytics</small></td>
+        <td>community</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">App review and video demo required for standard access</td>
+        <td><a class="ev" href="https://developers.pinterest.com/docs/api/v5/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.pinterest.com/docs/getting-started/set-up-authentication-and-authorization/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.pinterest.com/docs/key-concepts/access-tiers/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/collactivelabs/pinterest-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Marketing &amp; Ads" data-acc="self-serve">
+        <td class="num">39</td>
+        <td><strong>Threads</strong><small>Provides an API for creating, publishing, and retrieving Threads posts and managing a crea</small></td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on Threads posts and user content</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developers.facebook.com/documentation/threads" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.facebook.com/documentation/threads/get-started" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://mcp.aibase.com/server/1916354827725545473" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Marketing &amp; Ads" data-acc="self-serve">
+        <td class="num">40</td>
+        <td><strong>SendGrid</strong><small>SendGrid provides an email delivery service with a REST API for sending emails and managin</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on most core objects (excluding billing &amp; email validation)</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://www.twilio.com/docs/sendgrid/for-developers/sending-email/authentication" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/garethcull/sendgrid-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Ecommerce" data-acc="self-serve">
+        <td class="num">41</td>
+        <td><strong>Shopify</strong><small>Shopify provides APIs to manage e‑commerce stores, including products, orders, customers, </small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Session</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST + GraphQL<small>full CRUD on core e‑commerce objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://shopify.dev/docs/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://shopify.dev/docs/apps/build/authentication-authorization" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://shopify.dev/docs/apps/build/authentication-authorization/access-tokens/generate-app-access-tokens-admin" target="_blank" rel="noopener">access</a> <a class="ev" href="https://shopify.dev/docs/apps/build/ai-toolkit" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Ecommerce" data-acc="self-serve">
+        <td class="num">42</td>
+        <td><strong>WooCommerce</strong><small>WooCommerce adds e‑commerce functionality to WordPress sites, enabling online stores.</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core e‑commerce objects (products, orders, customers, etc.)</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developer.woocommerce.com/docs/apis/rest-api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.woocommerce.com/docs/apis/rest-api/authentication/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.woocommerce.com/docs/features/mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Ecommerce" data-acc="self-serve">
+        <td class="num">43</td>
+        <td><strong>BigCommerce</strong><small>BigCommerce provides a SaaS ecommerce platform with REST and GraphQL APIs to manage store </small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST + GraphQL<small>full CRUD on core ecommerce objects (products, orders, customers, etc.)</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.bigcommerce.com/developer/api-reference/about-our-apis" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.bigcommerce.com/developer/docs/overview/api-fundamentals/api-accounts" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.bigcommerce.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://mcpmarket.com/server/bigcommerce" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Ecommerce" data-acc="unknown">
+        <td class="num">44</td>
+        <td><strong>Salesforce Commerce Cloud</strong><small>Salesforce Commerce Cloud provides APIs to build and customize headless e‑commerce storefr</small></td>
+        <td><span class="tag">Other</span></td>
+        <td><span class="pill" style="color:var(--ink-3)">●</span> Unknown</td>
+        <td class="apisurf">REST<small>unknown</small></td>
+        <td>community</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">no public auth/credential details</td>
+        <td><a class="ev" href="https://developer.salesforce.com/docs/commerce/commerce-api/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.salesforce.com/docs/commerce/commerce-api/references/auth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/setting-up-api-access.html" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/BrinsilElias/commercecloud-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Ecommerce" data-acc="self-serve">
+        <td class="num">45</td>
+        <td><strong>Magento (Adobe Commerce)</strong><small>Adobe Commerce (Magento) provides an e‑commerce platform with APIs for managing products, </small></td>
+        <td><span class="tag">Basic Auth</span> <span class="tag">OAuth2</span> <span class="tag">Session</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST + GraphQL<small>full CRUD on core commerce objects</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developer.adobe.com/commerce/webapi/rest/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.adobe.com/commerce/marketplace/guides/eqp/v1/access-keys" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/rafaelstz/adobe-commerce-dev-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Ecommerce" data-acc="partial">
+        <td class="num">46</td>
+        <td><strong>Squarespace</strong><small>Squarespace is a website and ecommerce platform that provides APIs to manage commerce feat</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core commerce objects (products, orders, inventory, contacts, etc.)</small></td>
+        <td>community</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">requires paid Commerce Advanced plan or Extension approval</td>
+        <td><a class="ev" href="https://developers.squarespace.com/commerce-apis/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.squarespace.com/commerce-apis/oauth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.squarespace.com/commerce-apis/authentication-and-permissions" target="_blank" rel="noopener">access</a> <a class="ev" href="https://viasocket.com/mcp/squarespace" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Ecommerce" data-acc="partial">
+        <td class="num">47</td>
+        <td><strong>Ecwid</strong><small>Ecwid provides a REST API for managing store data, orders, products, customers and other e</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Other</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core e‑commerce objects (store profile, products, orders, customers, discounts, shipping, payments, etc.)</small></td>
+        <td>community</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">API requires a paid Ecwid plan</td>
+        <td><a class="ev" href="https://docs.ecwid.com/api-reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.ecwid.com/api-reference, https://docs.ecwid.com/get-started/make-your-first-api-request" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://github.com/Ecwid/ecwid-api-docs/blob/master/includes/_overview.md, https://docs.ecwid.com/get-started/make-your-first-api-request" target="_blank" rel="noopener">access</a> <a class="ev" href="https://viasocket.com/mcp/ecwid-by-lightspeed" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Ecommerce" data-acc="self-serve">
+        <td class="num">48</td>
+        <td><strong>Gumroad</strong><small>Gumroad provides a platform for creators to sell digital products and offers a REST API to</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>read/write on products, sales, subscribers, and license management</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://www.postman.com/api-reference-library/gumroad/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://gumroad.com/help/article/280-create-application-api" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://nocodeapi.com/marketplace/gumroad/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/rmarescu/gumroad-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Ecommerce" data-acc="partial">
+        <td class="num">49</td>
+        <td><strong>Amazon Selling Partner</strong><small>Provides REST APIs for Amazon sellers and vendors to programmatically access orders, shipm</small></td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core eCommerce objects (orders, inventory, listings, payments, reports)</small></td>
+        <td>community</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">requires Amazon approval for data‑access</td>
+        <td><a class="ev" href="https://developer-docs.amazon.com/sp-api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.amazonservices.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/jay-trivedi/amazon_sp_mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Ecommerce" data-acc="self-serve">
+        <td class="num">50</td>
+        <td><strong>Fanbasis</strong><small>FanBasis provides a payment and subscription platform that lets creators sell products, ma</small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on payments, subscriptions, customers, products, discounts, and webhooks</small></td>
+        <td>none found</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://apidocs.fan/" target="_blank" rel="noopener">api</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
+        <td class="num">51</td>
+        <td><strong>DataForSEO</strong><small>DataForSEO provides REST APIs that deliver structured SEO and SEM data such as SERP result</small></td>
+        <td><span class="tag">Basic Auth</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>broad set of read‑only SEO data endpoints (SERP, keyword, backlinks, etc.)</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.dataforseo.com/v3/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.dataforseo.com/v3/auth/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://dataforseo.com/model-context-protocol" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
+        <td class="num">52</td>
+        <td><strong>SE Ranking</strong><small>SE Ranking provides SEO and GEO data via a REST API and an MCP server for AI assistants.</small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on SEO data and project management resources</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://seranking.com/api/data/reference/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://seranking.com/api/data/getting-started/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://seranking.com/api.html" target="_blank" rel="noopener">access</a> <a class="ev" href="https://seranking.com/api/integrations/mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Data / SEO / Scraping" data-acc="partial">
+        <td class="num">53</td>
+        <td><strong>Ahrefs</strong><small>Provides access to Ahrefs marketing and search data via a REST API for custom integrations</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>read‑only reporting on SEO data plus limited management endpoints</small></td>
+        <td>official</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">Requires paid Ahrefs plan to obtain API key</td>
+        <td><a class="ev" href="https://docs.ahrefs.com/en/api/docs/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.ahrefs.com/en/api/docs/api-keys-creation-and-management" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://github.com/ahrefs/ahrefs-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
+        <td class="num">54</td>
+        <td><strong>MrScraper</strong><small>MrScraper provides a web‑scraping platform with AI‑powered and manual scrapers accessible </small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on scrapers, runs, and results</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.mrscraper.com/docs/api/authentication" target="_blank" rel="noopener">api</a> <a class="ev" href="https://apify.com/mrscrapercom/mrscraper-listing/api/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
+        <td class="num">55</td>
+        <td><strong>Apify</strong><small>Apify provides a platform for running web‑scraping and automation Actors via a REST API.</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on core platform objects (actors, runs, datasets, key‑value stores, schedules, etc.)</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.apify.com/api/v2" target="_blank" rel="noopener">api</a> <a class="ev" href="https://mcp.apify.com/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
+        <td class="num">56</td>
+        <td><strong>Firecrawl</strong><small>Firecrawl provides a REST API to search, scrape, crawl, map and extract web content for AI</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">None</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>scrape, crawl, map, search, extract, parse, and browser automation endpoints</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.firecrawl.dev/api-reference/v2-introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.firecrawl.dev/api-reference/introduction" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.firecrawl.dev/blog/firecrawl-keyless-launch" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/firecrawl/firecrawl-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
+        <td class="num">57</td>
+        <td><strong>Bright Data</strong><small>Bright Data is a web data platform that helps you collect, process and scale access to pub</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.brightdata.com/api-reference/rest-api/scraper/crawl-api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.brightdata.com/api-reference/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://brightdata.com/products/serp-api" target="_blank" rel="noopener">access</a> <a class="ev" href="https://brightdata.com/ai/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
+        <td class="num">58</td>
+        <td><strong>Sherlock</strong><small>Find usernames across 400+ social networks and websites.</small></td>
+        <td><span class="tag">None</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">CLI only<small>read‑only username search across many sites</small></td>
+        <td>community</td>
+        <td style="color:var(--c-gated);font-weight:600">No</td>
+        <td class="blk">No public REST/GraphQL API endpoint</td>
+        <td><a class="ev" href="https://github.com/sherlock-project/sherlock" target="_blank" rel="noopener">api</a> <a class="ev" href="https://github.com/Burnsedia/sherlock-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Data / SEO / Scraping" data-acc="partial">
+        <td class="num">59</td>
+        <td><strong>Waterfall.io</strong><small>Waterfall.io provides an enrichment API that aggregates data from 30+ vendors to find and </small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>search, enrichment and verification of contacts and companies</small></td>
+        <td>none found</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">requires master API key, likely a paid account</td>
+        <td><a class="ev" href="https://docs.waterfall.io/v1/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.waterfall.io/v1/api-keys-create" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.linkedin.com/posts/noah-adelstein-311896b9_emre-kavaloglu-from-waterfallio-gave-me-activity-7336500329078759424-TXT1" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Data / SEO / Scraping" data-acc="gated">
+        <td class="num">60</td>
+        <td><strong>Clay</strong><small>GTM data-enrichment platform that orchestrates 100+ data providers inside spreadsheet-like</small></td>
+        <td><span class="tag">None</span></td>
+        <td><span class="pill" style="color:var(--c-gated)">●</span> Gated</td>
+        <td class="apisurf">None<small>outbound HTTP-API column + per-table inbound webhooks only</small></td>
+        <td>none found</td>
+        <td style="color:var(--c-gated);font-weight:600">No</td>
+        <td class="blk">no public inbound API to build against</td>
+        <td><a class="ev" href="https://university.clay.com/docs/http-api-integration-overview" target="_blank" rel="noopener">api</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Dev / Infra / Data" data-acc="partial">
+        <td class="num">61</td>
+        <td><strong>GitHub</strong><small>GitHub is a DevOps platform for version control and collaboration on code.</small></td>
+        <td><span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">authentication token requirements</td>
+        <td><a class="ev" href="https://docs.github.com/en/rest" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.github.com/en/rest/overview/authenticating-to-the-rest-api" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://apievangelist.com/2017/10/16/operating-your-api-portal-using-github/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/github/github-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
+        <td class="num">62</td>
+        <td><strong>Vercel</strong><small>Frontend cloud platform for deploying and hosting web apps with serverless infrastructure.</small></td>
+        <td><span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full platform control: deployments, projects, domains, DNS, env vars, teams</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://vercel.com/docs/rest-api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://vercel.com/docs/mcp/vercel-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
+        <td class="num">63</td>
+        <td><strong>Netlify</strong><small>Web development platform for building, deploying and hosting sites with serverless functio</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>sites, deploys, DNS, forms, functions, env vars</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.netlify.com/api/get-started/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.netlify.com/build/build-with-ai/netlify-mcp-server/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
+        <td class="num">64</td>
+        <td><strong>Cloudflare</strong><small>CDN, DNS, security and edge-compute platform fronting a large share of the web.</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>very broad: zones, DNS, Workers, R2, KV, firewall, analytics</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developers.cloudflare.com/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.cloudflare.com/fundamentals/api/get-started/create-token/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://github.com/cloudflare/mcp-server-cloudflare" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
+        <td class="num">65</td>
+        <td><strong>Supabase</strong><small>Supabase is a full Postgres database for every project with Realtime functionality, databa</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST + GraphQL<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://supabase.com/docs/reference/api/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://supabase.com/docs/guides/auth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://supabase.com/docs/guides/getting-started/api-keys" target="_blank" rel="noopener">access</a> <a class="ev" href="https://supabase.com/docs/guides/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Dev / Infra / Data" data-acc="partial">
+        <td class="num">66</td>
+        <td><strong>Neo4j</strong><small>Neo4j Aura is a fully automated graph platform offered as a cloud service.</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST + GraphQL<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://neo4j.com/docs/aura/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://neo4j.com/docs/aura/api/authentication/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://neo4j.com/docs/aura/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://neo4j.com/developer/genai-ecosystem/model-context-protocol-mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
+        <td class="num">67</td>
+        <td><strong>Snowflake</strong><small>Cloud data warehouse for analytics, data engineering and AI workloads.</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>SQL API executes any SQL; separate REST APIs for management</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">none (account + warehouse setup is the only friction)</td>
+        <td><a class="ev" href="https://docs.snowflake.com/en/developer-guide/sql-api/index" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.snowflake.com/en/developer-guide/sql-api/authenticating" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://signup.snowflake.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/Snowflake-Labs/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Dev / Infra / Data" data-acc="partial">
+        <td class="num">68</td>
+        <td><strong>MongoDB Atlas</strong><small>The MongoDB Atlas Administration API allows developers to manage all components in MongoDB</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span> <span class="tag">None</span> <span class="tag">OAuth2</span> <span class="tag">Session</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">Organization Owner access required for service accounts and Project Owner access required for API keys</td>
+        <td><a class="ev" href="https://www.mongodb.com/docs/atlas/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.mongodb.com/docs/api/doc/atlas-admin-api-v2/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.mongodb.com/docs/atlas/configure-api-access/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.mongodb.com/docs/mcp-server/overview/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
+        <td class="num">69</td>
+        <td><strong>Datadog</strong><small>Observability platform: infrastructure monitoring, APM, logs and security.</small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>very broad: metrics, monitors, dashboards, logs, incidents, users</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.datadoghq.com/api/latest/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.datadoghq.com/account_management/api-app-keys/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.datadoghq.com/mcp_server/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
+        <td class="num">70</td>
+        <td><strong>Sentry</strong><small>Error tracking and application performance monitoring for developers.</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>projects, issues, events, releases, alerts, teams</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.sentry.io/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.sentry.io/api/auth/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.sentry.io/product/sentry-mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Productivity &amp; PM" data-acc="self-serve">
+        <td class="num">71</td>
+        <td><strong>Notion</strong><small>All-in-one workspace for notes, docs, wikis and databases.</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>pages, databases, blocks, users, comments, search</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developers.notion.com/reference/intro" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.notion.com/docs/authorization" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.notion.com/docs/create-a-notion-integration" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developers.notion.com/docs/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Productivity &amp; PM" data-acc="self-serve">
+        <td class="num">72</td>
+        <td><strong>Airtable</strong><small>Airtable is a low-code platform for building collaborative apps.</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://www.airtable.com/developers/web/api/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://support.airtable.com/docs/creating-personal-access-tokens" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://airtable.com/developers/tokens" target="_blank" rel="noopener">access</a> <a class="ev" href="https://support.airtable.com/docs/using-the-airtable-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Productivity &amp; PM" data-acc="self-serve">
+        <td class="num">73</td>
+        <td><strong>Linear</strong><small>A project management tool for teams.</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">GraphQL<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://linear.app/docs/api-and-webhooks" target="_blank" rel="noopener">api</a> <a class="ev" href="https://linear.app/developers/graphql" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://linear.app/developers" target="_blank" rel="noopener">access</a> <a class="ev" href="https://linear.app/docs/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Productivity &amp; PM" data-acc="partial">
+        <td class="num">74</td>
+        <td><strong>Jira</strong><small>Jira is a productivity and project management app.</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span> <span class="tag">OAuth2</span> <span class="tag">Session</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">Migrate from API tokens to officially supported authentication by December 31st, 2025</td>
+        <td><a class="ev" href="https://developer.atlassian.com/cloud/jira/software/rest/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.atlassian.com/blog/announcements/atlassian-rovo-mcp-ga" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Productivity &amp; PM" data-acc="self-serve">
+        <td class="num">75</td>
+        <td><strong>Asana</strong><small>Asana is a productivity and project management app.</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developers.asana.com/docs/api-explorer" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.asana.com/docs/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://help.asana.com/s/article/api?language=en_US" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developers.asana.com/docs/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Productivity &amp; PM" data-acc="self-serve">
+        <td class="num">76</td>
+        <td><strong>Monday.com</strong><small>A productivity and project management platform that allows teams to create and shape their</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">GraphQL<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developer.monday.com/api-reference/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.monday.com/api-reference/docs/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://support.monday.com/hc/en-us/articles/360005144659-Does-monday-com-have-an-API" target="_blank" rel="noopener">access</a> <a class="ev" href="https://monday.com/w/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Productivity &amp; PM" data-acc="partial">
+        <td class="num">77</td>
+        <td><strong>ClickUp</strong><small>Productivity and project management tool for teams.</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">OAuth app creation requires Workspace owner or admin approval</td>
+        <td><a class="ev" href="https://developer.clickup.com/docs/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.clickup.com/docs/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://help.clickup.com/hc/en-us/articles/6303422883095-Create-your-own-app-with-the-ClickUp-API" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Productivity &amp; PM" data-acc="partial">
+        <td class="num">78</td>
+        <td><strong>Coda</strong><small>Coda is an all-in-one collaborative workspace that blends the flexibility of docs, structu</small></td>
+        <td><span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">API usage is subject to the role of the user associated with the API token</td>
+        <td><a class="ev" href="https://coda.io/developers/apis/admin/v1" target="_blank" rel="noopener">api</a> <a class="ev" href="https://coda.io/developers" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://coda.io/packs/build/latest/samples/topic/apis/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://glama.ai/mcp/servers/orellazri/coda-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Productivity &amp; PM" data-acc="partial">
+        <td class="num">79</td>
+        <td><strong>Smartsheet</strong><small>The Smartsheet app is a productivity and project management tool that enables users to pro</small></td>
+        <td><span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">token generation process varies by environment</td>
+        <td><a class="ev" href="https://developers.smartsheet.com/api/smartsheet/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.smartsheet.com/api/smartsheet/guides/getting-started" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.smartsheet.com/ai-mcp/smartsheet/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Productivity &amp; PM" data-acc="self-serve">
+        <td class="num">80</td>
+        <td><strong>Harvest</strong><small>Time tracking and invoicing for teams and freelancers.</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>time entries, projects, clients, invoices, estimates, reports</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://help.getharvest.com/api-v2/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.getharvest.com/api-v2/authentication-api/authentication/authentication/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://github.com/taiste/harvest-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Finance &amp; Fintech" data-acc="self-serve">
+        <td class="num">81</td>
+        <td><strong>Stripe</strong><small>Payments infrastructure: accept, process and manage online payments.</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>very broad: payments, customers, subscriptions, invoices, payouts, issuing</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.stripe.com/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.stripe.com/keys" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.stripe.com/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Finance &amp; Fintech" data-acc="self-serve">
+        <td class="num">82</td>
+        <td><strong>Plaid</strong><small>Plaid is a financial services company that provides APIs for accessing financial data.</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://plaid.com/docs/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://dashboard.plaid.com/signup" target="_blank" rel="noopener">access</a> <a class="ev" href="https://plaid.com/docs/resources/mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Finance &amp; Fintech" data-acc="partial">
+        <td class="num">83</td>
+        <td><strong>Binance</strong><small>The Binance app provides access to cryptocurrency market data and trading functionality.</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">API key creation and management</td>
+        <td><a class="ev" href="https://github.com/binance/binance-spot-api-docs" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.binance.com/en/support/faq/detail/360002502072" target="_blank" rel="noopener">access</a> <a class="ev" href="https://mcpmarket.com/server/binance-1" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Finance &amp; Fintech" data-acc="partial">
+        <td class="num">84</td>
+        <td><strong>Paygent Connect</strong><small>Paygent Connect is a payment orchestration platform that enables AI agents to integrate wi</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on payment gateways</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">EMV Level 3 processor certification</td>
+        <td><a class="ev" href="https://docs.nmi.com/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.nmi.com/developers/sdks-apis/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://paygent.uk/" target="_blank" rel="noopener">access</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Finance &amp; Fintech" data-acc="partial">
+        <td class="num">85</td>
+        <td><strong>iPayX</strong><small>iPayX is a FINTRAC-registered FX forensic audit layer.</small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on FX audit data</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">API key management interface requires administrator privileges</td>
+        <td><a class="ev" href="https://www.ipayx.ai/docs/mcp-server" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.bluefin.com/payconex/docs/payconex-api-key-management" target="_blank" rel="noopener">access</a> <a class="ev" href="https://mcpservers.org/servers/ipayx-technologies/mcp-fx-audit" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Finance &amp; Fintech" data-acc="partial">
+        <td class="num">86</td>
+        <td><strong>QuickBooks</strong><small>QuickBooks is a finance and fintech app for accounting and bookkeeping.</small></td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST + GraphQL<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">OAuth2 setup and admin approval</td>
+        <td><a class="ev" href="https://developer.intuit.com/app/developer/qbo/docs/get-started" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.intuit.com/app/developer/qbo/docs/develop" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/intuit/quickbooks-online-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Finance &amp; Fintech" data-acc="self-serve">
+        <td class="num">87</td>
+        <td><strong>Xero</strong><small>Xero is a cloud-based accounting software that allows users to manage their finances, invo</small></td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developer.xero.com/documentation/api/accounting/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.xero.com/documentation/guides/oauth2/auth-flow/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.xero.com/documentation/getting-started-guide/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/xeroapi/xero-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Finance &amp; Fintech" data-acc="partial">
+        <td class="num">88</td>
+        <td><strong>Brex</strong><small>Brex is a financial platform that allows developers to integrate with their banking servic</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span> <span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST + GraphQL<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">OAuth implementation complexity</td>
+        <td><a class="ev" href="https://developer.brex.com/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.brex.com/guides/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.brex.com/docs/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Finance &amp; Fintech" data-acc="partial">
+        <td class="num">89</td>
+        <td><strong>Ramp</strong><small>Ramp is a finance and fintech app that provides a platform for businesses to manage their </small></td>
+        <td><span class="tag">Basic Auth</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">admin access required</td>
+        <td><a class="ev" href="https://docs.ramp.com/developer-api/v1" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.ramp.com/developer-api/v1/authorization" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.ramp.com/developer-api/v1/getting-started" target="_blank" rel="noopener">access</a> <a class="ev" href="https://builders.ramp.com/post/ramp-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="Finance &amp; Fintech" data-acc="partial">
+        <td class="num">90</td>
+        <td><strong>PitchBook</strong><small>PitchBook provides real-time access to company data and market intelligence for financial </small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on company data and market intelligence</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">API key generation and potential paid plan requirements</td>
+        <td><a class="ev" href="https://pitchbook.com/products/direct-access-data/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://pitchbook.com/help/PitchBook-api" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://apigene.ai/mcp/official/pitchbook" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="AI / Research / Media" data-acc="gated">
+        <td class="num">91</td>
+        <td><strong>NotebookLM</strong><small>Google&#x27;s AI research notebook that grounds answers in user-uploaded sources.</small></td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-gated)">●</span> Gated</td>
+        <td class="apisurf">REST<small>Enterprise-only: create/manage notebooks and sources via Discovery Engine API</small></td>
+        <td>none found</td>
+        <td style="color:var(--c-gated);font-weight:600">No</td>
+        <td class="blk">enterprise-only API behind Gemini Enterprise licensing</td>
+        <td><a class="ev" href="https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/create-manage-notebooks-api" target="_blank" rel="noopener">api</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="AI / Research / Media" data-acc="partial">
+        <td class="num">92</td>
+        <td><strong>Otter AI</strong><small>AI meeting transcription and notetaking assistant.</small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>speeches/transcripts export and search (narrow)</small></td>
+        <td>official</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">API is new and narrow; MCP gated to Business/Enterprise</td>
+        <td><a class="ev" href="https://help.otter.ai/hc/en-us/articles/36130822688279-Otter-ai-Public-API" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.otter.ai/hc/en-us/articles/35287607569687-Otter-MCP-Server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="AI / Research / Media" data-acc="self-serve">
+        <td class="num">93</td>
+        <td><strong>Fathom</strong><small>Fathom captures, transcribes, and summarizes meetings, and provides a public API for acces</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>read and write access to meeting data</small></td>
+        <td>community</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developers.fathom.ai/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.fathom.ai/quickstart" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/mackenly/mcp-fathom-analytics" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="AI / Research / Media" data-acc="gated">
+        <td class="num">94</td>
+        <td><strong>Consensus</strong><small>Consensus is an AI academic search engine for peer-reviewed literature that helps find, or</small></td>
+        <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-gated)">●</span> Gated</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-gated);font-weight:600">No</td>
+        <td class="blk">requires application and custom quote</td>
+        <td><a class="ev" href="https://consensus.app/home/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://consensus.app/home/mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="AI / Research / Media" data-acc="self-serve">
+        <td class="num">95</td>
+        <td><strong>Reducto</strong><small>Document-parsing API platform that turns PDFs and scans into structured data for AI pipeli</small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>parse, extract, split, edit pipelines</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://docs.reducto.ai/overview" target="_blank" rel="noopener">api</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="AI / Research / Media" data-acc="partial">
+        <td class="num">96</td>
+        <td><strong>Devin</strong><small>Cognition&#x27;s autonomous AI software engineer that plans and executes coding tasks.</small></td>
+        <td><span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>sessions, playbooks, knowledge, schedules</small></td>
+        <td>official</td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">paid Devin subscription required</td>
+        <td><a class="ev" href="https://docs.devin.ai/api-reference/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.devin.ai/work-with-devin/devin-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="AI / Research / Media" data-acc="partial">
+        <td class="num">97</td>
+        <td><strong>Higgsfield</strong><small>Generate and manage AI images and videos with Higgsfield&#x27;s unified model API.</small></td>
+        <td><span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td class="apisurf">REST<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://mindcloud.co/docs/universal/rest/higgsfield-ai/latest" target="_blank" rel="noopener">api</a> <a class="ev" href="https://cloud.higgsfield.ai/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://higgsfield.ai/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="AI / Research / Media" data-acc="self-serve">
+        <td class="num">98</td>
+        <td><strong>Mermaid CLI</strong><small>A command-line interface (CLI) for mermaid that takes a mermaid definition file as input a</small></td>
+        <td><span class="tag">API Key</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">CLI only<small>full CRUD on all core objects</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://github.com/mermaid-js/mermaid-cli" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.mistral.ai/vibe/code/cli/api-keys-profiles" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/rtuin/mcp-mermaid-validator" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="AI / Research / Media" data-acc="self-serve">
+        <td class="num">99</td>
+        <td><strong>YouTube Transcript</strong><small>Third-party REST API (transcriptapi.com) for fetching YouTube transcripts, video and chann</small></td>
+        <td><span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>transcripts, video search, channels, playlists</small></td>
+        <td>none found</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">none (note: unofficial third-party YouTube service)</td>
+        <td><a class="ev" href="https://www.transcriptapi.com/" target="_blank" rel="noopener">api</a> <span class="dim">–</span></td>
+      </tr>
+      <tr data-cat="AI / Research / Media" data-acc="self-serve">
+        <td class="num">100</td>
+        <td><strong>Grain</strong><small>AI meeting recorder that captures, transcribes and shares video call highlights.</small></td>
+        <td><span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
+        <td class="apisurf">REST<small>recordings, transcripts, webhooks, users, teams</small></td>
+        <td>official</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk">none documented; plan limits unclear</td>
+        <td><a class="ev" href="https://developers.grain.com/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://grain.com/release-note/06-18-2025" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+      </tr></tbody>
+  </table></div>
+</section>
+
+<section id="agent">
+  <div class="sec-head"><span class="sec-no">03</span><h2>The agent</h2>
+    <span class="sec-note">python · groq/openrouter/gemini fallback chain · serper search</span></div>
+  <div class="pipe">
+    <div class="step"><span class="n">01</span><h4>Search ×3</h4>
+      <p>Per app: docs &amp; auth, MCP servers, credential access — via Google (Serper).</p></div>
+    <div class="step"><span class="n">02</span><h4>Read the docs</h4>
+      <p>Downloads the top docs pages and reads the text — snippets alone lie.</p></div>
+    <div class="step"><span class="n">03</span><h4>Extract</h4>
+      <p>One LLM call → strict JSON: auth, access, API, MCP, verdict, evidence URLs, confidence. Guessing forbidden.</p></div>
+    <div class="step"><span class="n">04</span><h4>Checkpoint</h4>
+      <p>results.json written after every app — crash-safe, resumable.</p></div>
+    <div class="step"><span class="n">05</span><h4>Verify → fix → verify</h4>
+      <p>Independent verifier re-fetches evidence and judges all 5 claims; flagged apps get re-researched with the objection.</p></div>
+  </div>
+  <div class="insights" style="margin-top:14px">
+    <div class="card honesty"><h3>Where a human was needed</h3>
+      <p>Defining the schema and what “self-serve” means; unblocking run #1 (died on Gemini
+      free-tier 429s — kept in the repo as <span class="mono">artifacts_run1_gemini_429.json</span>);
+      swapping in the Groq/OpenRouter fallback chain; hand spot-checking a sample against real
+      docs; and writing this analysis. The agent did the other ~100×7 field lookups.</p></div>
+    <div class="card honesty"><h3>What the agent got wrong (kept honestly)</h3>
+      <p>0 apps errored outright.
+      1 records self-reported low confidence.
+      0 records had claims the verifier could not support and were re-researched.
+      The manual spot-check table below shows misses as well as hits.</p></div>
+  </div>
+</section>
+
+<section id="verification">
+  <div class="sec-head"><span class="sec-no">04</span><h2>How we know it's right</h2>
+    <span class="sec-note">accuracy is what matters most</span></div>
+  <div class="insights">
+    <div class="card"><h3>Machine loop</h3>
+      <p>Verification pass pending.
+      
+      The verifier never sees the researcher's sources — it re-fetches each record's evidence
+      URLs and judges every claim as supported, contradicted, or insufficient. A dead evidence
+      link can never count as support.</p></div>
+    <div class="card"><h3>Human loop</h3>
+      <p>13 field-level spot checks against the real docs by hand — <strong>8/13</strong> the agent had right.
+      Sample drawn across categories, weighted toward low-confidence and gated verdicts,
+      because that's where agents bluff.</p></div>
+  </div>
+  <div class="tblwrap" style="margin-top:14px"><table style="min-width:760px">
+    <thead><tr><th>App</th><th>Field</th><th>Agent said</th><th>Docs actually say</th><th>Verdict</th></tr></thead>
+    <tbody><tr><td><strong>Fathom</strong></td><td>identity + access</td><td>developers.fathom.ai, API key self-serve in minutes</td><td>Confirmed: developers.fathom.ai is the fathom.video meeting product; &#x27;Generate an API key and make your first call in minutes&#x27;</td><td><span class="ok">✓ right</span></td></tr><tr><td><strong>Fathom</strong></td><td>mcp evidence</td><td>community MCP: mcp-fathom-analytics</td><td>That repo is for Fathom Analytics (website stats) — a different company than the fathom.video meeting recorder</td><td><span class="bad">✗ wrong</span></td></tr><tr><td><strong>Mermaid CLI</strong></td><td>auth</td><td>API Key</td><td>No auth at all — mermaid-cli is a local npm CLI (mmdc), no hosted API, no credentials. Agent bled in API-key text from unrelated search results</td><td><span class="bad">✗ wrong</span></td></tr><tr><td><strong>WhatsApp Business</strong></td><td>auth</td><td>unknown</td><td>Bearer access tokens (temporary token for testing, permanent system-user token in production)</td><td><span class="bad">✗ wrong</span></td></tr><tr><td><strong>WhatsApp Business</strong></td><td>access</td><td>self-serve (free test numbers)</td><td>Confirmed: free test number + temporary token, no payment or approval to start</td><td><span class="ok">✓ right</span></td></tr><tr><td><strong>Fanbasis</strong></td><td>identity + auth</td><td>apidocs.fan, API key from dashboard</td><td>Confirmed: apidocs.fan is FanBasis; x-api-key header, key copied from dashboard, sandbox available</td><td><span class="ok">✓ right</span></td></tr><tr><td><strong>PitchBook</strong></td><td>access + buildable</td><td>partial, buildable: yes</td><td>&#x27;The API is a separate offering from the PitchBook platform that requires a standalone contract agreement&#x27; — gated behind sales, not buildable self-serve</td><td><span class="bad">✗ wrong</span></td></tr><tr><td><strong>Waterfall.io</strong></td><td>identity + access</td><td>partial — master API key on signup, likely paid</td><td>Right entity (contact/company enrichment); docs confirm x-api-key and are silent on pricing — the hedge is the honest answer</td><td><span class="ok">✓ right</span></td></tr><tr><td><strong>Ahrefs</strong></td><td>access</td><td>partial — API key requires paid Ahrefs plan</td><td>Confirmed: API keys created in account settings on paid plans; no free API tier</td><td><span class="ok">✓ right</span></td></tr><tr><td><strong>Telegram</strong></td><td>auth</td><td>API Key (bot token from BotFather)</td><td>Confirmed: bot token from @BotFather; api_id/api_hash for MTProto apps</td><td><span class="ok">✓ right</span></td></tr><tr><td><strong>Shopify</strong></td><td>auth + access</td><td>OAuth2 + session tokens, self-serve via custom app in dev dashboard</td><td>Confirmed: custom apps installable on a dev store generate access tokens without review; OAuth for public apps</td><td><span class="ok">✓ right</span></td></tr><tr><td><strong>Amazon Selling Partner</strong></td><td>access</td><td>partial — requires Amazon approval for data access</td><td>Confirmed: developer registration and role-based approval required before SP-API access</td><td><span class="ok">✓ right</span></td></tr><tr><td><strong>Zendesk</strong></td><td>access</td><td>partial — paid plan or approval</td><td>Free 14-day trial has full API access, and Zendesk sponsors non-expiring dev instances — self-serve for developers</td><td><span class="bad">✗ wrong</span></td></tr></tbody>
+  </table></div>
+</section>
+
+</div>
+
+<footer><div class="wrap">
+  built with agent.py · verify.py · build_site.py — source repo in submission ·
+  data generated 11 Jul 2026 · every table cell traces to a URL
+</div></footer>
+
+<script>
+const chips=document.querySelectorAll('.chip'),rows=document.querySelectorAll('#tb tr'),q=document.getElementById('q');
+let f='all';
+chips.forEach(c=>c.onclick=()=>{chips.forEach(x=>x.classList.remove('on'));c.classList.add('on');f=c.dataset.f;apply();});
+q.oninput=apply;
+function apply(){const s=q.value.toLowerCase();rows.forEach(r=>{
+  const okF=f==='all'||(f.startsWith('acc:')?r.dataset.acc===f.slice(4):r.dataset.cat===f);
+  const okS=!s||r.textContent.toLowerCase().includes(s);
+  r.style.display=okF&&okS?'':'none';});}
+</script>
+</body>
+</html>

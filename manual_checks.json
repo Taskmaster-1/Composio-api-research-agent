@@ -1,0 +1,93 @@
+[
+  {
+    "name": "Fathom", "field": "identity + access",
+    "agent_said": "developers.fathom.ai, API key self-serve in minutes",
+    "docs_say": "Confirmed: developers.fathom.ai is the fathom.video meeting product; 'Generate an API key and make your first call in minutes'",
+    "agent_was_right": true,
+    "source": "https://developers.fathom.ai/"
+  },
+  {
+    "name": "Fathom", "field": "mcp evidence",
+    "agent_said": "community MCP: mcp-fathom-analytics",
+    "docs_say": "That repo is for Fathom Analytics (website stats) — a different company than the fathom.video meeting recorder",
+    "agent_was_right": false,
+    "source": "https://github.com/mackenly/mcp-fathom-analytics"
+  },
+  {
+    "name": "Mermaid CLI", "field": "auth",
+    "agent_said": "API Key",
+    "docs_say": "No auth at all — mermaid-cli is a local npm CLI (mmdc), no hosted API, no credentials. Agent bled in API-key text from unrelated search results",
+    "agent_was_right": false,
+    "source": "https://github.com/mermaid-js/mermaid-cli"
+  },
+  {
+    "name": "WhatsApp Business", "field": "auth",
+    "agent_said": "unknown",
+    "docs_say": "Bearer access tokens (temporary token for testing, permanent system-user token in production)",
+    "agent_was_right": false,
+    "source": "https://developers.facebook.com/docs/whatsapp/cloud-api/get-started"
+  },
+  {
+    "name": "WhatsApp Business", "field": "access",
+    "agent_said": "self-serve (free test numbers)",
+    "docs_say": "Confirmed: free test number + temporary token, no payment or approval to start",
+    "agent_was_right": true,
+    "source": "https://developers.facebook.com/docs/whatsapp/cloud-api/get-started"
+  },
+  {
+    "name": "Fanbasis", "field": "identity + auth",
+    "agent_said": "apidocs.fan, API key from dashboard",
+    "docs_say": "Confirmed: apidocs.fan is FanBasis; x-api-key header, key copied from dashboard, sandbox available",
+    "agent_was_right": true,
+    "source": "https://apidocs.fan/"
+  },
+  {
+    "name": "PitchBook", "field": "access + buildable",
+    "agent_said": "partial, buildable: yes",
+    "docs_say": "'The API is a separate offering from the PitchBook platform that requires a standalone contract agreement' — gated behind sales, not buildable self-serve",
+    "agent_was_right": false,
+    "source": "https://documenter.getpostman.com/view/5190535/TzCV1iRc"
+  },
+  {
+    "name": "Waterfall.io", "field": "identity + access",
+    "agent_said": "partial — master API key on signup, likely paid",
+    "docs_say": "Right entity (contact/company enrichment); docs confirm x-api-key and are silent on pricing — the hedge is the honest answer",
+    "agent_was_right": true,
+    "source": "https://docs.waterfall.io/v1/introduction"
+  },
+  {
+    "name": "Ahrefs", "field": "access",
+    "agent_said": "partial — API key requires paid Ahrefs plan",
+    "docs_say": "Confirmed: API keys created in account settings on paid plans; no free API tier",
+    "agent_was_right": true,
+    "source": "https://docs.ahrefs.com/en/api/docs/api-keys-creation-and-management"
+  },
+  {
+    "name": "Telegram", "field": "auth",
+    "agent_said": "API Key (bot token from BotFather)",
+    "docs_say": "Confirmed: bot token from @BotFather; api_id/api_hash for MTProto apps",
+    "agent_was_right": true,
+    "source": "https://core.telegram.org/bots/api"
+  },
+  {
+    "name": "Shopify", "field": "auth + access",
+    "agent_said": "OAuth2 + session tokens, self-serve via custom app in dev dashboard",
+    "docs_say": "Confirmed: custom apps installable on a dev store generate access tokens without review; OAuth for public apps",
+    "agent_was_right": true,
+    "source": "https://shopify.dev/docs/apps/build/authentication-authorization"
+  },
+  {
+    "name": "Amazon Selling Partner", "field": "access",
+    "agent_said": "partial — requires Amazon approval for data access",
+    "docs_say": "Confirmed: developer registration and role-based approval required before SP-API access",
+    "agent_was_right": true,
+    "source": "https://developer-docs.amazon.com/sp-api"
+  },
+  {
+    "name": "Zendesk", "field": "access",
+    "agent_said": "partial — paid plan or approval",
+    "docs_say": "Free 14-day trial has full API access, and Zendesk sponsors non-expiring dev instances — self-serve for developers",
+    "agent_was_right": false,
+    "source": "https://developer.zendesk.com/documentation/api-basics/getting-started/getting-a-trial-or-sponsored-account-for-development/"
+  }
+]

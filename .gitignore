@@ -1,0 +1,11 @@
+# secrets — never commit
+.env
+
+# python
+__pycache__/
+*.pyc
+
+# local dev artifacts
+preview_*.png
+preview_light.html
+.claude/

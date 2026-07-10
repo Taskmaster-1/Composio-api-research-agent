@@ -1,0 +1,134 @@
+[
+  {
+    "name": "Salesforce",
+    "category": "CRM & Sales",
+    "auth": "Error",
+    "self_serve": "Unknown",
+    "api_surface": "Unknown",
+    "buildable": "Unknown",
+    "blocker": "Gemini 429 after 4 retries — quota exhausted",
+    "docs_url": "",
+    "search_snippet": ""
+  },
+  {
+    "name": "HubSpot",
+    "category": "CRM & Sales",
+    "auth": "Error",
+    "self_serve": "Unknown",
+    "api_surface": "Unknown",
+    "buildable": "Unknown",
+    "blocker": "Gemini 429 after 4 retries — quota exhausted",
+    "docs_url": "",
+    "search_snippet": ""
+  },
+  {
+    "name": "Pipedrive",
+    "category": "CRM & Sales",
+    "auth": "Error",
+    "self_serve": "Unknown",
+    "api_surface": "Unknown",
+    "buildable": "Unknown",
+    "blocker": "Gemini 429 after 4 retries — quota exhausted",
+    "docs_url": "",
+    "search_snippet": ""
+  },
+  {
+    "name": "Attio",
+    "category": "CRM & Sales",
+    "auth": "Error",
+    "self_serve": "Unknown",
+    "api_surface": "Unknown",
+    "buildable": "Unknown",
+    "blocker": "Gemini 429 after 4 retries — quota exhausted",
+    "docs_url": "",
+    "search_snippet": ""
+  },
+  {
+    "name": "Twenty CRM",
+    "category": "CRM & Sales",
+    "auth": "Error",
+    "self_serve": "Unknown",
+    "api_surface": "Unknown",
+    "buildable": "Unknown",
+    "blocker": "Gemini 429 after 4 retries — quota exhausted",
+    "docs_url": "",
+    "search_snippet": ""
+  },
+  {
+    "name": "Podio",
+    "category": "CRM & Sales",
+    "auth": "Error",
+    "self_serve": "Unknown",
+    "api_surface": "Unknown",
+    "buildable": "Unknown",
+    "blocker": "Gemini 429 after 4 retries — quota exhausted",
+    "docs_url": "",
+    "search_snippet": ""
+  },
+  {
+    "name": "Zoho CRM",
+    "category": "CRM & Sales",
+    "auth": "Error",
+    "self_serve": "Unknown",
+    "api_surface": "Unknown",
+    "buildable": "Unknown",
+    "blocker": "Gemini 429 after 4 retries — quota exhausted",
+    "docs_url": "",
+    "search_snippet": ""
+  },
+  {
+    "name": "Close CRM",
+    "category": "CRM & Sales",
+    "auth": "Error",
+    "self_serve": "Unknown",
+    "api_surface": "Unknown",
+    "buildable": "Unknown",
+    "blocker": "Gemini 429 after 4 retries — quota exhausted",
+    "docs_url": "",
+    "search_snippet": ""
+  },
+  {
+    "name": "Copper CRM",
+    "category": "CRM & Sales",
+    "auth": "Error",
+    "self_serve": "Unknown",
+    "api_surface": "Unknown",
+    "buildable": "Unknown",
+    "blocker": "Gemini 429 after 4 retries — quota exhausted",
+    "docs_url": "",
+    "search_snippet": ""
+  },
+  {
+    "name": "DealCloud",
+    "category": "CRM & Sales",
+    "auth": "Error",
+    "self_serve": "Unknown",
+    "api_surface": "Unknown",
+    "buildable": "Unknown",
+    "blocker": "Gemini 429 after 4 retries — quota exhausted",
+    "docs_url": "",
+    "search_snippet": ""
+  },
+  {
+    "name": "Zendesk",
+    "category": "Support & Helpdesk",
+    "auth": "Error",
+    "self_serve": "Unknown",
+    "api_surface": "Unknown",
+    "buildable": "Unknown",
+    "blocker": "Gemini 429 after 4 retries — quota exhausted",
+    "docs_url": "",
+    "search_snippet": ""
+  },
+  {
+    "name": "Intercom",
+    "category": "Support & Helpdesk",
+    "auth": "Error",
+    "self_serve": "Unknown",
+    "api_surface": "Unknown",
+    "buildable": "Unknown",
+    "blocker": "Gemini 429 after 4 retries — quota exhausted",
+    "docs_url": "",
+    "search_snippet": ""
+  }
+]
