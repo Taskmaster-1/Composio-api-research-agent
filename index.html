@@ -158,16 +158,16 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
   <p class="standfirst">A Python research agent profiled 100 SaaS apps — auth model, credential
   access, API surface, existing MCP servers — then an independent verifier fact-checked every
   claim against freshly fetched docs pages, and flagged records were re-researched.
-  </p>
+  A no-LLM checker re-tested every claim against its evidence URL: <strong>81%</strong> supported on pass 1, <strong>82%</strong> after the fix loop, with 9 records corrected along the way — misses shown honestly below.</p>
 </div>
 
 <div class="stats">
   <div class="stat"><b class="good">74</b><span>buildable today</span></div>
   <div class="stat"><b class="warn">21</b><span>buildable with friction</span></div>
-  <div class="stat"><b class="crit">4</b><span>blocked / no public API</span></div>
-  <div class="stat"><b>59</b><span>fully self-serve credentials</span></div>
-  <div class="stat"><b>3</b><span>gated (sales / partner)</span></div>
-  <div class="stat"><b>94</b><span>already have an MCP server</span></div>
+  <div class="stat"><b class="crit">5</b><span>blocked / no public API</span></div>
+  <div class="stat"><b>61</b><span>fully self-serve credentials</span></div>
+  <div class="stat"><b>5</b><span>gated (sales / partner)</span></div>
+  <div class="stat"><b>92</b><span>already have an MCP server</span></div>
 </div>
 
 <section id="patterns">
@@ -177,10 +177,10 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
     <div class="card big-insight">
       <h3>74 of 100 apps could become agent toolkits this week — the gate is business, not technology.</h3>
       <p>Where an app isn't buildable, the blocker is almost never a missing API — it's who is
-      allowed to hold credentials. Top blockers found: <strong>paid plan required (14), app review or admin gate (11), enterprise / partner gate (4)</strong>.</p>
+      allowed to hold credentials. Top blockers found: <strong>paid plan required (12), app review or admin gate (11), other (6)</strong>.</p>
     </div>
-    <div class="card"><h3>OAuth2 dominates (55/100)</h3>
-      <p>OAuth2 appears on <strong>55</strong> apps and API keys on <strong>55</strong> —
+    <div class="card"><h3>OAuth2 dominates (56/100)</h3>
+      <p>OAuth2 appears on <strong>56</strong> apps and API keys on <strong>54</strong> —
       many apps ship both: OAuth for user-delegated access, keys for server-to-server. A toolkit
       platform must treat dual-auth as the default case, not the edge case.</p></div>
     <div class="card"><h3>Self-serve is the norm — gating is categorical</h3>
@@ -188,9 +188,9 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
       (100% self-serve); <strong>Finance &amp; Fintech</strong> is the most gated
       (30%). Openness clusters by who the buyer is: developer-first
       products open the door, enterprise- and partner-sold products keep a human in the loop.</p></div>
-    <div class="card"><h3>3 easy wins with no MCP yet</h3>
+    <div class="card"><h3>4 easy wins with no MCP yet</h3>
       <p>Apps that are buildable, self-serve, <em>and</em> have no MCP server found —
-      greenfield for Composio. The gated list (3 apps) is the outreach queue, not
+      greenfield for Composio. The gated list (5 apps) is the outreach queue, not
       a dead end.</p></div>
   </div>
   <div class="charts">
@@ -198,18 +198,18 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
       
         <div class="bar-row">
           <span class="bar-name">OAuth2</span>
-          <div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--s-blue)"></div></div>
-          <span class="bar-val">55</span>
+          <div class="bar-track"><div class="bar-fill" style="width:56%;background:var(--s-blue)"></div></div>
+          <span class="bar-val">56</span>
         </div>
         <div class="bar-row">
           <span class="bar-name">API Key</span>
-          <div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--s-blue)"></div></div>
-          <span class="bar-val">55</span>
+          <div class="bar-track"><div class="bar-fill" style="width:54%;background:var(--s-blue)"></div></div>
+          <span class="bar-val">54</span>
         </div>
         <div class="bar-row">
           <span class="bar-name">Token / JWT</span>
-          <div class="bar-track"><div class="bar-fill" style="width:48%;background:var(--s-blue)"></div></div>
-          <span class="bar-val">48</span>
+          <div class="bar-track"><div class="bar-fill" style="width:49%;background:var(--s-blue)"></div></div>
+          <span class="bar-val">49</span>
         </div>
         <div class="bar-row">
           <span class="bar-name">Basic Auth</span>
@@ -217,25 +217,25 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
           <span class="bar-val">17</span>
         </div>
         <div class="bar-row">
+          <span class="bar-name">None</span>
+          <div class="bar-track"><div class="bar-fill" style="width:5%;background:var(--s-blue)"></div></div>
+          <span class="bar-val">5</span>
+        </div>
+        <div class="bar-row">
           <span class="bar-name">Session</span>
           <div class="bar-track"><div class="bar-fill" style="width:4%;background:var(--s-blue)"></div></div>
           <span class="bar-val">4</span>
         </div>
         <div class="bar-row">
-          <span class="bar-name">None</span>
-          <div class="bar-track"><div class="bar-fill" style="width:4%;background:var(--s-blue)"></div></div>
-          <span class="bar-val">4</span>
-        </div>
-        <div class="bar-row">
           <span class="bar-name">Other</span>
-          <div class="bar-track"><div class="bar-fill" style="width:3%;background:var(--s-blue)"></div></div>
-          <span class="bar-val">3</span>
+          <div class="bar-track"><div class="bar-fill" style="width:1%;background:var(--s-blue)"></div></div>
+          <span class="bar-val">1</span>
         </div></div>
     <div class="card"><div class="chart-title">Credential access by category</div>
-      <div class="stack-row"><span class="stack-name">CRM</span><div class="stack-track"><div class="seg" style="flex:6;background:var(--c-open)" title="CRM &amp; Sales — Self-serve: 6"><span>6</span></div><div class="seg" style="flex:4;background:var(--c-partial)" title="CRM &amp; Sales — Partial: 4"><span>4</span></div></div></div><div class="stack-row"><span class="stack-name">Support</span><div class="stack-track"><div class="seg" style="flex:4;background:var(--c-open)" title="Support &amp; Helpdesk — Self-serve: 4"><span>4</span></div><div class="seg" style="flex:5;background:var(--c-partial)" title="Support &amp; Helpdesk — Partial: 5"><span>5</span></div><div class="seg" style="flex:1;background:var(--ink-3)" title="Support &amp; Helpdesk — Unknown: 1"><span>1</span></div></div></div><div class="stack-row"><span class="stack-name">Communications</span><div class="stack-track"><div class="seg" style="flex:10;background:var(--c-open)" title="Communications — Self-serve: 10"><span>10</span></div></div></div><div class="stack-row"><span class="stack-name">Marketing</span><div class="stack-track"><div class="seg" style="flex:5;background:var(--c-open)" title="Marketing &amp; Ads — Self-serve: 5"><span>5</span></div><div class="seg" style="flex:5;background:var(--c-partial)" title="Marketing &amp; Ads — Partial: 5"><span>5</span></div></div></div><div class="stack-row"><span class="stack-name">Ecommerce</span><div class="stack-track"><div class="seg" style="flex:6;background:var(--c-open)" title="Ecommerce — Self-serve: 6"><span>6</span></div><div class="seg" style="flex:3;background:var(--c-partial)" title="Ecommerce — Partial: 3"><span>3</span></div><div class="seg" style="flex:1;background:var(--ink-3)" title="Ecommerce — Unknown: 1"><span>1</span></div></div></div><div class="stack-row"><span class="stack-name">Data</span><div class="stack-track"><div class="seg" style="flex:7;background:var(--c-open)" title="Data / SEO / Scraping — Self-serve: 7"><span>7</span></div><div class="seg" style="flex:2;background:var(--c-partial)" title="Data / SEO / Scraping — Partial: 2"><span>2</span></div><div class="seg" style="flex:1;background:var(--c-gated)" title="Data / SEO / Scraping — Gated: 1"><span>1</span></div></div></div><div class="stack-row"><span class="stack-name">Dev</span><div class="stack-track"><div class="seg" style="flex:7;background:var(--c-open)" title="Dev / Infra / Data — Self-serve: 7"><span>7</span></div><div class="seg" style="flex:3;background:var(--c-partial)" title="Dev / Infra / Data — Partial: 3"><span>3</span></div></div></div><div class="stack-row"><span class="stack-name">Productivity</span><div class="stack-track"><div class="seg" style="flex:6;background:var(--c-open)" title="Productivity &amp; PM — Self-serve: 6"><span>6</span></div><div class="seg" style="flex:4;background:var(--c-partial)" title="Productivity &amp; PM — Partial: 4"><span>4</span></div></div></div><div class="stack-row"><span class="stack-name">Finance</span><div class="stack-track"><div class="seg" style="flex:3;background:var(--c-open)" title="Finance &amp; Fintech — Self-serve: 3"><span>3</span></div><div class="seg" style="flex:7;background:var(--c-partial)" title="Finance &amp; Fintech — Partial: 7"><span>7</span></div></div></div><div class="stack-row"><span class="stack-name">AI</span><div class="stack-track"><div class="seg" style="flex:5;background:var(--c-open)" title="AI / Research / Media — Self-serve: 5"><span>5</span></div><div class="seg" style="flex:3;background:var(--c-partial)" title="AI / Research / Media — Partial: 3"><span>3</span></div><div class="seg" style="flex:2;background:var(--c-gated)" title="AI / Research / Media — Gated: 2"><span>2</span></div></div></div>
+      <div class="stack-row"><span class="stack-name">CRM</span><div class="stack-track"><div class="seg" style="flex:6;background:var(--c-open)" title="CRM &amp; Sales — Self-serve: 6"><span>6</span></div><div class="seg" style="flex:4;background:var(--c-partial)" title="CRM &amp; Sales — Partial: 4"><span>4</span></div></div></div><div class="stack-row"><span class="stack-name">Support</span><div class="stack-track"><div class="seg" style="flex:6;background:var(--c-open)" title="Support &amp; Helpdesk — Self-serve: 6"><span>6</span></div><div class="seg" style="flex:4;background:var(--c-partial)" title="Support &amp; Helpdesk — Partial: 4"><span>4</span></div></div></div><div class="stack-row"><span class="stack-name">Communications</span><div class="stack-track"><div class="seg" style="flex:10;background:var(--c-open)" title="Communications — Self-serve: 10"><span>10</span></div></div></div><div class="stack-row"><span class="stack-name">Marketing</span><div class="stack-track"><div class="seg" style="flex:5;background:var(--c-open)" title="Marketing &amp; Ads — Self-serve: 5"><span>5</span></div><div class="seg" style="flex:5;background:var(--c-partial)" title="Marketing &amp; Ads — Partial: 5"><span>5</span></div></div></div><div class="stack-row"><span class="stack-name">Ecommerce</span><div class="stack-track"><div class="seg" style="flex:6;background:var(--c-open)" title="Ecommerce — Self-serve: 6"><span>6</span></div><div class="seg" style="flex:3;background:var(--c-partial)" title="Ecommerce — Partial: 3"><span>3</span></div><div class="seg" style="flex:1;background:var(--c-gated)" title="Ecommerce — Gated: 1"><span>1</span></div></div></div><div class="stack-row"><span class="stack-name">Data</span><div class="stack-track"><div class="seg" style="flex:7;background:var(--c-open)" title="Data / SEO / Scraping — Self-serve: 7"><span>7</span></div><div class="seg" style="flex:2;background:var(--c-partial)" title="Data / SEO / Scraping — Partial: 2"><span>2</span></div><div class="seg" style="flex:1;background:var(--c-gated)" title="Data / SEO / Scraping — Gated: 1"><span>1</span></div></div></div><div class="stack-row"><span class="stack-name">Dev</span><div class="stack-track"><div class="seg" style="flex:7;background:var(--c-open)" title="Dev / Infra / Data — Self-serve: 7"><span>7</span></div><div class="seg" style="flex:3;background:var(--c-partial)" title="Dev / Infra / Data — Partial: 3"><span>3</span></div></div></div><div class="stack-row"><span class="stack-name">Productivity</span><div class="stack-track"><div class="seg" style="flex:6;background:var(--c-open)" title="Productivity &amp; PM — Self-serve: 6"><span>6</span></div><div class="seg" style="flex:4;background:var(--c-partial)" title="Productivity &amp; PM — Partial: 4"><span>4</span></div></div></div><div class="stack-row"><span class="stack-name">Finance</span><div class="stack-track"><div class="seg" style="flex:3;background:var(--c-open)" title="Finance &amp; Fintech — Self-serve: 3"><span>3</span></div><div class="seg" style="flex:6;background:var(--c-partial)" title="Finance &amp; Fintech — Partial: 6"><span>6</span></div><div class="seg" style="flex:1;background:var(--c-gated)" title="Finance &amp; Fintech — Gated: 1"><span>1</span></div></div></div><div class="stack-row"><span class="stack-name">AI</span><div class="stack-track"><div class="seg" style="flex:5;background:var(--c-open)" title="AI / Research / Media — Self-serve: 5"><span>5</span></div><div class="seg" style="flex:3;background:var(--c-partial)" title="AI / Research / Media — Partial: 3"><span>3</span></div><div class="seg" style="flex:2;background:var(--c-gated)" title="AI / Research / Media — Gated: 2"><span>2</span></div></div></div>
       <div class="legend"><span class="lg"><i style="background:var(--c-open)"></i>Self-serve</span><span class="lg"><i style="background:var(--c-partial)"></i>Partial</span><span class="lg"><i style="background:var(--c-gated)"></i>Gated</span><span class="lg"><i style="background:var(--ink-3)"></i>Unknown</span></div></div>
     <div class="card"><div class="chart-title">The 100 — buildability at a glance (hover any cell)</div>
-      <div class="waffle"><div class="wf" style="background:var(--c-partial)" title="Salesforce — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="HubSpot — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Pipedrive — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Attio — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Twenty — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Podio — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Zoho CRM — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Close — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Copper — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="DealCloud — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="Zendesk — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Intercom — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Freshdesk — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Front — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Pylon — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="LiveAgent — buildable: yes"></div><div class="wf" style="background:var(--ink-3)" title="Plain — buildable: unknown"></div><div class="wf" style="background:var(--c-partial)" title="Help Scout — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="Gorgias — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Gladly — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Slack — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Twilio — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Zoho Cliq — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Lark — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Pumble — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Discord — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Telegram — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="WhatsApp Business — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Aircall — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Vonage — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Google Ads — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="Meta Ads — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="LinkedIn Ads — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="GoHighLevel — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Mailchimp — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Klaviyo — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="systeme.io — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Pinterest — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Threads — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="SendGrid — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Shopify — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="WooCommerce — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="BigCommerce — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Salesforce Commerce Cloud — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Magento (Adobe Commerce) — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Squarespace — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="Ecwid — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Gumroad — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Amazon Selling Partner — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Fanbasis — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="DataForSEO — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="SE Ranking — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Ahrefs — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="MrScraper — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Apify — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Firecrawl — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Bright Data — buildable: yes"></div><div class="wf" style="background:var(--c-gated)" title="Sherlock — buildable: no"></div><div class="wf" style="background:var(--c-partial)" title="Waterfall.io — buildable: partial"></div><div class="wf" style="background:var(--c-gated)" title="Clay — buildable: no"></div><div class="wf" style="background:var(--c-open)" title="GitHub — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Vercel — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Netlify — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Cloudflare — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Supabase — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Neo4j — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Snowflake — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="MongoDB Atlas — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Datadog — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Sentry — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Notion — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Airtable — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Linear — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Jira — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Asana — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Monday.com — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="ClickUp — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Coda — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Smartsheet — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Harvest — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Stripe — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Plaid — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Binance — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Paygent Connect — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="iPayX — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="QuickBooks — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Xero — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Brex — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Ramp — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="PitchBook — buildable: yes"></div><div class="wf" style="background:var(--c-gated)" title="NotebookLM — buildable: no"></div><div class="wf" style="background:var(--c-partial)" title="Otter AI — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Fathom — buildable: yes"></div><div class="wf" style="background:var(--c-gated)" title="Consensus — buildable: no"></div><div class="wf" style="background:var(--c-open)" title="Reducto — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Devin — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Higgsfield — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Mermaid CLI — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="YouTube Transcript — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Grain — buildable: yes"></div></div>
+      <div class="waffle"><div class="wf" style="background:var(--c-partial)" title="Salesforce — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="HubSpot — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Pipedrive — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Attio — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Twenty — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Podio — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Zoho CRM — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Close — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Copper — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="DealCloud — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Zendesk — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Intercom — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Freshdesk — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Front — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Pylon — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="LiveAgent — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Plain — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Help Scout — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="Gorgias — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Gladly — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Slack — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Twilio — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Zoho Cliq — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Lark — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Pumble — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Discord — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Telegram — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="WhatsApp Business — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Aircall — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Vonage — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Google Ads — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="Meta Ads — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="LinkedIn Ads — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="GoHighLevel — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Mailchimp — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Klaviyo — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="systeme.io — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Pinterest — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Threads — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="SendGrid — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Shopify — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="WooCommerce — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="BigCommerce — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Salesforce Commerce Cloud — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Magento (Adobe Commerce) — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Squarespace — buildable: partial"></div><div class="wf" style="background:var(--c-partial)" title="Ecwid — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Gumroad — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Amazon Selling Partner — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Fanbasis — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="DataForSEO — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="SE Ranking — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Ahrefs — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="MrScraper — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Apify — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Firecrawl — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Bright Data — buildable: yes"></div><div class="wf" style="background:var(--c-gated)" title="Sherlock — buildable: no"></div><div class="wf" style="background:var(--c-partial)" title="Waterfall.io — buildable: partial"></div><div class="wf" style="background:var(--c-gated)" title="Clay — buildable: no"></div><div class="wf" style="background:var(--c-open)" title="GitHub — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Vercel — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Netlify — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Cloudflare — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Supabase — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Neo4j — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Snowflake — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="MongoDB Atlas — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Datadog — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Sentry — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Notion — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Airtable — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Linear — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Jira — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Asana — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Monday.com — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="ClickUp — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Coda — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Smartsheet — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Harvest — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Stripe — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Plaid — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Binance — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Paygent Connect — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="iPayX — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="QuickBooks — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Xero — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Brex — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Ramp — buildable: yes"></div><div class="wf" style="background:var(--c-gated)" title="PitchBook — buildable: no"></div><div class="wf" style="background:var(--c-gated)" title="NotebookLM — buildable: no"></div><div class="wf" style="background:var(--c-partial)" title="Otter AI — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Fathom — buildable: yes"></div><div class="wf" style="background:var(--c-gated)" title="Consensus — buildable: no"></div><div class="wf" style="background:var(--c-open)" title="Reducto — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Devin — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="Higgsfield — buildable: yes"></div><div class="wf" style="background:var(--c-partial)" title="Mermaid CLI — buildable: partial"></div><div class="wf" style="background:var(--c-open)" title="YouTube Transcript — buildable: yes"></div><div class="wf" style="background:var(--c-open)" title="Grain — buildable: yes"></div></div>
       <div class="legend"><span class="lg"><i style="background:var(--c-open)"></i>Yes</span><span class="lg"><i style="background:var(--c-partial)"></i>Partial</span><span class="lg"><i style="background:var(--c-gated)"></i>No</span><span class="lg"><i style="background:var(--ink-3)"></i>Unknown</span></div></div>
   </div>
 </section>
@@ -262,7 +262,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">paid plan or approval</td>
-        <td><a class="ev" href="https://developer.salesforce.com/docs/apis" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/intro_using_oauth.htm" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.apideck.com/blog/how-to-get-your-salesforce-api-keys" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.salesforce.com/agentforce/mcp-support/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.salesforce.com/docs/apis" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/intro_using_oauth.htm" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.apideck.com/blog/how-to-get-your-salesforce-api-keys" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.salesforce.com/agentforce/mcp-support/" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: api_surface">4/5</span></td>
       </tr>
       <tr data-cat="CRM &amp; Sales" data-acc="partial">
         <td class="num">2</td>
@@ -273,7 +273,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">paid plan or admin approval</td>
-        <td><a class="ev" href="https://developers.hubspot.com/docs/api-reference/latest/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.hubspot.com/docs/apps/legacy-apps/authentication/intro-to-auth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://community.hubspot.com/t5/APIs-Integrations/Where-is-my-developer-API-key/td-p/1023255" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developers.hubspot.com/ai-tools/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.hubspot.com/docs/api-reference/latest/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.hubspot.com/docs/apps/legacy-apps/authentication/intro-to-auth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://community.hubspot.com/t5/APIs-Integrations/Where-is-my-developer-API-key/td-p/1023255" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developers.hubspot.com/ai-tools/mcp" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="CRM &amp; Sales" data-acc="self-serve">
         <td class="num">3</td>
@@ -284,7 +284,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developers.pipedrive.com/docs/api/v1" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.pipedrive.com/docs/api/v1/Oauth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.pipedrive.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.pipedrive.com/en/newsroom/pipedrive-launches-native-mcp-server-bringing-crm-workflows-directly-into-ai-assistants" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.pipedrive.com/docs/api/v1" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.pipedrive.com/docs/api/v1/Oauth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.pipedrive.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.pipedrive.com/en/newsroom/pipedrive-launches-native-mcp-server-bringing-crm-workflows-directly-into-ai-assistants" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="CRM &amp; Sales" data-acc="partial">
         <td class="num">4</td>
@@ -295,7 +295,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">rate limits</td>
-        <td><a class="ev" href="https://docs.attio.com/rest-api/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.attio.com/rest-api/guides/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.stacksync.com/blog/how-to-get-an-attio-developer-account-and-start-working-with-attios-api" target="_blank" rel="noopener">access</a> <a class="ev" href="https://docs.attio.com/mcp/overview" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.attio.com/rest-api/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.attio.com/rest-api/guides/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.stacksync.com/blog/how-to-get-an-attio-developer-account-and-start-working-with-attios-api" target="_blank" rel="noopener">access</a> <a class="ev" href="https://docs.attio.com/mcp/overview" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="CRM &amp; Sales" data-acc="self-serve">
         <td class="num">5</td>
@@ -306,7 +306,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.twenty.com/developers/extend/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://github.com/mhenry3164/twenty-crm-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.twenty.com/developers/extend/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://github.com/mhenry3164/twenty-crm-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="CRM &amp; Sales" data-acc="self-serve">
         <td class="num">6</td>
@@ -317,7 +317,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developers.podio.com/doc" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.podio.com/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.podio.com/index/faq" target="_blank" rel="noopener">access</a> <a class="ev" href="https://docs.sharefile.com/en-us/podio/using-podio/general-features/podio-mcp-server.html" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.podio.com/doc" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.podio.com/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.podio.com/index/faq" target="_blank" rel="noopener">access</a> <a class="ev" href="https://docs.sharefile.com/en-us/podio/using-podio/general-features/podio-mcp-server.html" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="CRM &amp; Sales" data-acc="self-serve">
         <td class="num">7</td>
@@ -328,7 +328,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://www.zoho.com/crm/developer/docs/api/v8/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.zoho.com/crm/developer/docs/api/v8/oauth-overview.html" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://help.zoho.com/portal/en/community/topic/setting-up-the-api-key" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/junnaisystems/zoho-crm-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://www.zoho.com/crm/developer/docs/api/v8/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.zoho.com/crm/developer/docs/api/v8/oauth-overview.html" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://help.zoho.com/portal/en/community/topic/setting-up-the-api-key" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/junnaisystems/zoho-crm-mcp" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="CRM &amp; Sales" data-acc="self-serve">
         <td class="num">8</td>
@@ -339,7 +339,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developer.close.com/api/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.close.com/api/overview/api-key-authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.close.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://help.close.com/docs/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.close.com/api/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.close.com/api/overview/api-key-authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.close.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://help.close.com/docs/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="CRM &amp; Sales" data-acc="self-serve">
         <td class="num">9</td>
@@ -350,7 +350,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developer.copper.com/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.copper.com/introduction/authentication.html" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://viasocket.com/mcp/copper" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.copper.com/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.copper.com/introduction/authentication.html" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://viasocket.com/mcp/copper" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="CRM &amp; Sales" data-acc="partial">
         <td class="num">10</td>
@@ -361,18 +361,18 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">paid plan or approval</td>
-        <td><a class="ev" href="https://api.docs.dealcloud.com/docs" target="_blank" rel="noopener">api</a> <a class="ev" href="https://api.docs.dealcloud.com/docs/token" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://api.docs.dealcloud.com/docs/apikeys" target="_blank" rel="noopener">access</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://api.docs.dealcloud.com/docs" target="_blank" rel="noopener">api</a> <a class="ev" href="https://api.docs.dealcloud.com/docs/token" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://api.docs.dealcloud.com/docs/apikeys" target="_blank" rel="noopener">access</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
-      <tr data-cat="Support &amp; Helpdesk" data-acc="partial">
+      <tr data-cat="Support &amp; Helpdesk" data-acc="self-serve">
         <td class="num">11</td>
         <td><strong>Zendesk</strong><small>Zendesk is a support and helpdesk platform that provides APIs for ticketing, help center, </small></td>
         <td><span class="tag">API Key</span> <span class="tag">Basic Auth</span> <span class="tag">OAuth2</span> <span class="tag">Token / JWT</span></td>
-        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
         <td class="apisurf">REST<small>full CRUD on core objects</small></td>
         <td>community</td>
-        <td style="color:var(--c-partial);font-weight:600">Partial</td>
-        <td class="blk">paid plan or approval</td>
-        <td><a class="ev" href="https://developer.zendesk.com/api-reference/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.zendesk.com/api-reference/introduction/security-and-auth/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.zendesk.com/documentation/api-basics/getting-started/getting-a-trial-or-sponsored-account-for-development/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/reminia/zendesk-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
+        <td class="blk"><span class="dim">none</span></td>
+        <td><a class="ev" href="https://developer.zendesk.com/api-reference/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.zendesk.com/api-reference/introduction/security-and-auth/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.zendesk.com/documentation/api-basics/getting-started/getting-a-trial-or-sponsored-account-for-development/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/reminia/zendesk-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Support &amp; Helpdesk" data-acc="self-serve">
         <td class="num">12</td>
@@ -383,7 +383,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developers.intercom.com/docs/references/rest-api/api.intercom.io" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.intercom.com/docs/build-an-integration/learn-more/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.intercom.com/help/en/articles/9071694-intercom-developer-faqs" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.intercom.com/blog/introducing-model-context-protocol-fin/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.intercom.com/docs/references/rest-api/api.intercom.io" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.intercom.com/docs/build-an-integration/learn-more/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.intercom.com/help/en/articles/9071694-intercom-developer-faqs" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.intercom.com/blog/introducing-model-context-protocol-fin/" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Support &amp; Helpdesk" data-acc="partial">
         <td class="num">13</td>
@@ -394,7 +394,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">paid plan required</td>
-        <td><a class="ev" href="https://developer.freshdesk.com/api/v1" target="_blank" rel="noopener">api</a> <a class="ev" href="https://community.freshworks.com/api-and-webhooks-11406/freshdesk-api-for-free-users-available-35254" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/NeuraLegion/freshdesk_mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.freshdesk.com/api/v1" target="_blank" rel="noopener">api</a> <a class="ev" href="https://community.freshworks.com/api-and-webhooks-11406/freshdesk-api-for-free-users-available-35254" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/NeuraLegion/freshdesk_mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Support &amp; Helpdesk" data-acc="self-serve">
         <td class="num">14</td>
@@ -405,7 +405,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>none found</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://dev.frontapp.com/docs/welcome" target="_blank" rel="noopener">api</a> <a class="ev" href="https://dev.frontapp.com/reference/introduction" target="_blank" rel="noopener">auth</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://dev.frontapp.com/docs/welcome" target="_blank" rel="noopener">api</a> <a class="ev" href="https://dev.frontapp.com/reference/introduction" target="_blank" rel="noopener">auth</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Support &amp; Helpdesk" data-acc="partial">
         <td class="num">15</td>
@@ -416,7 +416,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">admin approval</td>
-        <td><a class="ev" href="https://docs.usepylon.com/pylon-docs/developer/api/api-reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.usepylon.com/pylon-docs/developer/api/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://getpylon.com/developers/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/JustinBeckwith/pylon-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.usepylon.com/pylon-docs/developer/api/api-reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.usepylon.com/pylon-docs/developer/api/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://getpylon.com/developers/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/JustinBeckwith/pylon-mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Support &amp; Helpdesk" data-acc="self-serve">
         <td class="num">16</td>
@@ -427,18 +427,18 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://support.liveagent.com/840770-Complete-API-reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://support.liveagent.com/802463-REST-API" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://support.liveagent.com/741982-API-key" target="_blank" rel="noopener">access</a> <a class="ev" href="https://faq.liveagent.com/114892-MCP-Integration-Guide-for-LiveAgent-Agents-Early-Preview" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://support.liveagent.com/840770-Complete-API-reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://support.liveagent.com/802463-REST-API" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://support.liveagent.com/741982-API-key" target="_blank" rel="noopener">access</a> <a class="ev" href="https://faq.liveagent.com/114892-MCP-Integration-Guide-for-LiveAgent-Agents-Early-Preview" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, mcp, buildable">2/5</span></td>
       </tr>
-      <tr data-cat="Support &amp; Helpdesk" data-acc="unknown">
+      <tr data-cat="Support &amp; Helpdesk" data-acc="self-serve">
         <td class="num">17</td>
         <td><strong>Plain</strong><small>Plain is an API-first customer infrastructure platform for B2B SaaS that provides a suppor</small></td>
         <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
-        <td><span class="pill" style="color:var(--ink-3)">●</span> Unknown</td>
+        <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
         <td class="apisurf">GraphQL<small>full API-UI parity</small></td>
         <td>official</td>
-        <td style="color:var(--ink-3);font-weight:600">Unknown</td>
+        <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://www.plain.com/docs/graphql/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.plain.com/docs/graphql/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.plain.com/blog/api-first-support-platforms" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://www.plain.com/docs/graphql/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.plain.com/docs/graphql/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.plain.com/blog/api-first-support-platforms" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="Support &amp; Helpdesk" data-acc="partial">
         <td class="num">18</td>
@@ -449,7 +449,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">paid plan required</td>
-        <td><a class="ev" href="https://developer.helpscout.com/docs-api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://articles.helpscout.com/blog/help-scout-api/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/drewburchfield/help-scout-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.helpscout.com/docs-api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://articles.helpscout.com/blog/help-scout-api/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/drewburchfield/help-scout-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Support &amp; Helpdesk" data-acc="partial">
         <td class="num">19</td>
@@ -460,7 +460,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">paid plan or approval</td>
-        <td><a class="ev" href="https://docs.gorgias.com/en-US/rest-api-208286" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.gorgias.com/docs/1-register-on-developer-portal" target="_blank" rel="noopener">access</a> <a class="ev" href="https://docs.gorgias.com/en-US/connect-your-ai-assistant-to-the-gorgias-mcp-6310546" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.gorgias.com/en-US/rest-api-208286" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.gorgias.com/docs/1-register-on-developer-portal" target="_blank" rel="noopener">access</a> <a class="ev" href="https://docs.gorgias.com/en-US/connect-your-ai-assistant-to-the-gorgias-mcp-6310546" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Support &amp; Helpdesk" data-acc="self-serve">
         <td class="num">20</td>
@@ -471,7 +471,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developer.gladly.com/rest/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.gladly.com/implementation/docs/get-your-api-tokens" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.stackone.com/connectors/gladly/mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.gladly.com/rest/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.gladly.com/implementation/docs/get-your-api-tokens" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.stackone.com/connectors/gladly/mcp/" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Communications" data-acc="self-serve">
         <td class="num">21</td>
@@ -482,7 +482,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.slack.dev/apis/web-api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.slack.dev/authentication/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://api.slack.com/apps/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://docs.slack.dev/ai/slack-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.slack.dev/apis/web-api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.slack.dev/authentication/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://api.slack.com/apps/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://docs.slack.dev/ai/slack-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="Communications" data-acc="self-serve">
         <td class="num">22</td>
@@ -493,7 +493,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://www.twilio.com/docs" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.twilio.com/docs/messaging/api" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.twilio.com/docs/ai/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://www.twilio.com/docs" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.twilio.com/docs/messaging/api" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.twilio.com/docs/ai/mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Communications" data-acc="self-serve">
         <td class="num">23</td>
@@ -504,7 +504,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://www.zoho.com/cliq/help/restapi/v3/introduction/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.zoho.com/cliq/help/restapi/v3/oauth/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.zoho.com/cliq/mcp-server.html" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://www.zoho.com/cliq/help/restapi/v3/introduction/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.zoho.com/cliq/help/restapi/v3/oauth/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.zoho.com/cliq/mcp-server.html" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="Communications" data-acc="self-serve">
         <td class="num">24</td>
@@ -515,7 +515,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://open.larksuite.com/api-explorer?from=guide" target="_blank" rel="noopener">api</a> <a class="ev" href="https://open.larksuite.com/document/ukTMukTMukTM/uMTNz4yM1MjLzUzM" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://open.larksuite.com/document/uAjLw4CM/ukTMukTMukTM/mcp_integration/mcp_introduction" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://open.larksuite.com/api-explorer?from=guide" target="_blank" rel="noopener">api</a> <a class="ev" href="https://open.larksuite.com/document/ukTMukTMukTM/uMTNz4yM1MjLzUzM" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://open.larksuite.com/document/uAjLw4CM/ukTMukTMukTM/mcp_integration/mcp_introduction" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: auth_methods, self_serve, api_surface, mcp, buildable">0/5</span></td>
       </tr>
       <tr data-cat="Communications" data-acc="self-serve">
         <td class="num">25</td>
@@ -526,7 +526,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://pumble.com/help/integrations/automation-workflow-integrations/api-keys-integration/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://pumble.com/help/integrations/automation-workflow-integrations/how-to-use-the-pumble-mcp-server/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://pumble.com/help/integrations/automation-workflow-integrations/api-keys-integration/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://pumble.com/help/integrations/automation-workflow-integrations/how-to-use-the-pumble-mcp-server/" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: api_surface">4/5</span></td>
       </tr>
       <tr data-cat="Communications" data-acc="self-serve">
         <td class="num">26</td>
@@ -537,7 +537,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.discord.com/developers/reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.discord.com/developers/topics/oauth2" target="_blank" rel="noopener">access</a> <a class="ev" href="https://mcpservers.org/servers/exilproductions/discord-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.discord.com/developers/reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.discord.com/developers/topics/oauth2" target="_blank" rel="noopener">access</a> <a class="ev" href="https://mcpservers.org/servers/exilproductions/discord-mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Communications" data-acc="self-serve">
         <td class="num">27</td>
@@ -548,18 +548,18 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://core.telegram.org/bots/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://core.telegram.org/api/obtaining_api_id" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/sparfenyuk/mcp-telegram" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://core.telegram.org/bots/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://core.telegram.org/api/obtaining_api_id" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/sparfenyuk/mcp-telegram" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: auth_methods, buildable">3/5</span></td>
       </tr>
       <tr data-cat="Communications" data-acc="self-serve">
         <td class="num">28</td>
         <td><strong>WhatsApp Business</strong><small>Provides a programmable API for businesses to send and receive WhatsApp messages.</small></td>
-        <td><span class="tag">Other</span></td>
+        <td><span class="tag">Token / JWT</span></td>
         <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
         <td class="apisurf">REST<small>full messaging (send, receive, templates, media)</small></td>
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
-        <td class="blk">auth method not explicitly documented</td>
-        <td><a class="ev" href="https://developers.facebook.com/documentation/business-messaging/whatsapp/get-started" target="_blank" rel="noopener">api</a> <a class="ev" href="https://whatsappbusiness.com/developers/developer-hub/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/msaelices/whatsapp-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td class="blk">business verification for production messaging</td>
+        <td><a class="ev" href="https://developers.facebook.com/documentation/business-messaging/whatsapp/get-started" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.facebook.com/docs/whatsapp/cloud-api/get-started" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://whatsappbusiness.com/developers/developer-hub/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/msaelices/whatsapp-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: api_surface">4/5</span></td>
       </tr>
       <tr data-cat="Communications" data-acc="self-serve">
         <td class="num">29</td>
@@ -570,7 +570,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developer.aircall.io/api-references" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.aircall.io/tutorials/basic-authentication/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://viasocket.com/mcp/aircall" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.aircall.io/api-references" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.aircall.io/tutorials/basic-authentication/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://viasocket.com/mcp/aircall" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Communications" data-acc="self-serve">
         <td class="num">30</td>
@@ -581,7 +581,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developer.vonage.com/en/documentation" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.vonage.com/en/verify/concepts/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.vonage.com/en/getting-started/overview" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developer.vonage.com/en/mcp-server/overview" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.vonage.com/en/documentation" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.vonage.com/en/verify/concepts/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.vonage.com/en/getting-started/overview" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developer.vonage.com/en/mcp-server/overview" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Marketing &amp; Ads" data-acc="partial">
         <td class="num">31</td>
@@ -592,7 +592,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">Developer token approval required</td>
-        <td><a class="ev" href="https://developers.google.com/google-ads/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.google.com/google-ads/api/docs/api-policy/developer-token" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developers.google.com/google-ads/api/docs/developer-toolkit/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.google.com/google-ads/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.google.com/google-ads/api/docs/api-policy/developer-token" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developers.google.com/google-ads/api/docs/developer-toolkit/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Marketing &amp; Ads" data-acc="partial">
         <td class="num">32</td>
@@ -603,7 +603,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">app review</td>
-        <td><a class="ev" href="https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.facebook.com/documentation/ads-commerce/marketing-api/get-started/authorization" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.adamigo.ai/blog/meta-ads-api-key-setup-guide" target="_blank" rel="noopener">access</a> <a class="ev" href="https://pipeboard.co/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.facebook.com/documentation/ads-commerce/marketing-api/get-started/authorization" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.adamigo.ai/blog/meta-ads-api-key-setup-guide" target="_blank" rel="noopener">access</a> <a class="ev" href="https://pipeboard.co/" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: api_surface">4/5</span></td>
       </tr>
       <tr data-cat="Marketing &amp; Ads" data-acc="partial">
         <td class="num">33</td>
@@ -614,7 +614,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">approval process</td>
-        <td><a class="ev" href="https://learn.microsoft.com/en-us/linkedin/marketing/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://learn.microsoft.com/en-us/linkedin/shared/authentication/getting-access" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.linkedin.com/product-catalog" target="_blank" rel="noopener">access</a> <a class="ev" href="https://lobehub.com/mcp/wsofidelhi-linkedin-ads-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://learn.microsoft.com/en-us/linkedin/marketing/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://learn.microsoft.com/en-us/linkedin/shared/authentication/getting-access" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.linkedin.com/product-catalog" target="_blank" rel="noopener">access</a> <a class="ev" href="https://lobehub.com/mcp/wsofidelhi-linkedin-ads-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Marketing &amp; Ads" data-acc="partial">
         <td class="num">34</td>
@@ -625,7 +625,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">OAuth requires paid Agency Pro plan</td>
-        <td><a class="ev" href="https://marketplace.gohighlevel.com/docs/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.gohighlevel.com/support/solutions/articles/48001060529-highlevel-api-documentation" target="_blank" rel="noopener">access</a> <a class="ev" href="https://marketplace.gohighlevel.com/docs/other/mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://marketplace.gohighlevel.com/docs/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.gohighlevel.com/support/solutions/articles/48001060529-highlevel-api-documentation" target="_blank" rel="noopener">access</a> <a class="ev" href="https://marketplace.gohighlevel.com/docs/other/mcp/" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Marketing &amp; Ads" data-acc="self-serve">
         <td class="num">35</td>
@@ -636,7 +636,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://mailchimp.com/developer/marketing/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://mailchimp.com/developer/marketing/docs/fundamentals/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://mailchimp.com/developer/marketing/guides/quick-start/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://apify.com/engaging_image/mailchimp-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://mailchimp.com/developer/marketing/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://mailchimp.com/developer/marketing/docs/fundamentals/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://mailchimp.com/developer/marketing/guides/quick-start/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://apify.com/engaging_image/mailchimp-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Marketing &amp; Ads" data-acc="self-serve">
         <td class="num">36</td>
@@ -647,7 +647,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developers.klaviyo.com/en/reference/api_overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.klaviyo.com/blog/introducing-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.klaviyo.com/en/reference/api_overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.klaviyo.com/blog/introducing-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Marketing &amp; Ads" data-acc="self-serve">
         <td class="num">37</td>
@@ -658,7 +658,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developer.systeme.io/reference/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.systeme.io/article/2323-how-to-create-a-public-api-key-on-systeme-io" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://help.systeme.io/article/9489-how-to-use-systeme-ios-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.systeme.io/reference/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.systeme.io/article/2323-how-to-create-a-public-api-key-on-systeme-io" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://help.systeme.io/article/9489-how-to-use-systeme-ios-mcp" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="Marketing &amp; Ads" data-acc="partial">
         <td class="num">38</td>
@@ -669,7 +669,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">App review and video demo required for standard access</td>
-        <td><a class="ev" href="https://developers.pinterest.com/docs/api/v5/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.pinterest.com/docs/getting-started/set-up-authentication-and-authorization/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.pinterest.com/docs/key-concepts/access-tiers/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/collactivelabs/pinterest-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.pinterest.com/docs/api/v5/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.pinterest.com/docs/getting-started/set-up-authentication-and-authorization/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.pinterest.com/docs/key-concepts/access-tiers/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/collactivelabs/pinterest-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Marketing &amp; Ads" data-acc="self-serve">
         <td class="num">39</td>
@@ -680,7 +680,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developers.facebook.com/documentation/threads" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.facebook.com/documentation/threads/get-started" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://mcp.aibase.com/server/1916354827725545473" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.facebook.com/documentation/threads" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.facebook.com/documentation/threads/get-started" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://mcp.aibase.com/server/1916354827725545473" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, api_surface, buildable">2/5</span></td>
       </tr>
       <tr data-cat="Marketing &amp; Ads" data-acc="self-serve">
         <td class="num">40</td>
@@ -691,7 +691,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://www.twilio.com/docs/sendgrid/for-developers/sending-email/authentication" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/garethcull/sendgrid-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://www.twilio.com/docs/sendgrid/for-developers/sending-email/authentication" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/garethcull/sendgrid-mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Ecommerce" data-acc="self-serve">
         <td class="num">41</td>
@@ -702,7 +702,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://shopify.dev/docs/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://shopify.dev/docs/apps/build/authentication-authorization" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://shopify.dev/docs/apps/build/authentication-authorization/access-tokens/generate-app-access-tokens-admin" target="_blank" rel="noopener">access</a> <a class="ev" href="https://shopify.dev/docs/apps/build/ai-toolkit" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://shopify.dev/docs/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://shopify.dev/docs/apps/build/authentication-authorization" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://shopify.dev/docs/apps/build/authentication-authorization/access-tokens/generate-app-access-tokens-admin" target="_blank" rel="noopener">access</a> <a class="ev" href="https://shopify.dev/docs/apps/build/ai-toolkit" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Ecommerce" data-acc="self-serve">
         <td class="num">42</td>
@@ -713,7 +713,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developer.woocommerce.com/docs/apis/rest-api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.woocommerce.com/docs/apis/rest-api/authentication/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.woocommerce.com/docs/features/mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.woocommerce.com/docs/apis/rest-api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.woocommerce.com/docs/apis/rest-api/authentication/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.woocommerce.com/docs/features/mcp/" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="Ecommerce" data-acc="self-serve">
         <td class="num">43</td>
@@ -724,18 +724,18 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.bigcommerce.com/developer/api-reference/about-our-apis" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.bigcommerce.com/developer/docs/overview/api-fundamentals/api-accounts" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.bigcommerce.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://mcpmarket.com/server/bigcommerce" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.bigcommerce.com/developer/api-reference/about-our-apis" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.bigcommerce.com/developer/docs/overview/api-fundamentals/api-accounts" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.bigcommerce.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://mcpmarket.com/server/bigcommerce" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: mcp">4/5</span></td>
       </tr>
-      <tr data-cat="Ecommerce" data-acc="unknown">
+      <tr data-cat="Ecommerce" data-acc="gated">
         <td class="num">44</td>
         <td><strong>Salesforce Commerce Cloud</strong><small>Salesforce Commerce Cloud provides APIs to build and customize headless e‑commerce storefr</small></td>
-        <td><span class="tag">Other</span></td>
-        <td><span class="pill" style="color:var(--ink-3)">●</span> Unknown</td>
+        <td><span class="tag">OAuth2</span></td>
+        <td><span class="pill" style="color:var(--c-gated)">●</span> Gated</td>
         <td class="apisurf">REST<small>unknown</small></td>
         <td>community</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
-        <td class="blk">no public auth/credential details</td>
-        <td><a class="ev" href="https://developer.salesforce.com/docs/commerce/commerce-api/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.salesforce.com/docs/commerce/commerce-api/references/auth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/setting-up-api-access.html" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/BrinsilElias/commercecloud-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td class="blk">Commerce Cloud license required — no self-serve path</td>
+        <td><a class="ev" href="https://developer.salesforce.com/docs/commerce/commerce-api/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.salesforce.com/docs/commerce/commerce-api/guide/authorization-for-shopper-apis.html" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/setting-up-api-access.html" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/BrinsilElias/commercecloud-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: auth_methods, self_serve, api_surface, buildable">1/5</span></td>
       </tr>
       <tr data-cat="Ecommerce" data-acc="self-serve">
         <td class="num">45</td>
@@ -746,7 +746,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developer.adobe.com/commerce/webapi/rest/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.adobe.com/commerce/marketplace/guides/eqp/v1/access-keys" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/rafaelstz/adobe-commerce-dev-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.adobe.com/commerce/webapi/rest/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.adobe.com/commerce/marketplace/guides/eqp/v1/access-keys" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/rafaelstz/adobe-commerce-dev-mcp" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="Ecommerce" data-acc="partial">
         <td class="num">46</td>
@@ -757,7 +757,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">requires paid Commerce Advanced plan or Extension approval</td>
-        <td><a class="ev" href="https://developers.squarespace.com/commerce-apis/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.squarespace.com/commerce-apis/oauth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.squarespace.com/commerce-apis/authentication-and-permissions" target="_blank" rel="noopener">access</a> <a class="ev" href="https://viasocket.com/mcp/squarespace" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.squarespace.com/commerce-apis/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.squarespace.com/commerce-apis/oauth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.squarespace.com/commerce-apis/authentication-and-permissions" target="_blank" rel="noopener">access</a> <a class="ev" href="https://viasocket.com/mcp/squarespace" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Ecommerce" data-acc="partial">
         <td class="num">47</td>
@@ -768,7 +768,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">API requires a paid Ecwid plan</td>
-        <td><a class="ev" href="https://docs.ecwid.com/api-reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.ecwid.com/api-reference, https://docs.ecwid.com/get-started/make-your-first-api-request" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://github.com/Ecwid/ecwid-api-docs/blob/master/includes/_overview.md, https://docs.ecwid.com/get-started/make-your-first-api-request" target="_blank" rel="noopener">access</a> <a class="ev" href="https://viasocket.com/mcp/ecwid-by-lightspeed" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.ecwid.com/api-reference" target="_blank" rel="noopener">api</a> <a class="ev" href="https://github.com/Ecwid/ecwid-api-docs/blob/master/includes/_overview.md" target="_blank" rel="noopener">access</a> <a class="ev" href="https://viasocket.com/mcp/ecwid-by-lightspeed" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Ecommerce" data-acc="self-serve">
         <td class="num">48</td>
@@ -779,7 +779,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://www.postman.com/api-reference-library/gumroad/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://gumroad.com/help/article/280-create-application-api" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://nocodeapi.com/marketplace/gumroad/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/rmarescu/gumroad-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://www.postman.com/api-reference-library/gumroad/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://gumroad.com/help/article/280-create-application-api" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://nocodeapi.com/marketplace/gumroad/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/rmarescu/gumroad-mcp" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: api_surface">4/5</span></td>
       </tr>
       <tr data-cat="Ecommerce" data-acc="partial">
         <td class="num">49</td>
@@ -790,7 +790,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">requires Amazon approval for data‑access</td>
-        <td><a class="ev" href="https://developer-docs.amazon.com/sp-api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.amazonservices.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/jay-trivedi/amazon_sp_mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer-docs.amazon.com/sp-api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.amazonservices.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/jay-trivedi/amazon_sp_mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Ecommerce" data-acc="self-serve">
         <td class="num">50</td>
@@ -801,7 +801,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>none found</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://apidocs.fan/" target="_blank" rel="noopener">api</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://apidocs.fan/" target="_blank" rel="noopener">api</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
         <td class="num">51</td>
@@ -812,7 +812,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.dataforseo.com/v3/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.dataforseo.com/v3/auth/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://dataforseo.com/model-context-protocol" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.dataforseo.com/v3/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.dataforseo.com/v3/auth/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://dataforseo.com/model-context-protocol" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
         <td class="num">52</td>
@@ -823,7 +823,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://seranking.com/api/data/reference/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://seranking.com/api/data/getting-started/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://seranking.com/api.html" target="_blank" rel="noopener">access</a> <a class="ev" href="https://seranking.com/api/integrations/mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://seranking.com/api/data/reference/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://seranking.com/api/data/getting-started/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://seranking.com/api.html" target="_blank" rel="noopener">access</a> <a class="ev" href="https://seranking.com/api/integrations/mcp/" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Data / SEO / Scraping" data-acc="partial">
         <td class="num">53</td>
@@ -834,7 +834,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">Requires paid Ahrefs plan to obtain API key</td>
-        <td><a class="ev" href="https://docs.ahrefs.com/en/api/docs/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.ahrefs.com/en/api/docs/api-keys-creation-and-management" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://github.com/ahrefs/ahrefs-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.ahrefs.com/en/api/docs/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.ahrefs.com/en/api/docs/api-keys-creation-and-management" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://github.com/ahrefs/ahrefs-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
         <td class="num">54</td>
@@ -845,7 +845,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.mrscraper.com/docs/api/authentication" target="_blank" rel="noopener">api</a> <a class="ev" href="https://apify.com/mrscrapercom/mrscraper-listing/api/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.mrscraper.com/docs/api/authentication" target="_blank" rel="noopener">api</a> <a class="ev" href="https://apify.com/mrscrapercom/mrscraper-listing/api/mcp" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: auth_methods, self_serve, buildable">2/5</span></td>
       </tr>
       <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
         <td class="num">55</td>
@@ -856,7 +856,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.apify.com/api/v2" target="_blank" rel="noopener">api</a> <a class="ev" href="https://mcp.apify.com/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.apify.com/api/v2" target="_blank" rel="noopener">api</a> <a class="ev" href="https://mcp.apify.com/" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, mcp, buildable">2/5</span></td>
       </tr>
       <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
         <td class="num">56</td>
@@ -867,7 +867,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.firecrawl.dev/api-reference/v2-introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.firecrawl.dev/api-reference/introduction" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.firecrawl.dev/blog/firecrawl-keyless-launch" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/firecrawl/firecrawl-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.firecrawl.dev/api-reference/v2-introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.firecrawl.dev/api-reference/introduction" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.firecrawl.dev/blog/firecrawl-keyless-launch" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/firecrawl/firecrawl-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
         <td class="num">57</td>
@@ -878,7 +878,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.brightdata.com/api-reference/rest-api/scraper/crawl-api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.brightdata.com/api-reference/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://brightdata.com/products/serp-api" target="_blank" rel="noopener">access</a> <a class="ev" href="https://brightdata.com/ai/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.brightdata.com/api-reference/rest-api/scraper/crawl-api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.brightdata.com/api-reference/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://brightdata.com/products/serp-api" target="_blank" rel="noopener">access</a> <a class="ev" href="https://brightdata.com/ai/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Data / SEO / Scraping" data-acc="self-serve">
         <td class="num">58</td>
@@ -889,7 +889,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-gated);font-weight:600">No</td>
         <td class="blk">No public REST/GraphQL API endpoint</td>
-        <td><a class="ev" href="https://github.com/sherlock-project/sherlock" target="_blank" rel="noopener">api</a> <a class="ev" href="https://github.com/Burnsedia/sherlock-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://github.com/sherlock-project/sherlock" target="_blank" rel="noopener">api</a> <a class="ev" href="https://github.com/Burnsedia/sherlock-mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Data / SEO / Scraping" data-acc="partial">
         <td class="num">59</td>
@@ -900,7 +900,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>none found</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">requires master API key, likely a paid account</td>
-        <td><a class="ev" href="https://docs.waterfall.io/v1/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.waterfall.io/v1/api-keys-create" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.linkedin.com/posts/noah-adelstein-311896b9_emre-kavaloglu-from-waterfallio-gave-me-activity-7336500329078759424-TXT1" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.waterfall.io/v1/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.waterfall.io/v1/api-keys-create" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.linkedin.com/posts/noah-adelstein-311896b9_emre-kavaloglu-from-waterfallio-gave-me-activity-7336500329078759424-TXT1" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Data / SEO / Scraping" data-acc="gated">
         <td class="num">60</td>
@@ -911,7 +911,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>none found</td>
         <td style="color:var(--c-gated);font-weight:600">No</td>
         <td class="blk">no public inbound API to build against</td>
-        <td><a class="ev" href="https://university.clay.com/docs/http-api-integration-overview" target="_blank" rel="noopener">api</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://university.clay.com/docs/http-api-integration-overview" target="_blank" rel="noopener">api</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Dev / Infra / Data" data-acc="partial">
         <td class="num">61</td>
@@ -922,7 +922,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">authentication token requirements</td>
-        <td><a class="ev" href="https://docs.github.com/en/rest" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.github.com/en/rest/overview/authenticating-to-the-rest-api" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://apievangelist.com/2017/10/16/operating-your-api-portal-using-github/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/github/github-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.github.com/en/rest" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.github.com/en/rest/overview/authenticating-to-the-rest-api" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://apievangelist.com/2017/10/16/operating-your-api-portal-using-github/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/github/github-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
         <td class="num">62</td>
@@ -933,7 +933,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://vercel.com/docs/rest-api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://vercel.com/docs/mcp/vercel-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://vercel.com/docs/rest-api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://vercel.com/docs/mcp/vercel-mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
         <td class="num">63</td>
@@ -944,7 +944,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.netlify.com/api/get-started/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.netlify.com/build/build-with-ai/netlify-mcp-server/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.netlify.com/api/get-started/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.netlify.com/build/build-with-ai/netlify-mcp-server/" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
         <td class="num">64</td>
@@ -955,7 +955,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developers.cloudflare.com/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.cloudflare.com/fundamentals/api/get-started/create-token/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://github.com/cloudflare/mcp-server-cloudflare" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.cloudflare.com/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.cloudflare.com/fundamentals/api/get-started/create-token/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://github.com/cloudflare/mcp-server-cloudflare" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
         <td class="num">65</td>
@@ -966,7 +966,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://supabase.com/docs/reference/api/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://supabase.com/docs/guides/auth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://supabase.com/docs/guides/getting-started/api-keys" target="_blank" rel="noopener">access</a> <a class="ev" href="https://supabase.com/docs/guides/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://supabase.com/docs/reference/api/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://supabase.com/docs/guides/auth" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://supabase.com/docs/guides/getting-started/api-keys" target="_blank" rel="noopener">access</a> <a class="ev" href="https://supabase.com/docs/guides/" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: api_surface">4/5</span></td>
       </tr>
       <tr data-cat="Dev / Infra / Data" data-acc="partial">
         <td class="num">66</td>
@@ -977,7 +977,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://neo4j.com/docs/aura/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://neo4j.com/docs/aura/api/authentication/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://neo4j.com/docs/aura/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://neo4j.com/developer/genai-ecosystem/model-context-protocol-mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://neo4j.com/docs/aura/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://neo4j.com/docs/aura/api/authentication/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://neo4j.com/docs/aura/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://neo4j.com/developer/genai-ecosystem/model-context-protocol-mcp/" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: api_surface">4/5</span></td>
       </tr>
       <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
         <td class="num">67</td>
@@ -988,7 +988,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">none (account + warehouse setup is the only friction)</td>
-        <td><a class="ev" href="https://docs.snowflake.com/en/developer-guide/sql-api/index" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.snowflake.com/en/developer-guide/sql-api/authenticating" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://signup.snowflake.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/Snowflake-Labs/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.snowflake.com/en/developer-guide/sql-api/index" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.snowflake.com/en/developer-guide/sql-api/authenticating" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://signup.snowflake.com/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/Snowflake-Labs/mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Dev / Infra / Data" data-acc="partial">
         <td class="num">68</td>
@@ -999,7 +999,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">Organization Owner access required for service accounts and Project Owner access required for API keys</td>
-        <td><a class="ev" href="https://www.mongodb.com/docs/atlas/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.mongodb.com/docs/api/doc/atlas-admin-api-v2/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.mongodb.com/docs/atlas/configure-api-access/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.mongodb.com/docs/mcp-server/overview/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://www.mongodb.com/docs/atlas/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.mongodb.com/docs/api/doc/atlas-admin-api-v2/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://www.mongodb.com/docs/atlas/configure-api-access/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.mongodb.com/docs/mcp-server/overview/" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
         <td class="num">69</td>
@@ -1010,7 +1010,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.datadoghq.com/api/latest/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.datadoghq.com/account_management/api-app-keys/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.datadoghq.com/mcp_server/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.datadoghq.com/api/latest/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.datadoghq.com/account_management/api-app-keys/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.datadoghq.com/mcp_server/" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: auth_methods, self_serve, buildable">2/5</span></td>
       </tr>
       <tr data-cat="Dev / Infra / Data" data-acc="self-serve">
         <td class="num">70</td>
@@ -1021,7 +1021,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.sentry.io/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.sentry.io/api/auth/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.sentry.io/product/sentry-mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.sentry.io/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.sentry.io/api/auth/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.sentry.io/product/sentry-mcp/" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="Productivity &amp; PM" data-acc="self-serve">
         <td class="num">71</td>
@@ -1032,7 +1032,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developers.notion.com/reference/intro" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.notion.com/docs/authorization" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.notion.com/docs/create-a-notion-integration" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developers.notion.com/docs/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.notion.com/reference/intro" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.notion.com/docs/authorization" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.notion.com/docs/create-a-notion-integration" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developers.notion.com/docs/mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Productivity &amp; PM" data-acc="self-serve">
         <td class="num">72</td>
@@ -1043,7 +1043,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://www.airtable.com/developers/web/api/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://support.airtable.com/docs/creating-personal-access-tokens" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://airtable.com/developers/tokens" target="_blank" rel="noopener">access</a> <a class="ev" href="https://support.airtable.com/docs/using-the-airtable-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://www.airtable.com/developers/web/api/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://support.airtable.com/docs/creating-personal-access-tokens" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://support.airtable.com/docs/using-the-airtable-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, api_surface, buildable">2/5</span></td>
       </tr>
       <tr data-cat="Productivity &amp; PM" data-acc="self-serve">
         <td class="num">73</td>
@@ -1054,7 +1054,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://linear.app/docs/api-and-webhooks" target="_blank" rel="noopener">api</a> <a class="ev" href="https://linear.app/developers/graphql" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://linear.app/developers" target="_blank" rel="noopener">access</a> <a class="ev" href="https://linear.app/docs/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://linear.app/docs/api-and-webhooks" target="_blank" rel="noopener">api</a> <a class="ev" href="https://linear.app/developers/graphql" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://linear.app/developers" target="_blank" rel="noopener">access</a> <a class="ev" href="https://linear.app/docs/mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Productivity &amp; PM" data-acc="partial">
         <td class="num">74</td>
@@ -1065,7 +1065,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">Migrate from API tokens to officially supported authentication by December 31st, 2025</td>
-        <td><a class="ev" href="https://developer.atlassian.com/cloud/jira/software/rest/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.atlassian.com/blog/announcements/atlassian-rovo-mcp-ga" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.atlassian.com/cloud/jira/software/rest/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://www.atlassian.com/blog/announcements/atlassian-rovo-mcp-ga" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Productivity &amp; PM" data-acc="self-serve">
         <td class="num">75</td>
@@ -1076,7 +1076,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developers.asana.com/docs/api-explorer" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.asana.com/docs/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://help.asana.com/s/article/api?language=en_US" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developers.asana.com/docs/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.asana.com/docs/api-explorer" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.asana.com/docs/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://help.asana.com/s/article/api?language=en_US" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developers.asana.com/docs/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Productivity &amp; PM" data-acc="self-serve">
         <td class="num">76</td>
@@ -1087,7 +1087,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developer.monday.com/api-reference/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.monday.com/api-reference/docs/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://support.monday.com/hc/en-us/articles/360005144659-Does-monday-com-have-an-API" target="_blank" rel="noopener">access</a> <a class="ev" href="https://monday.com/w/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.monday.com/api-reference/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.monday.com/api-reference/docs/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://support.monday.com/hc/en-us/articles/360005144659-Does-monday-com-have-an-API" target="_blank" rel="noopener">access</a> <a class="ev" href="https://monday.com/w/mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Productivity &amp; PM" data-acc="partial">
         <td class="num">77</td>
@@ -1098,7 +1098,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">OAuth app creation requires Workspace owner or admin approval</td>
-        <td><a class="ev" href="https://developer.clickup.com/docs/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.clickup.com/docs/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://help.clickup.com/hc/en-us/articles/6303422883095-Create-your-own-app-with-the-ClickUp-API" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.clickup.com/docs/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.clickup.com/docs/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://help.clickup.com/hc/en-us/articles/6303422883095-Create-your-own-app-with-the-ClickUp-API" target="_blank" rel="noopener">access</a> <a class="ev" href="https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Productivity &amp; PM" data-acc="partial">
         <td class="num">78</td>
@@ -1109,7 +1109,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">API usage is subject to the role of the user associated with the API token</td>
-        <td><a class="ev" href="https://coda.io/developers/apis/admin/v1" target="_blank" rel="noopener">api</a> <a class="ev" href="https://coda.io/developers" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://coda.io/packs/build/latest/samples/topic/apis/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://glama.ai/mcp/servers/orellazri/coda-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://coda.io/developers/apis/admin/v1" target="_blank" rel="noopener">api</a> <a class="ev" href="https://coda.io/developers" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://coda.io/packs/build/latest/samples/topic/apis/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://glama.ai/mcp/servers/orellazri/coda-mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Productivity &amp; PM" data-acc="partial">
         <td class="num">79</td>
@@ -1120,7 +1120,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">token generation process varies by environment</td>
-        <td><a class="ev" href="https://developers.smartsheet.com/api/smartsheet/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.smartsheet.com/api/smartsheet/guides/getting-started" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.smartsheet.com/ai-mcp/smartsheet/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.smartsheet.com/api/smartsheet/introduction" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.smartsheet.com/api/smartsheet/guides/getting-started" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developers.smartsheet.com/ai-mcp/smartsheet/mcp-server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Productivity &amp; PM" data-acc="self-serve">
         <td class="num">80</td>
@@ -1131,7 +1131,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>community</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://help.getharvest.com/api-v2/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.getharvest.com/api-v2/authentication-api/authentication/authentication/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://github.com/taiste/harvest-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://help.getharvest.com/api-v2/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.getharvest.com/api-v2/authentication-api/authentication/authentication/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://github.com/taiste/harvest-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="Finance &amp; Fintech" data-acc="self-serve">
         <td class="num">81</td>
@@ -1142,7 +1142,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.stripe.com/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.stripe.com/keys" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.stripe.com/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.stripe.com/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.stripe.com/keys" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.stripe.com/mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Finance &amp; Fintech" data-acc="self-serve">
         <td class="num">82</td>
@@ -1153,7 +1153,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://plaid.com/docs/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://dashboard.plaid.com/signup" target="_blank" rel="noopener">access</a> <a class="ev" href="https://plaid.com/docs/resources/mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://plaid.com/docs/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://dashboard.plaid.com/signup" target="_blank" rel="noopener">access</a> <a class="ev" href="https://plaid.com/docs/resources/mcp/" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="Finance &amp; Fintech" data-acc="partial">
         <td class="num">83</td>
@@ -1164,7 +1164,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">API key creation and management</td>
-        <td><a class="ev" href="https://github.com/binance/binance-spot-api-docs" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.binance.com/en/support/faq/detail/360002502072" target="_blank" rel="noopener">access</a> <a class="ev" href="https://mcpmarket.com/server/binance-1" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://github.com/binance/binance-spot-api-docs" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.binance.com/en/support/faq/detail/360002502072" target="_blank" rel="noopener">access</a> <a class="ev" href="https://mcpmarket.com/server/binance-1" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, mcp, buildable">2/5</span></td>
       </tr>
       <tr data-cat="Finance &amp; Fintech" data-acc="partial">
         <td class="num">84</td>
@@ -1172,10 +1172,10 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
         <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
         <td class="apisurf">REST<small>full CRUD on payment gateways</small></td>
-        <td>official</td>
+        <td>none found</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">EMV Level 3 processor certification</td>
-        <td><a class="ev" href="https://docs.nmi.com/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.nmi.com/developers/sdks-apis/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://paygent.uk/" target="_blank" rel="noopener">access</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.nmi.com/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://www.nmi.com/developers/sdks-apis/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://paygent.uk/" target="_blank" rel="noopener">access</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="Finance &amp; Fintech" data-acc="partial">
         <td class="num">85</td>
@@ -1186,7 +1186,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">API key management interface requires administrator privileges</td>
-        <td><a class="ev" href="https://www.ipayx.ai/docs/mcp-server" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.bluefin.com/payconex/docs/payconex-api-key-management" target="_blank" rel="noopener">access</a> <a class="ev" href="https://mcpservers.org/servers/ipayx-technologies/mcp-fx-audit" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://www.ipayx.ai/docs/mcp-server" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.bluefin.com/payconex/docs/payconex-api-key-management" target="_blank" rel="noopener">access</a> <a class="ev" href="https://mcpservers.org/servers/ipayx-technologies/mcp-fx-audit" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: api_surface">4/5</span></td>
       </tr>
       <tr data-cat="Finance &amp; Fintech" data-acc="partial">
         <td class="num">86</td>
@@ -1197,7 +1197,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">OAuth2 setup and admin approval</td>
-        <td><a class="ev" href="https://developer.intuit.com/app/developer/qbo/docs/get-started" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.intuit.com/app/developer/qbo/docs/develop" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/intuit/quickbooks-online-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.intuit.com/app/developer/qbo/docs/get-started" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.intuit.com/app/developer/qbo/docs/develop" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/intuit/quickbooks-online-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, api_surface, buildable">2/5</span></td>
       </tr>
       <tr data-cat="Finance &amp; Fintech" data-acc="self-serve">
         <td class="num">87</td>
@@ -1208,7 +1208,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developer.xero.com/documentation/api/accounting/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.xero.com/documentation/guides/oauth2/auth-flow/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.xero.com/documentation/getting-started-guide/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/xeroapi/xero-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.xero.com/documentation/api/accounting/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.xero.com/documentation/guides/oauth2/auth-flow/" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.xero.com/documentation/getting-started-guide/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/xeroapi/xero-mcp-server" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: api_surface">4/5</span></td>
       </tr>
       <tr data-cat="Finance &amp; Fintech" data-acc="partial">
         <td class="num">88</td>
@@ -1219,7 +1219,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">OAuth implementation complexity</td>
-        <td><a class="ev" href="https://developer.brex.com/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.brex.com/guides/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.brex.com/docs/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developer.brex.com/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developer.brex.com/guides/authentication" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://developer.brex.com/docs/mcp" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: api_surface">4/5</span></td>
       </tr>
       <tr data-cat="Finance &amp; Fintech" data-acc="partial">
         <td class="num">89</td>
@@ -1230,18 +1230,18 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">admin access required</td>
-        <td><a class="ev" href="https://docs.ramp.com/developer-api/v1" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.ramp.com/developer-api/v1/authorization" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.ramp.com/developer-api/v1/getting-started" target="_blank" rel="noopener">access</a> <a class="ev" href="https://builders.ramp.com/post/ramp-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.ramp.com/developer-api/v1" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.ramp.com/developer-api/v1/authorization" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://docs.ramp.com/developer-api/v1/getting-started" target="_blank" rel="noopener">access</a> <a class="ev" href="https://builders.ramp.com/post/ramp-mcp" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: auth_methods, self_serve, buildable">2/5</span></td>
       </tr>
-      <tr data-cat="Finance &amp; Fintech" data-acc="partial">
+      <tr data-cat="Finance &amp; Fintech" data-acc="gated">
         <td class="num">90</td>
         <td><strong>PitchBook</strong><small>PitchBook provides real-time access to company data and market intelligence for financial </small></td>
         <td><span class="tag">API Key</span> <span class="tag">Token / JWT</span></td>
-        <td><span class="pill" style="color:var(--c-partial)">●</span> Partial</td>
+        <td><span class="pill" style="color:var(--c-gated)">●</span> Gated</td>
         <td class="apisurf">REST<small>full CRUD on company data and market intelligence</small></td>
         <td>official</td>
-        <td style="color:var(--c-open);font-weight:600">Yes</td>
-        <td class="blk">API key generation and potential paid plan requirements</td>
-        <td><a class="ev" href="https://pitchbook.com/products/direct-access-data/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://pitchbook.com/help/PitchBook-api" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://apigene.ai/mcp/official/pitchbook" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td style="color:var(--c-gated);font-weight:600">No</td>
+        <td class="blk">standalone contract with PitchBook sales required</td>
+        <td><a class="ev" href="https://pitchbook.com/products/direct-access-data/api" target="_blank" rel="noopener">api</a> <a class="ev" href="https://pitchbook.com/help/PitchBook-api" target="_blank" rel="noopener">auth</a> <a class="ev" href="https://documenter.getpostman.com/view/5190535/TzCV1iRc" target="_blank" rel="noopener">access</a> <a class="ev" href="https://apigene.ai/mcp/official/pitchbook" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, api_surface, buildable">2/5</span></td>
       </tr>
       <tr data-cat="AI / Research / Media" data-acc="gated">
         <td class="num">91</td>
@@ -1252,7 +1252,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>none found</td>
         <td style="color:var(--c-gated);font-weight:600">No</td>
         <td class="blk">enterprise-only API behind Gemini Enterprise licensing</td>
-        <td><a class="ev" href="https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/create-manage-notebooks-api" target="_blank" rel="noopener">api</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/create-manage-notebooks-api" target="_blank" rel="noopener">api</a> <span class="warn" title="unresolved: auth_methods, self_serve, api_surface, buildable">1/5</span></td>
       </tr>
       <tr data-cat="AI / Research / Media" data-acc="partial">
         <td class="num">92</td>
@@ -1263,7 +1263,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">API is new and narrow; MCP gated to Business/Enterprise</td>
-        <td><a class="ev" href="https://help.otter.ai/hc/en-us/articles/36130822688279-Otter-ai-Public-API" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.otter.ai/hc/en-us/articles/35287607569687-Otter-MCP-Server" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://help.otter.ai/hc/en-us/articles/36130822688279-Otter-ai-Public-API" target="_blank" rel="noopener">api</a> <a class="ev" href="https://help.otter.ai/hc/en-us/articles/35287607569687-Otter-MCP-Server" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="AI / Research / Media" data-acc="self-serve">
         <td class="num">93</td>
@@ -1271,10 +1271,10 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td><span class="tag">API Key</span> <span class="tag">OAuth2</span></td>
         <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
         <td class="apisurf">REST<small>read and write access to meeting data</small></td>
-        <td>community</td>
+        <td>none found</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://developers.fathom.ai/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.fathom.ai/quickstart" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/mackenly/mcp-fathom-analytics" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.fathom.ai/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://developers.fathom.ai/quickstart" target="_blank" rel="noopener">access</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="AI / Research / Media" data-acc="gated">
         <td class="num">94</td>
@@ -1285,7 +1285,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-gated);font-weight:600">No</td>
         <td class="blk">requires application and custom quote</td>
-        <td><a class="ev" href="https://consensus.app/home/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://consensus.app/home/mcp/" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://consensus.app/home/api/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://consensus.app/home/mcp/" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: auth_methods, api_surface, buildable">2/5</span></td>
       </tr>
       <tr data-cat="AI / Research / Media" data-acc="self-serve">
         <td class="num">95</td>
@@ -1296,7 +1296,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://docs.reducto.ai/overview" target="_blank" rel="noopener">api</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.reducto.ai/overview" target="_blank" rel="noopener">api</a> <span class="warn" title="unresolved: auth_methods, buildable">3/5</span></td>
       </tr>
       <tr data-cat="AI / Research / Media" data-acc="partial">
         <td class="num">96</td>
@@ -1307,7 +1307,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-partial);font-weight:600">Partial</td>
         <td class="blk">paid Devin subscription required</td>
-        <td><a class="ev" href="https://docs.devin.ai/api-reference/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.devin.ai/work-with-devin/devin-mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://docs.devin.ai/api-reference/overview" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.devin.ai/work-with-devin/devin-mcp" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="AI / Research / Media" data-acc="partial">
         <td class="num">97</td>
@@ -1318,18 +1318,18 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://mindcloud.co/docs/universal/rest/higgsfield-ai/latest" target="_blank" rel="noopener">api</a> <a class="ev" href="https://cloud.higgsfield.ai/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://higgsfield.ai/mcp" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://mindcloud.co/docs/universal/rest/higgsfield-ai/latest" target="_blank" rel="noopener">api</a> <a class="ev" href="https://cloud.higgsfield.ai/" target="_blank" rel="noopener">access</a> <a class="ev" href="https://higgsfield.ai/mcp" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr>
       <tr data-cat="AI / Research / Media" data-acc="self-serve">
         <td class="num">98</td>
         <td><strong>Mermaid CLI</strong><small>A command-line interface (CLI) for mermaid that takes a mermaid definition file as input a</small></td>
-        <td><span class="tag">API Key</span></td>
+        <td><span class="tag">None</span></td>
         <td><span class="pill" style="color:var(--c-open)">●</span> Self-serve</td>
-        <td class="apisurf">CLI only<small>full CRUD on all core objects</small></td>
+        <td class="apisurf">CLI only<small>diagram file in, SVG/PNG/PDF out; also a Node.js run() API</small></td>
         <td>official</td>
-        <td style="color:var(--c-open);font-weight:600">Yes</td>
-        <td class="blk"><span class="dim">none</span></td>
-        <td><a class="ev" href="https://github.com/mermaid-js/mermaid-cli" target="_blank" rel="noopener">api</a> <a class="ev" href="https://docs.mistral.ai/vibe/code/cli/api-keys-profiles" target="_blank" rel="noopener">access</a> <a class="ev" href="https://github.com/rtuin/mcp-mermaid-validator" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td style="color:var(--c-partial);font-weight:600">Partial</td>
+        <td class="blk">no hosted API — a toolkit would wrap the local CLI</td>
+        <td><a class="ev" href="https://github.com/mermaid-js/mermaid-cli" target="_blank" rel="noopener">api</a> <a class="ev" href="https://github.com/rtuin/mcp-mermaid-validator" target="_blank" rel="noopener">mcp</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="AI / Research / Media" data-acc="self-serve">
         <td class="num">99</td>
@@ -1340,7 +1340,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>none found</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">none (note: unofficial third-party YouTube service)</td>
-        <td><a class="ev" href="https://www.transcriptapi.com/" target="_blank" rel="noopener">api</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://www.transcriptapi.com/" target="_blank" rel="noopener">api</a> <span class="ok" title="all 5 claims supported by evidence pages">✓</span></td>
       </tr>
       <tr data-cat="AI / Research / Media" data-acc="self-serve">
         <td class="num">100</td>
@@ -1351,7 +1351,7 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
         <td>official</td>
         <td style="color:var(--c-open);font-weight:600">Yes</td>
         <td class="blk">none documented; plan limits unclear</td>
-        <td><a class="ev" href="https://developers.grain.com/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://grain.com/release-note/06-18-2025" target="_blank" rel="noopener">mcp</a> <span class="dim">–</span></td>
+        <td><a class="ev" href="https://developers.grain.com/" target="_blank" rel="noopener">api</a> <a class="ev" href="https://grain.com/release-note/06-18-2025" target="_blank" rel="noopener">mcp</a> <span class="warn" title="unresolved: self_serve, buildable">3/5</span></td>
       </tr></tbody>
   </table></div>
 </section>
@@ -1369,19 +1369,25 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
     <div class="step"><span class="n">04</span><h4>Checkpoint</h4>
       <p>results.json written after every app — crash-safe, resumable.</p></div>
     <div class="step"><span class="n">05</span><h4>Verify → fix → verify</h4>
-      <p>Independent verifier re-fetches evidence and judges all 5 claims; flagged apps get re-researched with the objection.</p></div>
+      <p>A deterministic checker (no LLM) re-fetches all evidence URLs and tests every claim; flagged records get corrected and re-checked.</p></div>
   </div>
   <div class="insights" style="margin-top:14px">
     <div class="card honesty"><h3>Where a human was needed</h3>
-      <p>Defining the schema and what “self-serve” means; unblocking run #1 (died on Gemini
-      free-tier 429s — kept in the repo as <span class="mono">artifacts_run1_gemini_429.json</span>);
-      swapping in the Groq/OpenRouter fallback chain; hand spot-checking a sample against real
-      docs; and writing this analysis. The agent did the other ~100×7 field lookups.</p></div>
+      <p>Defining the schema and what “self-serve” means. Unblocking run #1, which died on
+      Gemini free-tier 429s (kept in the repo as <span class="mono">artifacts_run1_gemini_429.json</span>)
+      — replaced with a Groq → OpenRouter → Gemini fallback chain. When free-tier quotas kept
+      choking, <strong>16 apps were finished by a human-driven research pass</strong>
+      (same schema, same evidence rules — marked <span class="mono">researched_by</span> in the data).
+      Hand spot-checking 13 claims against real docs and correcting
+      9 records. The agent did everything else.</p></div>
     <div class="card honesty"><h3>What the agent got wrong (kept honestly)</h3>
-      <p>0 apps errored outright.
-      1 records self-reported low confidence.
-      0 records had claims the verifier could not support and were re-researched.
-      The manual spot-check table below shows misses as well as hits.</p></div>
+      <p>The hand check caught real failure modes: <strong>entity confusion</strong> (Fathom's MCP
+      evidence pointed at Fathom Analytics, a different company), <strong>context bleed</strong>
+      (Mermaid CLI got "API Key" auth from unrelated search results — it has no auth at all),
+      <strong>over-optimism on gated APIs</strong> (PitchBook needs a standalone contract, not
+      "partial"), and <strong>over-caution</strong> (Zendesk's free trial has full API access).
+      1 records self-report low confidence.
+      The spot-check table below shows every hit and miss.</p></div>
   </div>
 </section>
 
@@ -1389,16 +1395,20 @@ footer { margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48px
   <div class="sec-head"><span class="sec-no">04</span><h2>How we know it's right</h2>
     <span class="sec-note">accuracy is what matters most</span></div>
   <div class="insights">
-    <div class="card"><h3>Machine loop</h3>
-      <p>Verification pass pending.
-      
-      The verifier never sees the researcher's sources — it re-fetches each record's evidence
-      URLs and judges every claim as supported, contradicted, or insufficient. A dead evidence
-      link can never count as support.</p></div>
-    <div class="card"><h3>Human loop</h3>
-      <p>13 field-level spot checks against the real docs by hand — <strong>8/13</strong> the agent had right.
-      Sample drawn across categories, weighted toward low-confidence and gated verdicts,
-      because that's where agents bluff.</p></div>
+    <div class="card"><h3>Machine loop — deterministic, no LLM</h3>
+      <p>The checker re-fetches every record's evidence URLs and mechanically tests each claim
+      (URL liveness + keyword support). It cannot hallucinate agreement — a dead evidence link
+      can never count as support.
+       Pass 1: <strong>398/489</strong> claims supported (81%), 25 dead evidence links.
+       After the fix pass (evidence-URL repairs + 4 claim corrections), pass 2: <strong>399/488</strong> (82%), dead links down to 21.
+      Most remaining flags are docs the static fetcher can't read (JS-rendered or bot-blocked:
+      Salesforce, Meta, Datadog) — a stated limitation, covered by the human loop, not
+      papered over by loosening the checker.</p></div>
+    <div class="card"><h3>Human loop — where judgment lives</h3>
+      <p>13 field-level spot checks against the real docs by hand — the agent had <strong>8/13</strong> right (62%) before fixes;
+      every miss was corrected with a cited docs page and re-verified, and the machine loop's
+      flags triggered 9 record corrections in total.
+      Sample weighted toward low-confidence and gated verdicts, because that's where agents bluff.</p></div>
   </div>
   <div class="tblwrap" style="margin-top:14px"><table style="min-width:760px">
     <thead><tr><th>App</th><th>Field</th><th>Agent said</th><th>Docs actually say</th><th>Verdict</th></tr></thead>

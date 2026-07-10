@@ -491,17 +491,17 @@
       "API Key",
       "Bearer Token"
     ],
-    "self_serve": "unknown",
-    "access_note": "Developers can obtain an API key with fine-grained permission scopes.",
+    "self_serve": "self-serve",
+    "access_note": "API keys are created for Machine Users in workspace settings; free trial available.",
     "api_surface": "GraphQL",
     "api_breadth": "full API-UI parity",
     "mcp": "official",
     "mcp_note": "Plain has native MCP server support",
-    "buildable": "unknown",
+    "buildable": "yes",
     "blocker": "none",
     "evidence": {
       "auth": "https://www.plain.com/docs/graphql/authentication",
-      "access": "",
+      "access": "https://www.plain.com/docs/graphql/authentication",
       "api": "https://www.plain.com/docs/graphql/introduction",
       "mcp": "https://www.plain.com/blog/api-first-support-platforms"
     },
@@ -510,7 +510,9 @@
       "https://www.plain.com/blog/api-first-support-platforms",
       "https://www.plain.com/docs/graphql/introduction"
     ],
-    "verified": false
+    "verified": false,
+    "revised": true,
+    "revision_note": "corrected in verification fix pass (see verification.json pass1)"
   },
   {
     "id": 18,
@@ -1292,28 +1294,30 @@
     "category": "Ecommerce",
     "description": "Salesforce Commerce Cloud provides APIs to build and customize headless e‑commerce storefronts.",
     "auth_methods": [
-      "unknown"
+      "OAuth2"
     ],
-    "self_serve": "unknown",
-    "access_note": "Credentials are obtained via Business Manager / API Access Service, details not publicly free.",
+    "self_serve": "gated",
+    "access_note": "Requires a B2C Commerce license (realm); API clients are issued via Account Manager, shopper APIs use SLAS OAuth2.",
     "api_surface": "REST",
     "api_breadth": "unknown",
     "mcp": "community",
     "mcp_note": "commercecloud-mcp-server GitHub repository",
     "buildable": "partial",
-    "blocker": "no public auth/credential details",
+    "blocker": "Commerce Cloud license required — no self-serve path",
     "evidence": {
-      "auth": "https://developer.salesforce.com/docs/commerce/commerce-api/references/auth",
+      "auth": "https://developer.salesforce.com/docs/commerce/commerce-api/guide/authorization-for-shopper-apis.html",
       "access": "https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/setting-up-api-access.html",
       "api": "https://developer.salesforce.com/docs/commerce/commerce-api/overview",
       "mcp": "https://github.com/BrinsilElias/commercecloud-mcp-server"
     },
-    "confidence": "low",
+    "confidence": "medium",
     "sources_fetched": [
       "https://developer.salesforce.com/docs/commerce/commerce-api/overview",
       "https://developer.salesforce.com/docs/commerce/b2c-commerce/guide/api-doc.html"
     ],
-    "verified": false
+    "verified": false,
+    "revised": true,
+    "revision_note": "corrected in verification fix pass (see verification.json pass1)"
   },
   {
     "id": 45,
@@ -1396,8 +1400,8 @@
     "buildable": "partial",
     "blocker": "API requires a paid Ecwid plan",
     "evidence": {
-      "auth": "https://docs.ecwid.com/api-reference, https://docs.ecwid.com/get-started/make-your-first-api-request",
-      "access": "https://github.com/Ecwid/ecwid-api-docs/blob/master/includes/_overview.md, https://docs.ecwid.com/get-started/make-your-first-api-request",
+      "auth": "https://docs.ecwid.com/api-reference",
+      "access": "https://github.com/Ecwid/ecwid-api-docs/blob/master/includes/_overview.md",
       "api": "https://docs.ecwid.com/api-reference",
       "mcp": "https://viasocket.com/mcp/ecwid-by-lightspeed"
     },
@@ -2143,7 +2147,7 @@
     "blocker": "none",
     "evidence": {
       "auth": "https://support.airtable.com/docs/creating-personal-access-tokens",
-      "access": "https://airtable.com/developers/tokens",
+      "access": "https://support.airtable.com/docs/creating-personal-access-tokens",
       "api": "https://www.airtable.com/developers/web/api/introduction",
       "mcp": "https://support.airtable.com/docs/using-the-airtable-mcp-server"
     },
@@ -2152,7 +2156,9 @@
       "https://www.airtable.com/developers/web/api/introduction",
       "https://support.airtable.com/docs/creating-personal-access-tokens"
     ],
-    "verified": false
+    "verified": false,
+    "revised": true,
+    "revision_note": "corrected in verification fix pass (see verification.json pass1)"
   },
   {
     "id": 73,
@@ -2501,22 +2507,24 @@
     "access_note": "Developers can obtain API credentials through a free trial or a paid plan, but may need to contact sales for enterprise access.",
     "api_surface": "REST",
     "api_breadth": "full CRUD on payment gateways",
-    "mcp": "official",
-    "mcp_note": "Paygent",
+    "mcp": "none found",
+    "mcp_note": "earlier 'official' claim cited a page that does not mention MCP",
     "buildable": "yes",
     "blocker": "EMV Level 3 processor certification",
     "evidence": {
       "auth": "https://www.nmi.com/developers/sdks-apis/",
       "access": "https://paygent.uk/",
       "api": "https://docs.nmi.com/",
-      "mcp": "https://paygent.uk/"
+      "mcp": ""
     },
-    "confidence": "high",
+    "confidence": "low",
     "sources_fetched": [
       "https://www.nmi.com/developers/sdks-apis/",
       "https://docs.nmi.com/"
     ],
-    "verified": false
+    "verified": false,
+    "revised": true,
+    "revision_note": "corrected in verification fix pass (see verification.json pass1)"
   },
   {
     "id": 85,

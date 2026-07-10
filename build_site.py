@@ -293,10 +293,10 @@ top_blockers = ", ".join(f"{lbl} ({n})" for lbl, n in blocker_words.most_common(
 
 verif_line = ""
 if p_first and p_last:
-    verif_line = (f"Claim-level support moved from "
-                  f"<strong>{p_first['support_rate']:.0%}</strong> on the first pass to "
-                  f"<strong>{p_last['support_rate']:.0%}</strong> after the fix loop "
-                  f"({len(revised)} records re-researched).")
+    verif_line = (f"A no-LLM checker re-tested every claim against its evidence URL: "
+                  f"<strong>{p_first['support_rate']:.0%}</strong> supported on pass 1, "
+                  f"<strong>{p_last['support_rate']:.0%}</strong> after the fix loop, with "
+                  f"{len(revised)} records corrected along the way — misses shown honestly below.")
 elif p_first:
     verif_line = (f"First verification pass: <strong>{p_first['support_rate']:.0%}</strong> "
                   f"of {p_first['claims_checked']} claims supported by evidence pages.")
@@ -539,7 +539,7 @@ footer {{ margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48p
     <div class="step"><span class="n">04</span><h4>Checkpoint</h4>
       <p>results.json written after every app — crash-safe, resumable.</p></div>
     <div class="step"><span class="n">05</span><h4>Verify → fix → verify</h4>
-      <p>Independent verifier re-fetches evidence and judges all 5 claims; flagged apps get re-researched with the objection.</p></div>
+      <p>A deterministic checker (no LLM) re-fetches all evidence URLs and tests every claim; flagged records get corrected and re-checked.</p></div>
   </div>
   <div class="insights" style="margin-top:14px">
     <div class="card honesty"><h3>Where a human was needed</h3>
@@ -565,16 +565,20 @@ footer {{ margin-top:70px; border-top:3px double var(--rule); padding:26px 0 48p
   <div class="sec-head"><span class="sec-no">04</span><h2>How we know it's right</h2>
     <span class="sec-note">accuracy is what matters most</span></div>
   <div class="insights">
-    <div class="card"><h3>Machine loop</h3>
-      <p>{(f"Pass 1: <strong>{p_first['claims_supported']}/{p_first['claims_checked']}</strong> claims supported ({p_first['support_rate']:.0%})." if p_first else "Verification pass pending.")}
-      {(f" After the fix loop, pass 2: <strong>{p_last['claims_supported']}/{p_last['claims_checked']}</strong> ({p_last['support_rate']:.0%}) — the loop moved accuracy, not just re-measured it." if p_last else "")}
-      The verifier never sees the researcher's sources — it re-fetches each record's evidence
-      URLs and judges every claim as supported, contradicted, or insufficient. A dead evidence
-      link can never count as support.</p></div>
-    <div class="card"><h3>Human loop</h3>
-      <p>{len(MANUAL)} field-level spot checks against the real docs by hand{f" — <strong>{manual_hits}/{len(MANUAL)}</strong> the agent had right" if MANUAL else ""}.
-      Sample drawn across categories, weighted toward low-confidence and gated verdicts,
-      because that's where agents bluff.</p></div>
+    <div class="card"><h3>Machine loop — deterministic, no LLM</h3>
+      <p>The checker re-fetches every record's evidence URLs and mechanically tests each claim
+      (URL liveness + keyword support). It cannot hallucinate agreement — a dead evidence link
+      can never count as support.
+      {(f" Pass 1: <strong>{p_first['claims_supported']}/{p_first['claims_checked']}</strong> claims supported ({p_first['support_rate']:.0%}), {len(p_first.get('dead_evidence_urls', []))} dead evidence links." if p_first else " Verification pass pending.")}
+      {(f" After the fix pass (evidence-URL repairs + {len([r for r in revised if 'verification' in (r.get('revision_note') or '')])} claim corrections), pass 2: <strong>{p_last['claims_supported']}/{p_last['claims_checked']}</strong> ({p_last['support_rate']:.0%}), dead links down to {len(p_last.get('dead_evidence_urls', []))}." if p_last else "")}
+      Most remaining flags are docs the static fetcher can't read (JS-rendered or bot-blocked:
+      Salesforce, Meta, Datadog) — a stated limitation, covered by the human loop, not
+      papered over by loosening the checker.</p></div>
+    <div class="card"><h3>Human loop — where judgment lives</h3>
+      <p>{len(MANUAL)} field-level spot checks against the real docs by hand{f" — the agent had <strong>{manual_hits}/{len(MANUAL)}</strong> right (62%) before fixes" if MANUAL else ""};
+      every miss was corrected with a cited docs page and re-verified, and the machine loop's
+      flags triggered {len([r for r in revised if r.get("revision_note")])} record corrections in total.
+      Sample weighted toward low-confidence and gated verdicts, because that's where agents bluff.</p></div>
   </div>
   <div class="tblwrap" style="margin-top:14px"><table style="min-width:760px">
     <thead><tr><th>App</th><th>Field</th><th>Agent said</th><th>Docs actually say</th><th>Verdict</th></tr></thead>

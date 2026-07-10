@@ -24,18 +24,24 @@ LLM extraction (Groq → OpenRouter → Gemini fallback chain, llm.py)
 results.json  (checkpointed after every app — crash-safe resume)
    │
    ▼
-verify.py --check   independent verifier re-fetches each record's evidence
-   │                URLs and judges every claim: supported / contradicted /
-   │                insufficient  →  verification.json (pass 1 accuracy)
+verify_fast.py      deterministic checker (NO LLM): re-fetches every evidence
+   │                URL, tests each claim via liveness + keyword support
+   │                →  verification.json pass 1
    ▼
-verify.py --fix     re-researches every flagged app, feeding the verifier's
-   │                objection back into the research prompt
+fix_pass2.py /      corrections grounded in docs a human actually read,
+apply_corrections.py  plus evidence-URL hygiene — all logged in the data
    ▼
-verify.py --check   pass 2 — shows how accuracy moved because of the loop
+verify_fast.py      pass 2 — shows how support moved because of the loop
    │
    ▼
 build_site.py  →  index.html (the case study)
 ```
+
+There is also `verify.py`, an LLM-judge verifier (same independence rules,
+richer verdicts including "contradicted"). It works, but on free-tier LLM
+quotas it took >75 minutes for one pass, so the shipped numbers come from the
+deterministic checker — which has the nicer property that it *cannot*
+hallucinate agreement, at the cost of undercounting on JS-rendered docs.
 
 Design choices worth knowing:
 
@@ -54,15 +60,13 @@ Design choices worth knowing:
 
 ```powershell
 pip install -r requirements.txt
-
-# .env
-#   GROQ_API_KEY=...        (or OPENROUTER_API_KEY / GEMINI_API_KEY — any subset)
-#   SERPER_API_KEY=...      (google search, free tier is plenty)
+copy .env.example .env     # then fill in the keys
 
 python agent.py            # research all 100 apps (resumes if interrupted)
-python verify.py --check   # verification pass 1
-python verify.py --fix     # re-research flagged apps
-python verify.py --check   # verification pass 2
+python verify_fast.py      # verification pass 1 (deterministic, ~2 min)
+python show_flags.py       # inspect what got flagged
+#  fix flagged records (see fix_pass2.py for the pattern), then:
+python verify_fast.py      # pass 2 — measures the improvement
 python build_site.py       # generate index.html
 ```
 
@@ -74,13 +78,18 @@ python build_site.py       # generate index.html
 |---|---|
 | `apps.json` | the 100-app research set (10 categories) |
 | `agent.py` | research agent: search → read → extract → checkpoint |
-| `llm.py` | Groq/OpenRouter/Gemini fallback client with 429 handling |
+| `llm.py` | Groq/OpenRouter/Gemini fallback client with 429 cool-downs |
 | `tools.py` | Serper search + HTML-to-text page fetcher |
-| `verify.py` | verification loop: check pass, fix pass, accuracy history |
+| `verify_fast.py` | deterministic verifier (no LLM): liveness + keyword support |
+| `verify.py` | LLM-judge verifier (slower, richer verdicts) — kept, works |
+| `show_flags.py` | print dead links + flagged apps from the latest pass |
+| `apply_corrections.py` | corrections from the human doc-check (5 records) |
+| `fix_pass2.py` | corrections + URL hygiene from machine pass 1 (6 records) |
 | `build_site.py` | renders results + verification into `index.html` |
-| `results.json` | agent output (one record per app) |
+| `results.json` | agent output (one record per app, evidence URLs per claim) |
 | `verification.json` | claim-level verdicts per pass |
-| `manual_checks.json` | human spot-checks merged into the report |
+| `manual_checks.json` | 13 human spot-checks, hits and misses |
+| `fallback_records.json` | the 16 human-researched records (rate-limit fallback) |
 | `artifacts_run1_gemini_429.json` | the failed first run, kept honestly |
 
 ## Where a human was needed

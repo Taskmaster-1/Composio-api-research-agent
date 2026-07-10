@@ -1,0 +1,5733 @@
+{
+  "pass1": {
+    "method": "deterministic: evidence-URL liveness + keyword support (no LLM)",
+    "claims_checked": 489,
+    "claims_supported": 398,
+    "support_rate": 0.814,
+    "apps_fully_supported": 58,
+    "dead_evidence_urls": [
+      "https://airtable.com/developers/tokens",
+      "https://developer.salesforce.com/docs/apis",
+      "https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/intro_using_oauth.htm",
+      "https://developer.salesforce.com/docs/commerce/commerce-api/overview",
+      "https://developer.salesforce.com/docs/commerce/commerce-api/references/auth",
+      "https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/setting-up-api-access.html",
+      "https://developers.facebook.com/docs/whatsapp/cloud-api/get-started",
+      "https://developers.facebook.com/documentation/ads-commerce/marketing-api/get-started/authorization",
+      "https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference",
+      "https://developers.facebook.com/documentation/business-messaging/whatsapp/get-started",
+      "https://developers.facebook.com/documentation/threads",
+      "https://developers.facebook.com/documentation/threads/get-started",
+      "https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/create-manage-notebooks-api",
+      "https://docs.ecwid.com/api-reference, https://docs.ecwid.com/get-started/make-your-first-api-request",
+      "https://faq.liveagent.com/114892-MCP-Integration-Guide-for-LiveAgent-Agents-Early-Preview",
+      "https://github.com/Ecwid/ecwid-api-docs/blob/master/includes/_overview.md, https://docs.ecwid.com/get-started/make-your-first-api-request",
+      "https://glama.ai/mcp/servers/orellazri/coda-mcp",
+      "https://help.zoho.com/portal/en/community/topic/setting-up-the-api-key",
+      "https://mcp.apify.com/",
+      "https://mcpmarket.com/server/bigcommerce",
+      "https://mcpmarket.com/server/binance-1",
+      "https://neo4j.com/docs/aura/api/",
+      "https://pitchbook.com/help/PitchBook-api",
+      "https://pitchbook.com/products/direct-access-data/api",
+      "https://www.binance.com/en/support/faq/detail/360002502072"
+    ],
+    "details": [
+      {
+        "id": 1,
+        "name": "Salesforce",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review', 'admin', 'enterprise']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "HubSpot",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth', 'private app access token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Pipedrive",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 4,
+        "name": "Attio",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token', 'oauth 2.0']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['enterprise']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 5,
+        "name": "Twenty",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest', 'graphql']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Podio",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 7,
+        "name": "Zoho CRM",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 8,
+        "name": "Close",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 9,
+        "name": "Copper",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started', 'generate an api key']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 10,
+        "name": "DealCloud",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review', 'admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 11,
+        "name": "Zendesk",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['basic auth', 'bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free', 'trial']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 12,
+        "name": "Intercom",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'get started', 'developer account']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 13,
+        "name": "Freshdesk",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['paid plan', 'paid', 'upgrade']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 14,
+        "name": "Front",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'get started', 'developer account']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 15,
+        "name": "Pylon",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['verification']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 16,
+        "name": "LiveAgent",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "insufficient",
+            "why": "MCP evidence URL dead or empty"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "mcp",
+          "buildable"
+        ]
+      },
+      {
+        "id": 17,
+        "name": "Plain",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "claim is 'unknown'"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['graphql']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 18,
+        "name": "Help Scout",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 19,
+        "name": "Gorgias",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 20,
+        "name": "Gladly",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['basic auth']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 21,
+        "name": "Slack",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 22,
+        "name": "Twilio",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'signup', 'free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 23,
+        "name": "Zoho Cliq",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 24,
+        "name": "Lark",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "insufficient",
+            "why": "cited page does not mention MCP"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "self_serve",
+          "api_surface",
+          "mcp",
+          "buildable"
+        ]
+      },
+      {
+        "id": 25,
+        "name": "Pumble",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['generate an api key']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 26,
+        "name": "Discord",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['instantly']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 27,
+        "name": "Telegram",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "buildable"
+        ]
+      },
+      {
+        "id": 28,
+        "name": "WhatsApp Business",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'get started', 'in minutes']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 29,
+        "name": "Aircall",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['basic auth', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 30,
+        "name": "Vonage",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth', 'jwt']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 31,
+        "name": "Google Ads",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['approval', 'review']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 32,
+        "name": "Meta Ads",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review', 'admin']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 33,
+        "name": "LinkedIn Ads",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['paid', 'upgrade', 'approval']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 34,
+        "name": "GoHighLevel",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['upgrade', 'review', 'subscription']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 35,
+        "name": "Mailchimp",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth', 'bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['create an account']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 36,
+        "name": "Klaviyo",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 37,
+        "name": "systeme.io",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 38,
+        "name": "Pinterest",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['upgrade', 'review']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 39,
+        "name": "Threads",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 40,
+        "name": "SendGrid",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['create api key']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 41,
+        "name": "Shopify",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2', 'session']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest', 'graphql']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 42,
+        "name": "WooCommerce",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 43,
+        "name": "BigCommerce",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'jwt', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free', 'trial']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest', 'graphql']"
+          },
+          "mcp": {
+            "verdict": "insufficient",
+            "why": "MCP evidence URL dead or empty"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "mcp"
+        ]
+      },
+      {
+        "id": 44,
+        "name": "Salesforce Commerce Cloud",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['unknown']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "claim is 'unknown'"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "self_serve",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 45,
+        "name": "Magento (Adobe Commerce)",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'session']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest', 'graphql']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 46,
+        "name": "Squarespace",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review', 'subscription', 'verification']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 47,
+        "name": "Ecwid",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 48,
+        "name": "Gumroad",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['signup', 'free', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 49,
+        "name": "Amazon Selling Partner",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 50,
+        "name": "Fanbasis",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 51,
+        "name": "DataForSEO",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['basic auth']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'trial']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 52,
+        "name": "SE Ranking",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'trial', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 53,
+        "name": "Ahrefs",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['paid plan', 'paid', 'admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 54,
+        "name": "MrScraper",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 55,
+        "name": "Apify",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "insufficient",
+            "why": "MCP evidence URL dead or empty"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "mcp",
+          "buildable"
+        ]
+      },
+      {
+        "id": 56,
+        "name": "Firecrawl",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'signup', 'free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 57,
+        "name": "Bright Data",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'trial']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 58,
+        "name": "Sherlock",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim (no auth) — verified by human spot-check only"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['cli']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 59,
+        "name": "Waterfall.io",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['upgrade', 'verification']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 60,
+        "name": "Clay",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim (no auth) — verified by human spot-check only"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['apply', 'quote']"
+          },
+          "api_surface": {
+            "verdict": "not-machine-checkable",
+            "why": "claim 'none' — absence/unknown claims are human-checked"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 61,
+        "name": "GitHub",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['admin', 'enterprise']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 62,
+        "name": "Vercel",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 63,
+        "name": "Netlify",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 64,
+        "name": "Cloudflare",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['create an account']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 65,
+        "name": "Supabase",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token', 'jwt']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest', 'graphql'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 66,
+        "name": "Neo4j",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['enterprise']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest', 'graphql'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 67,
+        "name": "Snowflake",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'jwt', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['trial']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 68,
+        "name": "MongoDB Atlas",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 69,
+        "name": "Datadog",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 70,
+        "name": "Sentry",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 71,
+        "name": "Notion",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 72,
+        "name": "Airtable",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 73,
+        "name": "Linear",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'create api key']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['graphql']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 74,
+        "name": "Jira",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth', 'bearer token', 'jwt', 'oauth2', 'session']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review', 'admin', 'verification']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 75,
+        "name": "Asana",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2', 'personal access token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 76,
+        "name": "Monday.com",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['graphql']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 77,
+        "name": "ClickUp",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 78,
+        "name": "Coda",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['paid', 'review', 'admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "insufficient",
+            "why": "MCP evidence URL dead or empty"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "mcp"
+        ]
+      },
+      {
+        "id": 79,
+        "name": "Smartsheet",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['enterprise']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 80,
+        "name": "Harvest",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 81,
+        "name": "Stripe",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 82,
+        "name": "Plaid",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['signup', 'get started', 'create an account']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 83,
+        "name": "Binance",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "insufficient",
+            "why": "MCP evidence URL dead or empty"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "mcp",
+          "buildable"
+        ]
+      },
+      {
+        "id": 84,
+        "name": "Paygent Connect",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "insufficient",
+            "why": "cited page does not mention MCP"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "mcp",
+          "buildable"
+        ]
+      },
+      {
+        "id": 85,
+        "name": "iPayX",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['admin']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 86,
+        "name": "QuickBooks",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest', 'graphql'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 87,
+        "name": "Xero",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['developer account']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 88,
+        "name": "Brex",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review', 'admin']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest', 'graphql'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 89,
+        "name": "Ramp",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['basic auth', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 90,
+        "name": "PitchBook",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 91,
+        "name": "NotebookLM",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "self_serve",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 92,
+        "name": "Otter AI",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['enterprise']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 93,
+        "name": "Fathom",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['generate an api key', 'in minutes']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 94,
+        "name": "Consensus",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['api key', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['contact us', 'request access', 'apply']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 95,
+        "name": "Reducto",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "buildable"
+        ]
+      },
+      {
+        "id": 96,
+        "name": "Devin",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['enterprise']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 97,
+        "name": "Higgsfield",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 98,
+        "name": "Mermaid CLI",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim (no auth) — verified by human spot-check only"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['cli']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 99,
+        "name": "YouTube Transcript",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['signup', 'free', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 100,
+        "name": "Grain",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      }
+    ]
+  },
+  "pass2": {
+    "method": "deterministic: evidence-URL liveness + keyword support (no LLM)",
+    "claims_checked": 488,
+    "claims_supported": 399,
+    "support_rate": 0.818,
+    "apps_fully_supported": 59,
+    "dead_evidence_urls": [
+      "https://developer.salesforce.com/docs/apis",
+      "https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/intro_using_oauth.htm",
+      "https://developer.salesforce.com/docs/commerce/commerce-api/guide/authorization-for-shopper-apis.html",
+      "https://developer.salesforce.com/docs/commerce/commerce-api/overview",
+      "https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/guide/setting-up-api-access.html",
+      "https://developers.facebook.com/docs/whatsapp/cloud-api/get-started",
+      "https://developers.facebook.com/documentation/ads-commerce/marketing-api/get-started/authorization",
+      "https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference",
+      "https://developers.facebook.com/documentation/business-messaging/whatsapp/get-started",
+      "https://developers.facebook.com/documentation/threads",
+      "https://developers.facebook.com/documentation/threads/get-started",
+      "https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/create-manage-notebooks-api",
+      "https://faq.liveagent.com/114892-MCP-Integration-Guide-for-LiveAgent-Agents-Early-Preview",
+      "https://help.zoho.com/portal/en/community/topic/setting-up-the-api-key",
+      "https://mcp.apify.com/",
+      "https://mcpmarket.com/server/bigcommerce",
+      "https://mcpmarket.com/server/binance-1",
+      "https://neo4j.com/docs/aura/api/",
+      "https://pitchbook.com/help/PitchBook-api",
+      "https://pitchbook.com/products/direct-access-data/api",
+      "https://www.binance.com/en/support/faq/detail/360002502072"
+    ],
+    "details": [
+      {
+        "id": 1,
+        "name": "Salesforce",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review', 'admin', 'enterprise']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "HubSpot",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth', 'private app access token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Pipedrive",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 4,
+        "name": "Attio",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token', 'oauth 2.0']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['enterprise']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 5,
+        "name": "Twenty",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest', 'graphql']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Podio",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 7,
+        "name": "Zoho CRM",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 8,
+        "name": "Close",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 9,
+        "name": "Copper",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started', 'generate an api key']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 10,
+        "name": "DealCloud",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review', 'admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 11,
+        "name": "Zendesk",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['basic auth', 'bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free', 'trial']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 12,
+        "name": "Intercom",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'get started', 'developer account']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 13,
+        "name": "Freshdesk",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['paid plan', 'paid', 'upgrade']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 14,
+        "name": "Front",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'get started', 'developer account']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 15,
+        "name": "Pylon",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['verification']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 16,
+        "name": "LiveAgent",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "insufficient",
+            "why": "MCP evidence URL dead or empty"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "mcp",
+          "buildable"
+        ]
+      },
+      {
+        "id": 17,
+        "name": "Plain",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['graphql']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 18,
+        "name": "Help Scout",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 19,
+        "name": "Gorgias",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 20,
+        "name": "Gladly",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['basic auth']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 21,
+        "name": "Slack",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 22,
+        "name": "Twilio",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'signup', 'free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 23,
+        "name": "Zoho Cliq",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 24,
+        "name": "Lark",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "insufficient",
+            "why": "cited page does not mention MCP"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "self_serve",
+          "api_surface",
+          "mcp",
+          "buildable"
+        ]
+      },
+      {
+        "id": 25,
+        "name": "Pumble",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['generate an api key']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 26,
+        "name": "Discord",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['instantly']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 27,
+        "name": "Telegram",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "buildable"
+        ]
+      },
+      {
+        "id": 28,
+        "name": "WhatsApp Business",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'get started', 'in minutes']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 29,
+        "name": "Aircall",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['basic auth', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 30,
+        "name": "Vonage",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth', 'jwt']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 31,
+        "name": "Google Ads",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['approval', 'review']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 32,
+        "name": "Meta Ads",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review', 'admin']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 33,
+        "name": "LinkedIn Ads",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['paid', 'upgrade', 'approval']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 34,
+        "name": "GoHighLevel",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['upgrade', 'review', 'subscription']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 35,
+        "name": "Mailchimp",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth', 'bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['create an account']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 36,
+        "name": "Klaviyo",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 37,
+        "name": "systeme.io",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 38,
+        "name": "Pinterest",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['upgrade', 'review']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 39,
+        "name": "Threads",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 40,
+        "name": "SendGrid",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['create api key']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 41,
+        "name": "Shopify",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2', 'session']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest', 'graphql']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 42,
+        "name": "WooCommerce",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 43,
+        "name": "BigCommerce",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'jwt', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free', 'trial']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest', 'graphql']"
+          },
+          "mcp": {
+            "verdict": "insufficient",
+            "why": "MCP evidence URL dead or empty"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "mcp"
+        ]
+      },
+      {
+        "id": 44,
+        "name": "Salesforce Commerce Cloud",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "self_serve",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 45,
+        "name": "Magento (Adobe Commerce)",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'session']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest', 'graphql']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 46,
+        "name": "Squarespace",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review', 'subscription', 'verification']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 47,
+        "name": "Ecwid",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['paid plan', 'paid', 'review']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 48,
+        "name": "Gumroad",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['signup', 'free', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 49,
+        "name": "Amazon Selling Partner",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 50,
+        "name": "Fanbasis",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 51,
+        "name": "DataForSEO",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['basic auth']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'trial']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 52,
+        "name": "SE Ranking",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'trial', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 53,
+        "name": "Ahrefs",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['paid plan', 'paid', 'admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 54,
+        "name": "MrScraper",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 55,
+        "name": "Apify",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "insufficient",
+            "why": "MCP evidence URL dead or empty"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "mcp",
+          "buildable"
+        ]
+      },
+      {
+        "id": 56,
+        "name": "Firecrawl",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'signup', 'free']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 57,
+        "name": "Bright Data",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'trial']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 58,
+        "name": "Sherlock",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim (no auth) — verified by human spot-check only"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['cli']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 59,
+        "name": "Waterfall.io",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['upgrade', 'verification']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 60,
+        "name": "Clay",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim (no auth) — verified by human spot-check only"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['apply', 'quote']"
+          },
+          "api_surface": {
+            "verdict": "not-machine-checkable",
+            "why": "claim 'none' — absence/unknown claims are human-checked"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 61,
+        "name": "GitHub",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['admin', 'enterprise']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 62,
+        "name": "Vercel",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 63,
+        "name": "Netlify",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 64,
+        "name": "Cloudflare",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['create an account']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 65,
+        "name": "Supabase",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token', 'jwt']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest', 'graphql'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 66,
+        "name": "Neo4j",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['enterprise']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest', 'graphql'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 67,
+        "name": "Snowflake",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'jwt', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['trial']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 68,
+        "name": "MongoDB Atlas",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 69,
+        "name": "Datadog",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 70,
+        "name": "Sentry",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 71,
+        "name": "Notion",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['free', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 72,
+        "name": "Airtable",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 73,
+        "name": "Linear",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'create api key']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['graphql']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 74,
+        "name": "Jira",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'basic auth', 'bearer token', 'jwt', 'oauth2', 'session']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review', 'admin', 'verification']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 75,
+        "name": "Asana",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2', 'personal access token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 76,
+        "name": "Monday.com",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'free', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['graphql']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 77,
+        "name": "ClickUp",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 78,
+        "name": "Coda",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['paid', 'review', 'admin']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 79,
+        "name": "Smartsheet",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['enterprise']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 80,
+        "name": "Harvest",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 81,
+        "name": "Stripe",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 82,
+        "name": "Plaid",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['signup', 'get started', 'create an account']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 83,
+        "name": "Binance",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "insufficient",
+            "why": "MCP evidence URL dead or empty"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "mcp",
+          "buildable"
+        ]
+      },
+      {
+        "id": 84,
+        "name": "Paygent Connect",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 85,
+        "name": "iPayX",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['admin']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 86,
+        "name": "QuickBooks",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest', 'graphql'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 87,
+        "name": "Xero",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['developer account']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 88,
+        "name": "Brex",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['review', 'admin']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest', 'graphql'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": [
+          "api_surface"
+        ]
+      },
+      {
+        "id": 89,
+        "name": "Ramp",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['basic auth', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 90,
+        "name": "PitchBook",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 91,
+        "name": "NotebookLM",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "evidence URLs dead or empty"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "self_serve",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 92,
+        "name": "Otter AI",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['enterprise']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 93,
+        "name": "Fathom",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['api key', 'oauth']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['generate an api key', 'in minutes']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 94,
+        "name": "Consensus",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['api key', 'bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['contact us', 'request access', 'apply']"
+          },
+          "api_surface": {
+            "verdict": "insufficient",
+            "why": "['rest'] not evident on cited page"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "api_surface",
+          "buildable"
+        ]
+      },
+      {
+        "id": 95,
+        "name": "Reducto",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "insufficient",
+            "why": "no keyword match for ['api key']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "auth_methods",
+          "buildable"
+        ]
+      },
+      {
+        "id": 96,
+        "name": "Devin",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['enterprise']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 97,
+        "name": "Higgsfield",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      },
+      {
+        "id": 98,
+        "name": "Mermaid CLI",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim (no auth) — verified by human spot-check only"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['sign up']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['cli']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 99,
+        "name": "YouTube Transcript",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token']"
+          },
+          "self_serve": {
+            "verdict": "supported",
+            "why": "matched ['signup', 'free', 'get started']"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "not-machine-checkable",
+            "why": "absence claim — human-checked on a sample"
+          },
+          "buildable": {
+            "verdict": "supported",
+            "why": "derived: auth + access hold up"
+          }
+        },
+        "flagged_fields": []
+      },
+      {
+        "id": 100,
+        "name": "Grain",
+        "verdicts": {
+          "auth_methods": {
+            "verdict": "supported",
+            "why": "keywords found for ['bearer token', 'oauth2']"
+          },
+          "self_serve": {
+            "verdict": "insufficient",
+            "why": "no access-language match"
+          },
+          "api_surface": {
+            "verdict": "supported",
+            "why": "found ['rest']"
+          },
+          "mcp": {
+            "verdict": "supported",
+            "why": "MCP referenced on cited page"
+          },
+          "buildable": {
+            "verdict": "insufficient",
+            "why": "derived: an input claim is unsupported"
+          }
+        },
+        "flagged_fields": [
+          "self_serve",
+          "buildable"
+        ]
+      }
+    ]
+  }
+}
